@@ -37,7 +37,7 @@ class Navbar extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
           <a className="navbar-brand" href="#">
             TripTab
           </a>
@@ -45,15 +45,15 @@ class Navbar extends Component {
             className="navbar-toggler collapsed"
             type="button"
             data-toggle="collapse"
-            data-target="#navbarColor01"
-            aria-controls="navbarColor01"
+            data-target="#navbarColor02"
+            aria-controls="navbarColor02"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon" />
           </button>
 
-          <div className="navbar-collapse collapse" id="navbarColor01">
+          <div className="navbar-collapse collapse" id="navbarColor02">
             <ul className="navbar-nav mr-auto m-0">
               <li className="nav-item m-0">
                 <Link
