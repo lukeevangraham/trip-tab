@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Route, Link } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
+import "./navbar.css";
 
 class Navbar extends Component {
   constructor() {
@@ -36,7 +37,7 @@ class Navbar extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
           <a className="navbar-brand" href="#">
             TripTab
           </a>
@@ -54,7 +55,7 @@ class Navbar extends Component {
 
           <div className="navbar-collapse collapse" id="navbarColor01">
             <ul className="navbar-nav mr-auto m-0">
-              <li className="nav-item active m-0">
+              <li className="nav-item m-0">
                 <Link
                   to="/"
                   className={
@@ -71,8 +72,8 @@ class Navbar extends Component {
                 to="/trips"
                 className={
                     window.location.pathname === "/trips"
-                    ? "nav-link active"
-                    : "nav-link"
+                    ? "nav-link active non-underline-link"
+                    : "nav-link non-underline-link"
                 }
                 >
                   Trips
@@ -86,7 +87,7 @@ class Navbar extends Component {
                   className="btn btn-link text-secondary"
                   onClick={this.logout}
                 >
-                  <span className="text-secondary">logout</span>
+                  <span className="text-nav">Logout</span>
                 </Link>
               </section>
             ) : (
