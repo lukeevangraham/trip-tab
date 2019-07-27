@@ -7,7 +7,7 @@ text-decoration: none
 }
 
 a, a:hover,a:visited, a:focus {
-    text-decoration:none;
+    text-decoration:none !important
 }
 
 a:link {
@@ -23,5 +23,5 @@ a:link {
   }
   
   a:active {
-    text-decoration: none;
+    text-decoration: none !important
   }
