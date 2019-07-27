@@ -89,7 +89,7 @@ class Navbar extends Component {
         <Link style={{color: "rgba(255,255,255,0.5)"}} className="nav-link dropdown-toggle text-right" to="#" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           {currentUser}
         </Link>
-        <div class="dropdown-menu drop-special" x-placement="bottom-start">
+        <div className="dropdown-menu drop-special" x-placement="bottom-start">
           <Link style={{color: "rgba(255,255,255,0.5)"}} className="dropdown-item" to="#" onClick={this.logout} >Logout</Link>
         </div>
       </li>
