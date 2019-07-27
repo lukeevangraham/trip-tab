@@ -7,6 +7,7 @@ import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
 import Home2 from './components/home2'
+import Ledger from "./pages/Ledger"
 
 class App extends Component {
   constructor() {
@@ -53,13 +54,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-   
         <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-        {/* greet user if logged in: */}
+        <div className="container-fluid">
+
         {this.state.loggedIn &&
           <p>Join the party, {this.state.username}!</p>
         }
-        <Home2 currentUser={this.state.username}></Home2>
         {/* Routes to different components */}
         <Route
           exact path="/"
@@ -70,13 +70,19 @@ class App extends Component {
             <LoginForm
               updateUser={this.updateUser}
             />}
-        />
+            />
         <Route
           path="/signup"
           render={() =>
             <Signup/>}
-        />
+            />
+        <Route
+          path="/ledger"
+          render={() =>
+            <Ledger />}
+            />
 
+            </div>
       </div>
     );
   }
