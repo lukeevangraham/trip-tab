@@ -7,6 +7,8 @@ import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
 import Home2 from './components/home2'
+import Trips from './components/trips'
+
 
 class App extends Component {
   constructor() {
@@ -76,7 +78,11 @@ class App extends Component {
           render={() =>
             <Signup/>}
         />
-
+        <Route
+        path="/trips"
+        render={() =>
+          <Trips/>}
+        />
       </div>
     );
   }
