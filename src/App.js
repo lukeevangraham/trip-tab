@@ -64,8 +64,6 @@ class App extends Component {
         <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} currentUser={this.state.username}  />
         <div className="container">
           {/* greet user if logged in: */}
-          {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
-          <Home2 currentUser={this.state.username} />
           {/* Routes to different components */}
           <Route exact path="/" component={Home} />
           <Route
@@ -73,6 +71,8 @@ class App extends Component {
             render={() => <LoginForm updateUser={this.updateUser} />}
           />
           <Route path="/signup" render={() => <Signup />} />
+          {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
+          <Home2 currentUser={this.state.username} />
         </div>
       </div>
     );
