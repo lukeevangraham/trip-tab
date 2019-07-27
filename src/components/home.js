@@ -7,17 +7,10 @@ class Home extends Component {
   }
 
   render() {
-    const imageStyle = {
-      width: 400
-    };
     return (
       <div>
         <TotalBalanceCard userOwes={9} userIsOwed={8} />
-        <p>It's good to be home</p>
-        <img
-          style={imageStyle}
-          src="https://i.ytimg.com/vi/N1icEHtgb3g/maxresdefault.jpg"
-        />
+  
       </div>
     );
   }
