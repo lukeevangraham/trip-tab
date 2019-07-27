@@ -23,5 +23,6 @@ const owedSchema = new Schema({
     }]
 })
 
+const Oweds = mongoose.model('Owed', owedSchema)
 
-module.exports = owedSchema
+module.exports = Oweds;

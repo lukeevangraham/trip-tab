@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../database/models/user')
+const Oweds = require('../database/models/owed')
 const passport = require('../passport')
 
 router.post('/', (req, res) => {
@@ -63,6 +64,22 @@ router.post('/logout', (req, res) => {
     } else {
         res.send({ msg: 'no user to log out' })
     }
+})
+
+router.get('/newEvent', (request, response) => {
+
+    // const testEvent= {userId: "someID",
+    // payerId: "someID",
+    // amount: 13,
+    // eventName: "test event",
+    // paid: false,
+    // usersAttended: []}
+    // Owed.create(testEvent, (err, result) => {
+    //     console.log(result)
+    // })
+    Oweds.findOne({userId: "someID"})
+    .then(dbModel => response.json(dbModel))
+    .catch(err => response.status(422).json(err))
 })
 
 module.exports = router

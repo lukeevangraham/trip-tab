@@ -23,11 +23,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getUser();
+    this.getUser()
+    this.getNewEvent()
   }
 
   updateUser(userObject) {
     this.setState(userObject);
+  }
+
+  getNewEvent(){
+    axios.get("/user/newEvent").then( response => {
+      console.log(response.data)
+    })
   }
 
   getUser() {
