@@ -35,6 +35,8 @@ class Navbar extends Component {
     console.log("navbar render, props: ");
     console.log(this.props);
 
+    const currentUser = this.props.currentUser;
+
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
@@ -116,16 +118,18 @@ class Navbar extends Component {
                 </Link>
               </li>
             </ul>
+            
             {loggedIn ? (
-              <section className="navbar-section">
-                <Link
-                  to="#"
-                  className="btn btn-link text-secondary"
-                  onClick={this.logout}
-                >
-                  <span className="text-nav">Logout</span>
-                </Link>
-              </section>
+              
+              <li className="nav-item dropdown ml-auto">
+        <Link style={{color: "rgba(255,255,255,0.5)"}} className="nav-link dropdown-toggle text-right" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {currentUser}
+        </Link>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <Link style={{color: "rgba(255,255,255,0.5)"}} className="dropdown-item" to="#" onClick={this.logout} >Logout</Link>
+        </div>
+      </li>
+            
             ) : (
               <section className="navbar-section">
                 <Link to="/" className="btn btn-link text-secondary">
