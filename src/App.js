@@ -55,6 +55,7 @@ class App extends Component {
       <div className="App">
    
         <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <div className="container">
         {/* greet user if logged in: */}
         {this.state.loggedIn &&
           <p>Join the party, {this.state.username}!</p>
@@ -77,6 +78,7 @@ class App extends Component {
             <Signup/>}
         />
 
+        </div>
       </div>
     );
   }
