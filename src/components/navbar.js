@@ -55,42 +55,6 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon" />
           </button>
 
-                <header className="navbar App-header" id="nav-container">
-                    <div className="col-4" >
-                        {loggedIn ? (
-                            <section className="navbar-section">
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                    <span className="text-secondary">Logout</span></Link>
-
-                            </section>
-                        ) : (
-                                <section className="navbar-section">
-                                    <Link to="/" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">Home</span>
-                                    </Link>
-                                    <Link to="/login" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">Login</span>
-                                    </Link>
-                                    <Link to="/signup" className="btn btn-link">
-                                        <span className="text-secondary">Sign Up</span>
-                                    </Link>
-                                    {/* <Link to="/trips" className="btn btn-link">
-                                        <span className="text-secondary">Trips</span>
-                                    </Link> */}
-                                </section>
-                            )}
-                    </div>
-                    <div className="col-4 col-mr-auto">
-                        <div id="top-filler"></div>
-                        <img src={logo} className="App-logo" alt="logo" />
-                        <h1 className="App-title">MERN Passport</h1>
-                    </div>
-                </header>
-            </div>
-
-        );
-
-    }
           <div className="navbar-collapse collapse" id="navbarColor02">
             <ul className="navbar-nav mr-auto m-0">
               <li className="nav-item m-0">
@@ -122,10 +86,10 @@ class Navbar extends Component {
             {loggedIn ? (
               
               <li className="nav-item dropdown ml-auto">
-        <Link style={{color: "rgba(255,255,255,0.5)"}} className="nav-link dropdown-toggle text-right" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <Link style={{color: "rgba(255,255,255,0.5)"}} className="nav-link dropdown-toggle text-right" to="#" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           {currentUser}
         </Link>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div className="dropdown-menu drop-special" x-placement="bottom-start">
           <Link style={{color: "rgba(255,255,255,0.5)"}} className="dropdown-item" to="#" onClick={this.logout} >Logout</Link>
         </div>
       </li>

@@ -8,6 +8,7 @@ import Navbar from './components/navbar'
 import Home from './components/home'
 import Home2 from './components/home2'
 import Ledger from "./pages/Ledger"
+import Trips from "./components/trips"
 
 class App extends Component {
   constructor() {
@@ -85,6 +86,11 @@ class App extends Component {
           path="/ledger"
           render={() =>
             <Ledger />}
+            />
+            <Route
+          path="/trips"
+          render={() =>
+            <Trips />}
             />
 
             </div>
