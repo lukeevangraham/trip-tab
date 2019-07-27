@@ -54,7 +54,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} currentUser={this.state.username}  />
         <div className="container">
           {/* greet user if logged in: */}
           {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
