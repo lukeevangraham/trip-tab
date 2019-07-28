@@ -36,7 +36,41 @@ class Navbar extends Component {
     console.log(this.props);
 
     const currentUser = this.props.currentUser;
+    
+                <header className="navbar App-header" id="nav-container">
+                    <div className="col-4" >
+                        {loggedIn ? (
+                            <section className="navbar-section">
+                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
+                                    <span className="text-secondary">Logout</span></Link>
 
+                            </section>
+                        ) : (
+                                <section className="navbar-section">
+                                    <Link to="/" className="btn btn-link text-secondary">
+                                        <span className="text-secondary">Home</span>
+                                    </Link>
+                                    <Link to="/login" className="btn btn-link text-secondary">
+                                        <span className="text-secondary">Login</span>
+                                    </Link>
+                                    <Link to="/signup" className="btn btn-link">
+                                        <span className="text-secondary">Sign Up</span>
+                                    </Link>
+                                </section>
+                            )}
+                    </div>
+                    <div className="col-4 col-mr-auto">
+                        <div id="top-filler"></div>
+                        <img src={logo} className="App-logo" alt="logo" />
+                        <h1 className="App-title">MERN Passport</h1>
+                    </div>
+                </header>
+            </div>
+
+        );
+
+    }
+    
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
@@ -112,6 +146,7 @@ class Navbar extends Component {
       </div>
     );
   }
+
 }
 
 export default Navbar;
