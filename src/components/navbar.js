@@ -86,10 +86,10 @@ class Navbar extends Component {
             {loggedIn ? (
               
               <li className="nav-item dropdown ml-auto">
-        <Link style={{color: "rgba(255,255,255,0.5)"}} className="nav-link dropdown-toggle text-right" to="#" id="navbarDropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <Link style={{color: "rgba(255,255,255,0.5)"}} className="nav-link dropdown-toggle text-right" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {currentUser}
         </Link>
-        <div className="dropdown-menu drop-special" x-placement="bottom-start">
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
           <Link style={{color: "rgba(255,255,255,0.5)"}} className="dropdown-item" to="#" onClick={this.logout} >Logout</Link>
         </div>
       </li>
