@@ -31,7 +31,7 @@ class Home extends Component {
   <hr className="my-4 text-left" />
   {/* <p className="text-left">It uses utility classes for typography and spacing to space content out within the larger container.</p> */}
   <p className="lead text-left">
-    <Link className="btn btn-primary btn-lg" to="/signup" role="button">Sign up</Link>
+    <Link className="btn btn-primary bg-primary btn-lg" to="/signup" role="button">Sign up</Link>
   </p>
 </div>
       )}
