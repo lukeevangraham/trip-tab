@@ -7,8 +7,8 @@ import "./trips.css"
 class Trips extends Component {
     constructor(props) {
         super(props)
-       this.state = {
-            Controls: {
+        this.state = {
+            formControls: {
                 event: {
                     value: '',
                     placeholder: 'What is your name',
