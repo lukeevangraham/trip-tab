@@ -1,23 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import TotalBalanceCard from "./totalBalance";
+import TripCardHome from "./tripCardHome";
 
 class Home extends Component {
-    constructor() {
-        super()
-    }
+  constructor() {
+    super();
+  }
 
-
-    render() {
-        const imageStyle = {
-            width: 400
-        }
-        return (
-            <div>
-                <p>It's good to be home</p>
-                <img style={imageStyle} src="https://i.ytimg.com/vi/N1icEHtgb3g/maxresdefault.jpg" />
-            </div>
-        )
-
-    }
+  render() {
+    return (
+      <div className="row">
+        <div className="col-md-11 col-lg-5 mx-auto">
+          <TripCardHome tripName={"Denver"} />
+        </div>
+        <div className="col-md-11 col-lg-5 mx-auto">
+          <TotalBalanceCard userOwes={9} userIsOwed={8} />
+        </div>
+      </div>
+    );
+  }
 }
 
-export default Home
+export default Home;
