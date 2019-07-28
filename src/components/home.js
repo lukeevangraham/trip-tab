@@ -26,7 +26,7 @@ class Home extends Component {
         </div>
       ) : (
         <div className="jumbotron col-lg-10 mx-auto">
-  <h1 className="display-4 text-white text-left">Simplified Trip Costs</h1>
+  <h1 className="display-5 text-white text-left">Simplified Trip Costs</h1>
   <p className="lead text-left">Travelling with friends?  Keep track of who paid what here.</p>
   <hr className="my-4 text-left" />
   {/* <p className="text-left">It uses utility classes for typography and spacing to space content out within the larger container.</p> */}
