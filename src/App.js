@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Route, Link } from "react-router-dom";
 // components
-import Signup from './components/sign-up'
-import LoginForm from './components/login-form'
-import Navbar from './components/navbar'
-import Home from './components/home'
-import Home2 from './components/home2'
-import Ledger from "./pages/Ledger"
+import Signup from "./components/sign-up";
+import LoginForm from "./components/login-form";
+import Navbar from "./components/navbar";
+import Home from "./components/home";
+import Home2 from "./components/home2";
+import Ledger from "./pages/Ledger";
 
 class App extends Component {
   constructor() {
@@ -23,18 +23,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getUser()
-    this.getNewEvent()
+    this.getUser();
+    this.getNewEvent();
+    const loggedIn = false;
   }
 
   updateUser(userObject) {
     this.setState(userObject);
   }
 
-  getNewEvent(){
-    axios.get("/user/newEvent").then( response => {
-      console.log(response.data)
-    })
+  getNewEvent() {
+    axios.get("/user/newEvent").then(response => {
+      console.log(response.data);
+    });
   }
 
   getUser() {
@@ -43,6 +44,7 @@ class App extends Component {
       console.log(response.data);
       if (response.data.user) {
         console.log("Get User: There is a user saved in the server session: ");
+        // loggedIn = true
 
         this.setState({
           loggedIn: true,
@@ -61,33 +63,25 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} currentUser={this.state.username} />
+        <Navbar
+          updateUser={this.updateUser}
+          loggedIn={this.state.loggedIn}
+          currentUser={this.state.username}
+        />
         <div className="container-fluid">
-
-     
-        {/* Routes to different components */}
-        <Route
-          exact path="/"
-          component={Home} />
-        <Route
-          path="/login"
-          render={() =>
-            <LoginForm
-              updateUser={this.updateUser}
-            />}
-            />
-        <Route
-          path="/signup"
-          render={() =>
-            <Signup/>}
-            />
-        <Route
-          path="/ledger"
-          render={() =>
-            <Ledger />}
-            />
-
-            </div>
+          {/* Routes to different components */}
+          <Route
+            exact
+            path="/"
+            render={() => <Home loggedIn={this.state.loggedIn} />}
+          />
+          <Route
+            path="/login"
+            render={() => <LoginForm updateUser={this.updateUser} />}
+          />
+          <Route path="/signup" render={() => <Signup />} />
+          <Route path="/ledger" render={() => <Ledger />} />
+        </div>
       </div>
     );
   }
