@@ -18,15 +18,6 @@
   font-size: 1.5em;
 }
 
-P {
-  padding: 30px;
-}
-
-span:hover {
-  background-color: red;
-  padding: 5px;
-}
-
 .App-intro {
   font-size: large;
 }
