@@ -61,7 +61,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} currentUser={this.state.username} />
         <div className="container-fluid">
 
      
