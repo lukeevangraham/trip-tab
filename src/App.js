@@ -14,7 +14,8 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      owed:[]
     };
 
     this.getUser = this.getUser.bind(this);
@@ -33,7 +34,12 @@ class App extends Component {
 
   getNewEvent(){
     axios.get("/user/newEvent").then( response => {
-      console.log(response.data)
+      this.setState ({
+        ...this.state,
+        owed: response.data
+      })
+      console.log("here");
+      console.log(this.state);
     })
   }
 
@@ -57,6 +63,8 @@ class App extends Component {
       }
     });
   }
+
+   
 
   render() {
     return (
@@ -84,7 +92,7 @@ class App extends Component {
         <Route
           path="/ledger"
           render={() =>
-            <Ledger />}
+            <Ledger owed={this.state.owed}/>}
             />
 
             </div>

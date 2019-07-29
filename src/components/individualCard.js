@@ -12,7 +12,7 @@ function Individualcard(props) {
         </div>
         <div className="col-md-3" />
       <div className="col-md-4">
-        <h4>Amount: $124314</h4>
+        <h4>Amount: ${props.owedamount}</h4>
           
       </div>
       </div>

@@ -77,7 +77,7 @@ router.get('/newEvent', (request, response) => {
     // Owed.create(testEvent, (err, result) => {
     //     console.log(result)
     // })
-    Oweds.findOne({userId: "someID"})
+    Oweds.find({})
     .then(dbModel => response.json(dbModel))
     .catch(err => response.status(422).json(err))
 })
