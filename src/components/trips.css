@@ -8,7 +8,7 @@ label {
     display: inline-block;
 }
 
-p {
+.heading {
     text-align: center;
     font-size: 35px;
     font-weight: bolder;
@@ -16,14 +16,49 @@ p {
     text-shadow: 5px 5px 5px gray;
 }
 
-input {
+p {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bolder;
+    color: white;
+    text-shadow: 5px 5px 5px gray;
+}
+
+input, select, option {
     display: inline-block;
     box-align: center;
     text-align: center;
     border: 5px ridge rgb(98, 189, 241);
+    margin-left: 15px;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 20px;
 }
 
-button {
+#remove {
+    background-color: yellow;
+    text-align: center;
+    color: purple;
+    font-weight: bolder;
+    font-size: 25px;
+    padding: 15px;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 1px;
+    box-shadow: 5px 5px 5px yellow;
+    border: 5px ridge;
+    border-radius: 7px;
+    text-shadow: 10px 10px 10px black;
+    margin-left: 20px;
+}
+
+#remove:hover {
+    background-color: purple;
+    color:yellow;
+    box-shadow: 10px 10px 10px wheat;
+}
+
+
+#add {
     background-color: rgb(0, 162, 255);
     text-align: center;
     color: white;
@@ -38,7 +73,7 @@ button {
     text-shadow: 10px 10px 10px black;
 }
 
-button:hover, #submit:hover {
+#add:hover, #submit:hover {
     background-color: red;
     color:yellow;
     box-shadow: 10px 10px 10px wheat;
