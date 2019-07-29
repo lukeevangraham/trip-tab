@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import TotalBalanceCard from "./totalBalance";
 import TripCardHome from "./tripCardHome";
+import { Route, Link } from "react-router-dom";
 
 class Home extends Component {
     constructor() {
         super();
     }
 
-<<<<<<< HEAD
   render(props) {
     console.log(this.props)
     return (
@@ -39,20 +39,6 @@ class Home extends Component {
       </div>
     );
   }
-=======
-    render() {
-        return (
-            <div className="row">
-                <div className="col-md-11 col-lg-5 mx-auto">
-                    <TripCardHome tripName={"Denver"} />
-                </div>
-                <div className="col-md-11 col-lg-5 mx-auto">
-                    <TotalBalanceCard userOwes={9} userIsOwed={8} />
-                </div>
-            </div>
-        );
-    }
->>>>>>> c0f244c0a1f2019b35f10e724ad236516b4e05d4
 }
 
 export default Home;
