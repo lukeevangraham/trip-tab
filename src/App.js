@@ -18,19 +18,19 @@ class App extends Component {
       owed:[]
     };
 
-    this.getUser = this.getUser.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.updateUser = this.updateUser.bind(this);
-  }
+        this.getUser = this.getUser.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.updateUser = this.updateUser.bind(this);
+    }
 
-  componentDidMount() {
-    this.getUser()
-    this.getNewEvent()
-  }
+    componentDidMount() {
+        this.getUser()
+        this.getNewEvent()
+    }
 
-  updateUser(userObject) {
-    this.setState(userObject);
-  }
+    updateUser(userObject) {
+        this.setState(userObject);
+    }
 
   getNewEvent(){
     axios.get("/user/newEvent").then( response => {
@@ -43,28 +43,28 @@ class App extends Component {
     })
   }
 
-  getUser() {
-    axios.get("/user/").then(response => {
-      console.log("Get user response: ");
-      console.log(response.data);
-      if (response.data.user) {
-        console.log("Get User: There is a user saved in the server session: ");
+    getUser() {
+        axios.get("/user/").then(response => {
+            console.log("Get user response: ");
+            console.log(response.data);
+            if (response.data.user) {
+                console.log("Get User: There is a user saved in the server session: ");
 
-        this.setState({
-          loggedIn: true,
-          username: response.data.user.username
+                this.setState({
+                    loggedIn: true,
+                    username: response.data.user.username
+                });
+            } else {
+                console.log("Get user: no user");
+                this.setState({
+                    loggedIn: false,
+                    username: null
+                });
+            }
         });
-      } else {
-        console.log("Get user: no user");
-        this.setState({
-          loggedIn: false,
-          username: null
-        });
-      }
-    });
-  }
+    }
 
-   
+  
 
   render() {
     return (
@@ -95,10 +95,10 @@ class App extends Component {
             <Ledger owed={this.state.owed}/>}
             />
 
+                </div>
             </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default App;
