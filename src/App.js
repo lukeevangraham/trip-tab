@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Route, Link } from "react-router-dom";
 // components
-import Signup from "./components/sign-up";
-import LoginForm from "./components/login-form";
-import Navbar from "./components/navbar";
-import Home from "./components/home";
-import Home2 from "./components/home2";
-import Ledger from "./pages/Ledger";
+import Signup from './components/sign-up'
+import LoginForm from './components/login-form'
+import Navbar from './components/navbar'
+import Home from './components/home'
+import Home2 from './components/home2'
+import Ledger from "./pages/Ledger"
 
 class App extends Component {
     constructor() {
@@ -57,6 +57,7 @@ class App extends Component {
             }
         });
     }
+<<<<<<< HEAD
   render() {
     return (
       <div className="App">
@@ -82,6 +83,42 @@ class App extends Component {
       </div>
     );
   }
+=======
+
+    render() {
+        return (
+            <div className="App">
+                <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} currentUser={this.state.username} />
+                <div className="container-fluid">
+
+
+                    {/* Routes to different components */}
+                    <Route
+                        exact path="/"
+                        component={Home} />
+                    <Route
+                        path="/login"
+                        render={() =>
+                            <LoginForm
+                                updateUser={this.updateUser}
+                            />}
+                    />
+                    <Route
+                        path="/signup"
+                        render={() =>
+                            <Signup />}
+                    />
+                    <Route
+                        path="/ledger"
+                        render={() =>
+                            <Ledger />}
+                    />
+
+                </div>
+            </div>
+        );
+    }
+>>>>>>> c0f244c0a1f2019b35f10e724ad236516b4e05d4
 }
 
 export default App;
