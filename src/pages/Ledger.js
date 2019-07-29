@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Individualcard from "../components/individualCard";
-import TotalBalanceCard from "../components/totalBalance"
+import TotalBalanceCard from "../components/totalBalance";
+import Tripmaker from "../pages/Tripmaker"
 
 
 
@@ -23,13 +24,14 @@ function Ledger(props) {
 }
                 <TotalBalanceCard userOwes={totalOwed}/>    
                 </div>
+                <Tripmaker ></Tripmaker>
                 
                 <div className="col-md-4~ center">
                     </div>
                     </div>
                 <h2 className="text-left">Your Ledger: </h2>
                 {props.owed.map((user) => {
-                    console.log(user);
+                    console.log(user)
                  return  <Individualcard username={user.userId} owedamount={user.amount} img={user.img}/>})}
                 
             </div>

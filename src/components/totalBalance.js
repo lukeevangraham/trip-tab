@@ -8,7 +8,7 @@ function TotalBalanceCard(props) {
       <div className="card-body text-left">
         <h4 className="card-title mb-1">Total Balance</h4>
         <p className="card-text pl-3">
-          You owe: {props.userOwes} <br/>
+          You owe: ${props.userOwes} <br/>
           You are owed: {props.userIsOwed}
           </p>
       </div>
