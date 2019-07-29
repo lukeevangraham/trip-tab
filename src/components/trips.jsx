@@ -4,7 +4,6 @@ import { Form, Button, Container, Row, Col, Input } from 'reactstrap';
 // import Geosuggest from 'react-geosuggest';
 import "./trips.css"
 
-
 class Trips extends React.Component {
     state = {
         newParticipant: [{ owed: "", paid: "" }],
@@ -28,7 +27,7 @@ class Trips extends React.Component {
     handleSubmit = (e) => { e.preventDefault() }
 
     render() {
-        
+
         let { owed, newParticipant } = this.state
         return (
             <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
@@ -49,7 +48,7 @@ class Trips extends React.Component {
                 <br /><br />
                 <label>Location</label>
 
-                <input 
+                <input
                     type="location"
                     value={this.props.searchString}
                     ref="searchStringInput"
