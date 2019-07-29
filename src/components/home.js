@@ -4,9 +4,9 @@ import TripCardHome from "./tripCardHome";
 import { Route, Link } from "react-router-dom";
 
 class Home extends Component {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
   render(props) {
     console.log(this.props)

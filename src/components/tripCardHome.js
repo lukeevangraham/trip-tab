@@ -2,6 +2,7 @@ import React from "react";
 import "./totalBalance.css";
 
 function TripCardHome(props) {
+
   return (
     <div className="card text-white border-warning bg-warning  mb-3 rounded card-parent">
       {/* <div className="card-header text-left">Upcoming Trips</div> */}
