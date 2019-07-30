@@ -10,12 +10,13 @@ import Home2 from './components/home2'
 import Ledger from "./pages/Ledger"
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            loggedIn: false,
-            username: null
-        };
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false,
+      username: null,
+      owed:[]
+    };
 
         this.getUser = this.getUser.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -31,11 +32,16 @@ class App extends Component {
         this.setState(userObject);
     }
 
-    getNewEvent() {
-        axios.get("/user/newEvent").then(response => {
-            console.log(response.data)
-        })
-    }
+  getNewEvent(){
+    axios.get("/user/newEvent").then( response => {
+      this.setState ({
+        ...this.state,
+        owed: response.data
+      })
+      console.log("here");
+      console.log(this.state);
+    })
+  }
 
     getUser() {
         axios.get("/user/").then(response => {
@@ -77,7 +83,7 @@ class App extends Component {
             render={() => <LoginForm updateUser={this.updateUser} />}
           />
           <Route path="/signup" render={() => <Signup />} />
-          <Route path="/ledger" render={() => <Ledger />} />
+          <Route path="/ledger" render={() => <Ledger owed={this.state.owed}/>} />
         </div>
       </div>
     );
