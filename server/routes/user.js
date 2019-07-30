@@ -4,6 +4,8 @@ const User = require('../database/models/user')
 const Oweds = require('../database/models/owed')
 const passport = require('../passport')
 
+let userName;
+
 router.post('/', (req, res) => {
     console.log('user signup');
 
@@ -40,6 +42,7 @@ router.post(
     passport.authenticate('local'),
     (req, res) => {
         console.log('logged in', req.user);
+        userName = req.user.username
         var userInfo = {
             username: req.user.username
         };
@@ -77,7 +80,14 @@ router.get('/newEvent', (request, response) => {
     // Owed.create(testEvent, (err, result) => {
     //     console.log(result)
     // })
-    Oweds.findOne({userId: "someID"})
+    Oweds.find({})
+    .then(dbModel => response.json(dbModel))
+    .catch(err => response.status(422).json(err))
+})
+router.post('/newEvent', (request, response) => {
+
+   
+    Oweds.create(request.body)
     .then(dbModel => response.json(dbModel))
     .catch(err => response.status(422).json(err))
 })

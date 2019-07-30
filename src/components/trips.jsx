@@ -8,6 +8,7 @@ class Trips extends React.Component {
     state = {
         newParticipant: [{ owed: "", paid: "" }],
         owed: "",
+        deleteParticipant: [{ owed: null, paid: null }]
     }
 
     handleChange = (e) => {
@@ -22,6 +23,12 @@ class Trips extends React.Component {
     addNewParticipant = (e) => {
         this.setState((prevState) => ({
             newParticipant: [...prevState.newParticipant, { owed: "", paid: "" }],
+        }));
+    }
+
+    deleteParticipant(e) {
+        this.setState((prevState) => ({
+            deleteParticipant: [...prevState.deleteParticipant, { owed: null, paid: null }],
         }));
     }
     handleSubmit = (e) => { e.preventDefault() }
@@ -148,7 +155,7 @@ class Trips extends React.Component {
                                 />
                                 <br /><br />
                                 <button id="add" onClick={this.addNewParticipant}>+Participant</button>
-                                <button id="remove" onClick={this.addNewParticipant}>-Participant</button>
+                                <button id="remove" onClick={this.deleteParticipant}>Delete Participant</button>
                                 <br /><br />
                             </Container>
                         )
