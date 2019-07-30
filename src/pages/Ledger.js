@@ -24,7 +24,7 @@ function Ledger(props) {
 }
                 <TotalBalanceCard userOwes={totalOwed}/>    
                 </div>
-                <Tripmaker ></Tripmaker>
+                <Tripmaker />
                 
                 <div className="col-md-4~ center">
                     </div>
