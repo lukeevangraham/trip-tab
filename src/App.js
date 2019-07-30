@@ -63,42 +63,31 @@ class App extends Component {
             }
         });
     }
-
-  
-
   render() {
     return (
       <div className="App">
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} currentUser={this.state.username} />
+        <Navbar
+          updateUser={this.updateUser}
+          loggedIn={this.state.loggedIn}
+          currentUser={this.state.username}
+        />
         <div className="container-fluid">
-
-     
-        {/* Routes to different components */}
-        <Route
-          exact path="/"
-          component={Home} />
-        <Route
-          path="/login"
-          render={() =>
-            <LoginForm
-              updateUser={this.updateUser}
-            />}
-            />
-        <Route
-          path="/signup"
-          render={() =>
-            <Signup/>}
-            />
-        <Route
-          path="/ledger"
-          render={() =>
-            <Ledger owed={this.state.owed}/>}
-            />
-
-                </div>
-            </div>
-        );
-    }
+          {/* Routes to different components */}
+          <Route
+            exact
+            path="/"
+            render={() => <Home loggedIn={this.state.loggedIn} />}
+          />
+          <Route
+            path="/login"
+            render={() => <LoginForm updateUser={this.updateUser} />}
+          />
+          <Route path="/signup" render={() => <Signup />} />
+          <Route path="/ledger" render={() => <Ledger owed={this.state.owed}/>} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
