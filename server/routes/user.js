@@ -69,7 +69,8 @@ router.post('/logout', (req, res) => {
     }
 })
 
-router.get('/newEvent', (request, response) => {
+router.get('/newEvent/:userId', (request, response) => {
+console.log("TCL: request=======================>>>>", request.params.userId)
 
     // const testEvent= {userId: "someID",
     // payerId: "someID",
@@ -80,11 +81,12 @@ router.get('/newEvent', (request, response) => {
     // Owed.create(testEvent, (err, result) => {
     //     console.log(result)
     // })
-    Oweds.find({})
+    Oweds.findOne({})
     .then(dbModel => response.json(dbModel))
     .catch(err => response.status(422).json(err))
 })
 router.post('/newEvent', (request, response) => {
+console.log("TCL: request==========>>>>>>", request.body)
 
    
     Oweds.create(request.body)

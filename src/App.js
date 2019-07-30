@@ -25,7 +25,8 @@ class App extends Component {
 
     componentDidMount() {
         this.getUser()
-        this.getNewEvent()
+        this.postNewEvent();
+        // this.getNewEvent()
     }
 
     updateUser(userObject) {
@@ -33,13 +34,22 @@ class App extends Component {
     }
 
   getNewEvent(){
-    axios.get("/user/newEvent").then( response => {
+    
+    axios.get("/user/newEvent/"+":someId").then( response => {
       this.setState ({
         ...this.state,
         owed: response.data
       })
       console.log("here");
       console.log(this.state);
+    })
+  }
+
+  postNewEvent(){
+    let tripData = { userName: "someUser", tripName: "Denver"}
+    axios.post("/user/newEvent", tripData)
+    .then(response => {
+      console.log(response.data)
     })
   }
 
