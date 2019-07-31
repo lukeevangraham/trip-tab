@@ -6,54 +6,54 @@ import axios from "axios";
 import "./navbar.css";
 
 class Navbar extends Component {
-    constructor() {
-        super();
-        this.logout = this.logout.bind(this);
-    }
+  constructor() {
+    super();
+    this.logout = this.logout.bind(this);
+  }
 
-    logout(event) {
-        event.preventDefault();
-        console.log("logging out");
-        axios
-            .post("/user/logout")
-            .then(response => {
-                console.log(response.data);
-                if (response.status === 200) {
-                    this.props.updateUser({
-                        loggedIn: false,
-                        username: null
-                    });
-                }
-            })
-            .catch(error => {
-                console.log("Logout error");
-            });
-    }
+  logout(event) {
+    event.preventDefault();
+    console.log("logging out");
+    axios
+      .post("/user/logout")
+      .then(response => {
+        console.log(response.data);
+        if (response.status === 200) {
+          this.props.updateUser({
+            loggedIn: false,
+            username: null
+          });
+        }
+      })
+      .catch(error => {
+        console.log("Logout error");
+      });
+  }
 
-    render() {
-        const loggedIn = this.props.loggedIn;
-        console.log("navbar render, props: ");
-        console.log(this.props);
+  render() {
+    const loggedIn = this.props.loggedIn;
+    console.log("navbar render, props: ");
+    console.log(this.props);
 
-        const currentUser = this.props.currentUser;
+    const currentUser = this.props.currentUser;
 
-        return (
-            <div>
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-                    <a className="navbar-brand" href="#">
-                        TripTab
+    return (
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+          <a className="navbar-brand" href="#">
+            TripTab
           </a>
-                    <button
-                        className="navbar-toggler collapsed"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarColor02"
-                        aria-controls="navbarColor02"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon" />
-                    </button>
+          <button
+            className="navbar-toggler collapsed"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarColor02"
+            aria-controls="navbarColor02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
 
           <div className="navbar-collapse collapse" id="navbarColor02">
             <ul className="navbar-nav mr-auto m-0">
@@ -103,6 +103,7 @@ class Navbar extends Component {
             </ul>
 
             {loggedIn ? (
+              <ul className="navbar-nav m-0">
               <li className="nav-item dropdown ml-auto">
                 <Link
                   style={{ color: "rgba(255,255,255,0.5)" }}
@@ -127,6 +128,7 @@ class Navbar extends Component {
                   </Link>
                 </div>
               </li>
+              </ul>
             ) : (
               <section className="navbar-section">
                 <Link to="/" className="btn btn-link text-secondary">
@@ -145,7 +147,6 @@ class Navbar extends Component {
       </div>
     );
   }
-
 }
 
 export default Navbar;
