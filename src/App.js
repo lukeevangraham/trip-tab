@@ -35,7 +35,9 @@ class App extends Component {
     }
 
   getNewEvent(){
-    axios.get("/user/findOwedByUserId/"+ "blahblah").then( response => {
+    console.log("TCL: App -> getNewEvent ----------------------------> username", this.state.username)
+    
+    axios.get("/user/findOwedByUserId/"+ this.state.username).then( response => {
       this.setState ({
         ...this.state,
         owed: response.data
@@ -47,10 +49,10 @@ class App extends Component {
 
   getPostEvent(){
     const testEvent= {
-        userId: "ajay",
-        payerId: "luke",
-        amount: 300,
-        eventName: "Snowboarding tickets",
+        userId: "luke",
+        payerId: "ajay",
+        amount: 600,
+        eventName: "Ruth's chris",
         paid: false,
         usersAttended: ["ajay", "jenny", "luke"]
     }
@@ -100,6 +102,7 @@ class App extends Component {
             render={() => <LoginForm updateUser={this.updateUser} />}
           />
           <Route path="/signup" render={() => <Signup />} />
+          <Route path="/trips" render={() => <Trips />} />
           <Route path="/ledger" render={() => <Ledger owed={this.state.owed}/>} />
           <Route path="/trips" render={() => <Trips owed={this.state.owed}/>} />
         </div>
