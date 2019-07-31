@@ -24,18 +24,19 @@ class App extends Component {
     this.updateUser = this.updateUser.bind(this);
   }
 
-  componentDidMount() {
-    this.getUser()
-    this.getNewEvent()
-  }
+    componentDidMount() {
+        this.getUser()
+        // this.getNewEvent()
+        this.getPostEvent();
+    }
 
   updateUser(userObject) {
     this.setState(userObject);
   }
 
-  getNewEvent() {
-    axios.get("/user/newEvent").then(response => {
-      this.setState({
+  getNewEvent(){
+    axios.get("/user/findOwedByUserId/"+ "blahblah").then( response => {
+      this.setState ({
         ...this.state,
         owed: response.data
       })
@@ -44,12 +45,27 @@ class App extends Component {
     })
   }
 
-  getUser() {
-    axios.get("/user/").then(response => {
-      console.log("Get user response: ");
-      console.log(response.data);
-      if (response.data.user) {
-        console.log("Get User: There is a user saved in the server session: ");
+  getPostEvent(){
+    const testEvent= {
+        userId: "ajay",
+        payerId: "luke",
+        amount: 300,
+        eventName: "Snowboarding tickets",
+        paid: false,
+        usersAttended: ["ajay", "jenny", "luke"]
+    }
+
+    axios.post("/user/newEvent/", testEvent).then(response => {
+        console.log(response)
+    })
+  }
+
+    getUser() {
+        axios.get("/user/").then(response => {
+            console.log("Get user response: ");
+            console.log(response.data);
+            if (response.data.user) {
+                console.log("Get User: There is a user saved in the server session: ");
 
         this.setState({
           loggedIn: true,

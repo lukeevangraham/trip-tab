@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../database/models/user')
 const Oweds = require('../database/models/owed')
+const Events = require("../database/models/event")
 const passport = require('../passport')
 
 let userName;
@@ -69,7 +70,8 @@ router.post('/logout', (req, res) => {
     }
 })
 
-router.get('/newEvent', (request, response) => {
+router.get('/findOwedByUserId/:userId', (request, response) => {
+// console.log("TCL: request================>>>>>>>>>>>>", request.params.userId)
 
     // const testEvent= {userId: "someID",
     // payerId: "someID",
@@ -80,16 +82,57 @@ router.get('/newEvent', (request, response) => {
     // Owed.create(testEvent, (err, result) => {
     //     console.log(result)
     // })
-    Oweds.find({})
+    Oweds.find({userId : request.params.userId})
     .then(dbModel => response.json(dbModel))
     .catch(err => response.status(422).json(err))
 })
-router.post('/newEvent', (request, response) => {
 
-   
-    Oweds.create(request.body)
-    .then(dbModel => response.json(dbModel))
+
+router.post('/newEvent', (request, response) => {
+    //add this data to events database
+    Events.create(request.body)
+    .then(dbModel => {
+    console.log("TCL: dbModel", dbModel)
+        addToOwedTable(request.body);
+        response.json(dbModel);
+    })
     .catch(err => response.status(422).json(err))
+
+    // console.log("request.body ", request.body.usersAttended)
+    // 
+    // let listOfUsersThatOwes = usersThatOwedForThisEvent(request.body.usersAttended, request.body.payerId);
+    // console.log("TCL: listOfUsersThatOwes", listOfUsersThatOwes)
+    // let howMuchTheyOwe = request.body.amount/request.body.usersAttended.length
+    // console.log("TCL: howMuchTheyOwe", howMuchTheyOwe)
+    // listOfUsersThatOwes.forEach(element => {
+    //     const datatoInsert = {
+            
+    //     }
+    //     // Oweds.create(request.body)
+    //     // .then(dbModel => response.json(dbModel))
+    //     // .catch(err => response.status(422).json(err))
+    // });
+
+    
+    
 })
+
+function addToOwedTable(data){
+console.log("TCL: addToOwedTable -> data", data)
+ let listOfUsersThatOwes = usersThatOwedForThisEvent(data.usersAttended, data.payerId);
+   
+
+    
+}
+
+function usersThatOwedForThisEvent (anArrayOfUsers, userPaid){
+    let returnArray = [];
+    anArrayOfUsers.forEach(element => {
+        if(element !== userPaid){
+            returnArray.push(element)
+        }
+    });
+    return returnArray;
+}
 
 module.exports = router

@@ -7,7 +7,10 @@ import "./trips.css"
 class Trips extends React.Component {
     state = {
         newParticipant: [{ owed: "", paid: "" }],
-        owed: "",
+
+    }
+
+    deleteState = {
         deleteParticipant: [{ owed: null, paid: null }]
     }
 
@@ -16,8 +19,10 @@ class Trips extends React.Component {
             let newParticipant = [...this.state.newParticipant]
             newParticipant[e.target.dataset.id][e.target.classowed] = e.target.value.toUpperCase()
             this.setState({ newParticipant }, () => console.log(this.state.newParticipant))
+            this.deleteState({ newParticipant }, () => console.log(this.state.newParticipant))
         } else {
-            this.setState({ [e.target.owed]: e.target.value.toUpperCase() })
+            this.setState({ [e.target.newParticipant]: e.target.value.toUpperCase() })
+            this.deleteState({[e.target.deleteParticipant]: e.target.value(null)})
         }
     }
     addNewParticipant = (e) => {
@@ -27,7 +32,7 @@ class Trips extends React.Component {
     }
 
     deleteParticipant(e) {
-        this.setState((prevState) => ({
+        this.deleteState((prevState) => ({
             deleteParticipant: [...prevState.deleteParticipant, { owed: null, paid: null }],
         }));
     }
@@ -36,6 +41,7 @@ class Trips extends React.Component {
     render() {
 
         let { owed, newParticipant } = this.state
+        let {deleteParticipant} = this.deleteState
         return (
             <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
                 <p>Trip Information</p>
@@ -51,12 +57,12 @@ class Trips extends React.Component {
                     type="date"
                     value={this.props.searchString}
                     ref="searchStringInput"
-                    onChange={this.handleChange} />
+                    onChange={this.handleChange}
+                />
                 <br /><br />
                 <label>Location</label>
-
                 <input
-                    type="location"
+                    type="text"
                     value={this.props.searchString}
                     ref="searchStringInput"
                     onChange={this.handleChange} />
@@ -114,7 +120,6 @@ class Trips extends React.Component {
                     <option value="50">WY</option>
                 </select>
                 <br /><br />
-
                 {
                     newParticipant.map((val, idx) => {
                         let newParticipantId = `newParticipant-${idx}`, paidId = `paid-${idx}`
@@ -128,6 +133,7 @@ class Trips extends React.Component {
                                     data-id={idx}
                                     id={newParticipantId}
                                     value={newParticipant[idx].owed}
+                                    onChange={this.handleChange}
 
                                 /><br /><br />
                                 <label htmlFor={paidId}>Amount Owed</label>
@@ -152,6 +158,8 @@ class Trips extends React.Component {
                                     id={paidId}
                                     value={newParticipant[idx].paid}
                                     classowed="paid"
+                                // value={this.props.searchString}
+                                // onChange={this.handleChange}
                                 />
                                 <br /><br />
                                 <button id="add" onClick={this.addNewParticipant}>+Participant</button>
