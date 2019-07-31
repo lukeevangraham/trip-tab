@@ -62,7 +62,7 @@ class Trips extends Component {
             <label for="amount">Amount</label>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
-                <span className="input-group-text">$</span>
+                <span className="input-group-text bg-secondary">$</span>
               </div>
               <input type="text" className="form-control" placeholder="USD" />
             </div>
@@ -80,10 +80,10 @@ class Trips extends Component {
                   <button className="btn-danger mb-2 btn-sm" onClick={this.handleDelete(index)}>X</button><br/>
                 </span>
               ))}
-              <button className="btn btn-secondary" onClick={this.addParticipant}>Add Participant</button>
+              <button className="btn btn-dark text-light" onClick={this.addParticipant}>Add Participant</button>
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary float-right">
               Submit
             </button>
           </fieldset>
