@@ -10,19 +10,19 @@ class Trips extends React.Component {
 
     }
 
-    deleteState = {
-        deleteParticipant: [{ owed: null, paid: null }]
-    }
+    // deleteState = {
+    //     deleteParticipant: [{ owed: null, paid: null }]
+    // }
 
     handleChange = (e) => {
         if (["owed", "paid"].includes(e.target.classowed)) {
             let newParticipant = [...this.state.newParticipant]
             newParticipant[e.target.dataset.id][e.target.classowed] = e.target.value.toUpperCase()
             this.setState({ newParticipant }, () => console.log(this.state.newParticipant))
-            this.deleteState({ newParticipant }, () => console.log(this.state.newParticipant))
+            // this.deleteState({ newParticipant }, () => console.log(this.state.newParticipant))
         } else {
             this.setState({ [e.target.newParticipant]: e.target.value.toUpperCase() })
-            this.deleteState({[e.target.deleteParticipant]: e.target.value(null)})
+            // this.deleteState({[e.target.deleteParticipant]: e.target.value(null)})
         }
     }
     addNewParticipant = (e) => {
@@ -31,17 +31,17 @@ class Trips extends React.Component {
         }));
     }
 
-    deleteParticipant(e) {
-        this.deleteState((prevState) => ({
-            deleteParticipant: [...prevState.deleteParticipant, { owed: null, paid: null }],
-        }));
-    }
+    // // deleteParticipant(e) {
+    // //     this.deleteState((prevState) => ({
+    // //         deleteParticipant: [...prevState.deleteParticipant, { owed: null, paid: null }],
+    // //     }));
+    // }
     handleSubmit = (e) => { e.preventDefault() }
 
     render() {
 
         let { owed, newParticipant } = this.state
-        let {deleteParticipant} = this.deleteState
+        // let {deleteParticipant} = this.deleteState
         return (
             <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
                 <p>Trip Information</p>
