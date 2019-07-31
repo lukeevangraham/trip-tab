@@ -34,7 +34,9 @@ class App extends Component {
     }
 
   getNewEvent(){
-    axios.get("/user/findOwedByUserId/"+ "blahblah").then( response => {
+    console.log("TCL: App -> getNewEvent ----------------------------> username", this.state.username)
+    
+    axios.get("/user/findOwedByUserId/"+ this.state.username).then( response => {
       this.setState ({
         ...this.state,
         owed: response.data
@@ -46,10 +48,10 @@ class App extends Component {
 
   getPostEvent(){
     const testEvent= {
-        userId: "ajay",
-        payerId: "luke",
-        amount: 300,
-        eventName: "Snowboarding tickets",
+        userId: "luke",
+        payerId: "ajay",
+        amount: 600,
+        eventName: "Ruth's chris",
         paid: false,
         usersAttended: ["ajay", "jenny", "luke"]
     }
