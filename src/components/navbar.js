@@ -67,6 +67,7 @@ class Navbar extends Component {
                   }
                 >
                   Home <span className="sr-only">(current)</span>
+<<<<<<< HEAD
                 </Link>
               </li>
 
@@ -140,6 +141,60 @@ class Navbar extends Component {
                 </Link>
               </section>
             )}
+=======
+                </Link>
+              </li>
+              <li className="nav-item m-0">
+                <Link
+                  to="/trips"
+                  className={
+                    window.location.pathname === "/trips"
+                      ? "nav-link active non-underline-link"
+                      : "nav-link non-underline-link"
+                  }
+                >
+                  Trips
+                </Link>
+              </li>
+              <li className="nav-item m-0">
+                <Link
+                  to="/ledger"
+                  className={
+                    window.location.pathname === "/ledger"
+                      ? "nav-link active non-underline-link"
+                      : "nav-link non-underline-link"
+                  }
+                >
+                  Ledger
+                </Link>
+              </li>
+            </ul>
+
+            {loggedIn ? (
+
+              <li className="nav-item dropdown ml-auto">
+                <Link style={{ color: "rgba(255,255,255,0.5)" }} className="nav-link dropdown-toggle text-right" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {currentUser}
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <Link style={{ color: "rgba(255,255,255,0.5)" }} className="dropdown-item" to="#" onClick={this.logout} >Logout</Link>
+                </div>
+              </li>
+
+            ) : (
+                <section className="navbar-section">
+                  <Link to="/" className="btn btn-link text-secondary">
+                    <span className="text-secondary">home</span>
+                  </Link>
+                  <Link to="/login" className="btn btn-link text-secondary">
+                    <span className="text-secondary">login</span>
+                  </Link>
+                  <Link to="/signup" className="btn btn-link">
+                    <span className="text-secondary">sign up</span>
+                  </Link>
+                </section>
+              )}
+>>>>>>> bcc5479d8d7a44234b9240345fe42f131ded4858
           </div>
         </nav>
       </div>

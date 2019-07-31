@@ -8,6 +8,7 @@ import Navbar from './components/navbar'
 import Home from './components/home'
 import Home2 from './components/home2'
 import Ledger from "./pages/Ledger"
+import Trips from "./components/trips"
 
 class App extends Component {
   constructor() {
@@ -15,13 +16,13 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: null,
-      owed:[]
+      owed: []
     };
 
-        this.getUser = this.getUser.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.updateUser = this.updateUser.bind(this);
-    }
+    this.getUser = this.getUser.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+  }
 
     componentDidMount() {
         this.getUser()
@@ -29,9 +30,9 @@ class App extends Component {
         this.getPostEvent();
     }
 
-    updateUser(userObject) {
-        this.setState(userObject);
-    }
+  updateUser(userObject) {
+    this.setState(userObject);
+  }
 
   getNewEvent(){
     axios.get("/user/findOwedByUserId/"+ "blahblah").then( response => {
@@ -66,19 +67,20 @@ class App extends Component {
             if (response.data.user) {
                 console.log("Get User: There is a user saved in the server session: ");
 
-                this.setState({
-                    loggedIn: true,
-                    username: response.data.user.username
-                });
-            } else {
-                console.log("Get user: no user");
-                this.setState({
-                    loggedIn: false,
-                    username: null
-                });
-            }
+        this.setState({
+          loggedIn: true,
+          username: response.data.user.username
         });
-    }
+      } else {
+        console.log("Get user: no user");
+        this.setState({
+          loggedIn: false,
+          username: null
+        });
+      }
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -99,7 +101,8 @@ class App extends Component {
             render={() => <LoginForm updateUser={this.updateUser} />}
           />
           <Route path="/signup" render={() => <Signup />} />
-          <Route path="/ledger" render={() => <Ledger owed={this.state.owed}/>} />
+          <Route path="/trips" render={() => <Trips />}/>
+          <Route path="/ledger" render={() => <Ledger owed={this.state.owed} />} />
         </div>
       </div>
     );
