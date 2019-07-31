@@ -1,13 +1,44 @@
 import React, { Component } from "react";
 
-function Trips(props) {
+class Trips extends Component {
+  state = {
+    participants: []
+  };
 
-    return(
-        <div className="col-6 mx-auto text-left">
+  handleText = i => e => {
+    let participants = [...this.state.participants]
+    participants[i] = e.target.value
+    this.setState({
+      participants
+    })
+  }
+
+  handleDelete = i => e => {
+    e.preventDefault()
+    let participants = [
+      ...this.state.participants.slice(0, i),
+      ...this.state.participants.slice(i + 1)
+    ]
+    this.setState({
+      participants
+    })
+  }
+
+  addParticipant = e => {
+    e.preventDefault()
+    let participants = this.state.participants.concat([''])
+    this.setState({
+      participants
+    })
+  }
+
+  render() {
+    return (
+      <div className="col-xs-11 bg-light p-3 rounded col-lg-6 mx-auto text-left">
         <form>
-  <fieldset>
-    <legend className="text-center">Create A Trip</legend>
-    <div className="form-group row">
+          <fieldset>
+            <legend className="text-center">Create An Event</legend>
+            {/* <div className="form-group row">
       <label for="staticEmail" className="col-sm-2 col-form-label">Email</label>
       <div className="col-sm-10">
         <input type="text" readonly="" className="form-control-plaintext" id="staticEmail" value="email@example.com" />
@@ -41,58 +72,70 @@ function Trips(props) {
         <option>4</option>
         <option>5</option>
       </select>
-    </div>
-    <div className="form-group">
-      <label for="exampleTextarea">Example textarea</label>
-      <textarea className="form-control" id="exampleTextarea" rows="3"></textarea>
-    </div>
-    <div className="form-group">
-      <label for="exampleInputFile">File input</label>
-      <input type="file" className="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" />
-      <small id="fileHelp" className="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-    </div>
-    <fieldset className="form-group">
-      <legend>Radio buttons</legend>
-      <div className="form-check">
-        <label className="form-check-label">
-          <input type="radio" className="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-          Option one is this and that—be sure to include why it's great
-        </label>
-      </div>
-      <div className="form-check">
-      <label className="form-check-label">
-          <input type="radio" className="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2" />
-          Option two can be something else and selecting it will deselect option one
-        </label>
-      </div>
-      <div className="form-check disabled">
-      <label className="form-check-label">
-          <input type="radio" className="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled="" />
-          Option three is disabled
-        </label>
-      </div>
-    </fieldset>
-    <fieldset className="form-group">
-      <legend>Checkboxes</legend>
-      <div className="form-check">
-        <label className="form-check-label">
-          <input className="form-check-input" type="checkbox" value="" checked="" />
-          Option one is this and that—be sure to include why it's great
-        </label>
-      </div>
-      <div className="form-check disabled">
-        <label className="form-check-label">
-          <input className="form-check-input" type="checkbox" value="" disabled="" />
-          Option two is disabled
-        </label>
-      </div>
-    </fieldset>
-    <button type="submit" className="btn btn-primary">Submit</button>
-  </fieldset>
-</form>
-        </div>
-    )
+    </div> */}
 
+            <div className="form-group">
+              <label for="eventtName">Event Name:</label>
+              <textarea
+                className="form-control mb-3"
+                id="eventName"
+                placeholder="Dinner"
+                rows="1"
+              />
+            </div>
+
+            <div className="form-group">
+              <label for="payerFirstName">Payer First Name</label>
+              <textarea
+                className="form-control mb-3"
+                id="payerFirstName"
+                placeholder="John"
+                rows="1"
+              />
+            </div>
+
+            <label for="amount">Amount</label>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text">$</span>
+              </div>
+              <input type="text" className="form-control" placeholder="USD" />
+            </div>
+
+
+            <label for="payerFirstName">Additional Participant First Name(s)</label>
+            <div className="mb-3">
+              {this.state.participants.map((participant, index) => (
+                <span key={index}>
+                  <input
+                    type="text"
+                    onChange={this.handleText(index)}
+                    value={participant}
+                  />
+                  <button className="btn-danger mb-2 btn-sm" onClick={this.handleDelete(index)}>X</button><br/>
+                </span>
+              ))}
+              <button className="btn btn-secondary" onClick={this.addParticipant}>Add Participant</button>
+            </div>
+
+            {/* <div className="form-group">
+              <label for="payerFirstName">Additional Participant</label>
+              <textarea
+                className="form-control mb-3"
+                id="additionalParticipant1"
+                placeholder="Suzy"
+                rows="1"
+              />
+            </div> */}
+
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default Trips;
