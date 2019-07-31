@@ -102,7 +102,7 @@ class App extends Component {
             render={() => <LoginForm updateUser={this.updateUser} />}
           />
           <Route path="/signup" render={() => <Signup />} />
-          <Route path="/trips" render={() => <Trips />} />
+          {/* <Route path="/trips" render={() => <Trips />} /> */}
           <Route path="/ledger" render={() => <Ledger owed={this.state.owed}/>} />
           <Route path="/trips" render={() => <Trips owed={this.state.owed}/>} />
         </div>

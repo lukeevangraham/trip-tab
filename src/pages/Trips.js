@@ -38,41 +38,6 @@ class Trips extends Component {
         <form>
           <fieldset>
             <legend className="text-center">Create An Event</legend>
-            {/* <div className="form-group row">
-      <label for="staticEmail" className="col-sm-2 col-form-label">Email</label>
-      <div className="col-sm-10">
-        <input type="text" readonly="" className="form-control-plaintext" id="staticEmail" value="email@example.com" />
-      </div>
-    </div>
-    <div className="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-      <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div className="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-    </div>
-    <div className="form-group">
-      <label for="exampleSelect1">Example select</label>
-      <select className="form-control" id="exampleSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    <div className="form-group">
-      <label for="exampleSelect2">Example multiple select</label>
-      <select multiple="" className="form-control" id="exampleSelect2">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div> */}
 
             <div className="form-group">
               <label for="eventtName">Event Name:</label>
@@ -117,16 +82,6 @@ class Trips extends Component {
               ))}
               <button className="btn btn-secondary" onClick={this.addParticipant}>Add Participant</button>
             </div>
-
-            {/* <div className="form-group">
-              <label for="payerFirstName">Additional Participant</label>
-              <textarea
-                className="form-control mb-3"
-                id="additionalParticipant1"
-                placeholder="Suzy"
-                rows="1"
-              />
-            </div> */}
 
             <button type="submit" className="btn btn-primary">
               Submit
