@@ -1,4 +1,5 @@
 module.exports = {
   Owed: require("./owed"),
-  Paid: require("./paid")
+  Paid: require("./paid"),
+  Event: require("./event")
 };

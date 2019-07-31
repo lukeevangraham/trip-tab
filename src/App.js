@@ -25,7 +25,8 @@ class App extends Component {
 
     componentDidMount() {
         this.getUser()
-        this.getNewEvent()
+        // this.getNewEvent()
+        this.getPostEvent();
     }
 
     updateUser(userObject) {
@@ -33,13 +34,28 @@ class App extends Component {
     }
 
   getNewEvent(){
-    axios.get("/user/newEvent").then( response => {
+    axios.get("/user/findOwedByUserId/"+ "blahblah").then( response => {
       this.setState ({
         ...this.state,
         owed: response.data
       })
       console.log("here");
       console.log(this.state);
+    })
+  }
+
+  getPostEvent(){
+    const testEvent= {
+        userId: "ajay",
+        payerId: "luke",
+        amount: 300,
+        eventName: "Snowboarding tickets",
+        paid: false,
+        usersAttended: ["ajay", "jenny", "luke"]
+    }
+
+    axios.post("/user/newEvent/", testEvent).then(response => {
+        console.log(response)
     })
   }
 
