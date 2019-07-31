@@ -95,7 +95,6 @@ function addToOwedTable(data, eventId) {
         data.payerId
     );
     let howMuchTheyOwe = data.amount / data.usersAttended.length;
-    console.log("TCL: howMuchTheyOwe", howMuchTheyOwe);
     listOfUsersThatOwes.forEach(element => {
         const datatoInsert = {
             userId: element,
@@ -103,7 +102,8 @@ function addToOwedTable(data, eventId) {
             amount: howMuchTheyOwe,
             eventName: eventId
         };
-    return Oweds.create(datatoInsert);
+        console.log("data to inster =======>>", datatoInsert)
+        return Oweds.create(datatoInsert);
     });
 }
 
