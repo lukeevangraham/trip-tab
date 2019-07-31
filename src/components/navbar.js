@@ -69,30 +69,37 @@ class Navbar extends Component {
                   Home <span className="sr-only">(current)</span>
                 </Link>
               </li>
-              <li className="nav-item m-0">
-                <Link
-                  to="/trips"
-                  className={
-                    window.location.pathname === "/trips"
-                      ? "nav-link active non-underline-link"
-                      : "nav-link non-underline-link"
-                  }
-                >
-                  Trips
-                </Link>
-              </li>
-              <li className="nav-item m-0">
-                <Link
-                  to="/ledger"
-                  className={
-                    window.location.pathname === "/ledger"
-                      ? "nav-link active non-underline-link"
-                      : "nav-link non-underline-link"
-                  }
-                >
-                  Ledger
-                </Link>
-              </li>
+
+              {loggedIn ? (
+                <div className="navbar-nav mr-auto m-0">
+                  <li className="nav-item m-0">
+                    <Link
+                      to="/trips"
+                      className={
+                        window.location.pathname === "/trips"
+                          ? "nav-link active non-underline-link"
+                          : "nav-link non-underline-link"
+                      }
+                    >
+                      Trips
+                    </Link>
+                  </li>
+                  <li className="nav-item m-0">
+                    <Link
+                      to="/ledger"
+                      className={
+                        window.location.pathname === "/ledger"
+                          ? "nav-link active non-underline-link"
+                          : "nav-link non-underline-link"
+                      }
+                    >
+                      Ledger
+                    </Link>
+                  </li>
+                </div>
+              ) : (
+                ""
+              )}
             </ul>
 
             {loggedIn ? (
