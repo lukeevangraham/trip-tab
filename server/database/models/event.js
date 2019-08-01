@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const owedSchema = new Schema({
+const eventSchema = new Schema({
     userId: {
         type: String, required: true
     },
-    youOwedTo: {
+    payerId: {
         type: String, required: true
     },
     amount: {
@@ -13,9 +13,16 @@ const owedSchema = new Schema({
     },
     eventName: {
         type: String, required: true
-    }
+    },
+    paid: {
+        type: Boolean, required: true, default: false
+    },
+    usersAttended: [{
+        type: String,
+        required: true
+    }]
 })
 
-const Oweds = mongoose.model('Owed', owedSchema)
+const Events = mongoose.model('Event', eventSchema)
 
-module.exports = Oweds;
+module.exports = Events;
