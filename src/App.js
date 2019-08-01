@@ -26,32 +26,14 @@ class App extends Component {
 
     componentDidMount() {
         this.getUser()
-<<<<<<< HEAD
-        this.postNewEvent();
-        // this.getNewEvent()
-=======
         // this.getNewEvent()
         // this.getPostEvent();
->>>>>>> master
     }
 
     updateUser(userObject) {
         this.setState(userObject);
     }
 
-<<<<<<< HEAD
-  getNewEvent(){
-    
-    axios.get("/user/newEvent/"+":someId").then( response => {
-      this.setState ({
-        ...this.state,
-        owed: response.data
-      })
-      console.log("here");
-      console.log(this.state);
-    })
-  }
-=======
     getNewEvent() {
         console.log("TCL: App -> getNewEvent ----------------------------> username", this.state.username)
 
@@ -79,7 +61,6 @@ class App extends Component {
             console.log(response)
         })
     }
->>>>>>> master
 
   postNewEvent(){
     let tripData = { userName: "someUser", tripName: "Denver"}

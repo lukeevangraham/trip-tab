@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import TextInput from 'react-autocomplete-input';
 
 class Trips extends Component {
     constructor(props){
@@ -8,8 +9,31 @@ class Trips extends Component {
             eventName: "",
             payerName: "",
             totalAmountPaid: 0,
-            participants: []
+            participantsOptions: [],
+            trigger: '@',
+            participants: [],
+            regex: '^[a-zA-Z0-9_\\-]+$',
+            requestOnlyIfNoOptions: true,
+            
         };
+    }
+
+    getAllExistingUsers = () => {
+        axios.get("/user/allUsers/")
+        .then(response => {
+            let tempArray = [];
+            console.log("lk;asdjf;laskjdfkl;asdjflkasdjf;klasd;lfasdlkf;askdlfasdfklasdf", response.data)
+            // let tempArray = response.data
+            response.data.forEach(element => {
+                tempArray.push(element.username)
+            });
+
+            this.setState({
+                participantsOptions: tempArray
+            })
+            // console.log("la;ksdjf;laksdfj;lkasdfj", this.state.participantsOptions)
+            // return response.data
+        })
     }
 
     handleSubmit = (currentUser) => event => {
@@ -42,6 +66,10 @@ class Trips extends Component {
         });
         return returnBool;
     }
+
+    handleRequestOptions(str){
+        console.log(`Requesting options for string: ${str}`);
+    } 
 
     handleText = i => e => {
         let participants = [...this.state.participants]
@@ -96,6 +124,9 @@ class Trips extends Component {
         console.log(this.state.totalAmountPaid);
     }
 
+    componentDidMount(){
+        this.getAllExistingUsers();
+    }
     render() {
         const currentUser = this.props.currentUser
         return (
@@ -143,7 +174,7 @@ class Trips extends Component {
                                 <span key={index}>
                                     <input
                                         type="text"
-                                        onChange={this.handleText(index)}
+                                        // onChange={this.handleText(index)}
                                         value={participant}
                                     />
                                     <button className="btn-danger mb-2 btn-sm" onClick={this.handleDelete(index)}>X</button><br />
@@ -152,9 +183,43 @@ class Trips extends Component {
                             <button className="btn btn-dark text-light" onClick={this.addParticipant}>Add Participant</button>
                         </div>
 
+                        <div className="mb-3">
+                            {this.state.participants.map((participant, index) => (
+                                <span key={index}>
+                                    <TextInput
+                                        // type="text"
+                                        options={this.state.participantsOptions}
+                                        trigger={this.state.trigger}
+                                        onRequestOptions={this.handleRequestOptions}
+                                        // onChange={this.handleText(index)}
+                                        value={participant}
+                                    />
+                                    <button className="btn-danger mb-2 btn-sm" onClick={this.handleDelete(index)}>X</button><br />
+                                </span>
+                            ))}
+                            <button className="btn btn-dark text-light" onClick={this.addParticipant}>Add Participant</button>
+                        </div>
+
+                        <div>
+                            <TextInput
+                            // disabled={this.state.disabled}
+                            // style={{ width: '300px', height: '100px', display: 'block' }}
+                            // maxOptions={parseInt(this.state.maxOptions, 10)}
+                            onRequestOptions={this.handleRequestOptions}
+                            options={this.state.participantsOptions}
+                            regex={this.state.regex}
+                            requestOnlyIfNoOptions={this.state.requestOnlyIfNoOptions}
+                            spaceRemovers={eval(this.state.spaceRemovers)}
+                            spacer={this.state.spacer}
+                            trigger={this.state.trigger}
+                            
+                            ></TextInput>
+                        </div>
+
                         <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit(currentUser)}>
                             Submit
                         </button>
+                        
                     </fieldset>
                 </form>
             </div>

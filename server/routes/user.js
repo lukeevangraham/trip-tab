@@ -69,6 +69,12 @@ router.post("/logout", (req, res) => {
     }
 });
 
+router.get("/allUsers", (request, response) => {
+    User.find({})
+    .then(dbModel => response.json(dbModel))
+    .catch(err => response.status(422).json(err))
+})
+
 router.get("/findOwedByUserId/:userId", (request, response) => {
     console.log("TCL: request================>>>>>>>>>>>>", request.params.userId)
     Oweds.find({ userId: request.params.userId })
