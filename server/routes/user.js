@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../database/models/user");
 const Oweds = require("../database/models/owed");
+const Paids = require("../database/models/paid")
 const Events = require("../database/models/event");
 const passport = require("../passport");
 
@@ -72,6 +73,12 @@ router.post("/logout", (req, res) => {
 router.get("/findOwedByUserId/:userId", (request, response) => {
     console.log("TCL: request================>>>>>>>>>>>>", request.params.userId)
     Oweds.find({ userId: request.params.userId })
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err));
+});
+router.get("/findPaidByUserId/:paidtoId", (request, response) => {
+    console.log("TCL: request================>>>>>>>>>>>>", request.params.paidtobyId)
+    Paids.find({})
         .then(dbModel => response.json(dbModel))
         .catch(err => response.status(422).json(err));
 });
