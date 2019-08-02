@@ -63,6 +63,14 @@ class App extends Component {
         })
     }
 
+  postNewEvent(){
+    let tripData = { userName: "someUser", tripName: "Denver"}
+    axios.post("/user/newEvent", tripData)
+    .then(response => {
+      console.log(response.data)
+    })
+  }
+
     getUser() {
         axios.get("/user/").then(response => {
             console.log("Get user response: ");
