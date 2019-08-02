@@ -109,7 +109,7 @@ class Trips extends Component {
                             <textarea
                                 className="form-control mb-3"
                                 id="eventName"
-                                placeholder="Dinner"
+                                placeholder="Dinner in Detroit"
                                 rows="1"
                                 name="eventName"
                                 onChange={this.handleChangeEventInput}
