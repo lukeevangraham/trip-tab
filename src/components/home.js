@@ -3,6 +3,7 @@ import TotalBalanceCard from "./totalBalance";
 import TripCardHome from "./tripCardHome";
 import { Route, Link } from "react-router-dom";
 import axios from "axios"
+import logo from"./logo.png"
 
 let totalOwed= 0;
 let totalPaid =0;
@@ -56,28 +57,32 @@ class Home extends Component {
 
       <div>
         {this.setTotals()}
-      { this.props.loggedIn ? (
-        <div className="row">
-        <div className="col-md-11 col-lg-5 mx-auto">
-          <TripCardHome tripName={"Denver"} />
-        </div>
+        {this.props.loggedIn ? (
+          <div className="row">
+            <div className="col-md-11 col-lg-5 mx-auto">
+              <TripCardHome tripName={"Denver"} />
+            </div>
 
-        <div className="col-md-11 col-lg-5 mx-auto">
-          <TotalBalanceCard userOwes={totalOwed} userIsOwed={totalPaid} balance={totalPaid - totalOwed} />
-        </div>
-        </div>
-      ) : (
-        <div className="jumbotron rounded col-lg-10 mx-auto">
-  <h1 className="display-5 text-white text-left">Simplified Trip Costs</h1>
-  <p className="lead text-left">Travelling with friends?  Keep track of who paid what here.</p>
-  <hr className="my-4 text-left" />
-  {/* <p className="text-left">It uses utility classes for typography and spacing to space content out within the larger container.</p> */}
-  <p className="lead text-left">
-    <Link className="btn btn-primary bg-primary btn-lg" to="/signup" role="button">Sign up</Link>
-  </p>
-</div>
-      )}
+            <div className="col-md-11 col-lg-5 mx-auto">
+              <TotalBalanceCard userOwes={9} userIsOwed={8} />
+            </div>
+          </div>
+        ) : (
+            <div className="row">
+              <div className="jumbotron rounded col-lg-16 mx-auto">
+                <img src={logo} height={125} width={100} />
+                <br /> <br />
+                <h1 className="display-5 text-white text-left">Simplified Trip Costs</h1>
 
+                <p className="lead text-left">Travelling with friends?  Keep track of who paid what here.</p>
+                <hr className="my-4 text-left" />
+                {/* <p className="text-left">It uses utility classes for typography and spacing to space content out within the larger container.</p> */}
+                <p className="lead text-left">
+                  <Link className="btn btn-primary bg-primary btn-lg" to="/signup" role="button">Sign up</Link>
+                </p>
+              </div>
+            </div>
+          )}
       </div>
     );
   }

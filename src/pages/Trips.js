@@ -70,6 +70,71 @@ class Trips extends Component {
         return returnBool;
     }
 
+
+  isParticipantsArrayEmpty = () => {
+    let returnBool = true;
+    this.participant.forEach(element => {
+      if (element === "") {
+        returnBool = false;
+        return;
+      }
+    });
+    return returnBool;
+  }
+
+  handleText = i => e => {
+    let participants = [...this.state.participants]
+    participants[i] = e.target.value
+    this.setState({
+      participants
+    })
+  }
+
+  handleDelete = i => e => {
+    e.preventDefault()
+    let participants = [
+      ...this.state.participants.slice(0, i),
+      ...this.state.participants.slice(i + 1)
+    ]
+    this.setState({
+      participants
+    })
+  }
+
+  addParticipant = e => {
+    e.preventDefault()
+    let participants = this.state.participants.concat([''])
+    this.setState({
+      participants
+    })
+  }
+  handleChangeEventInput = event => {
+    event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    this.setState({
+      eventName: value
+    })
+  }
+  handleChangePayerNameInput = event => {
+    event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    this.setState({
+      payerName: value
+    })
+  }
+
+  handleChangeTotalAmount = event => {
+    event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    this.setState({
+      totalAmountPaid: value
+    })
+    console.log(this.state.totalAmountPaid);
+  }
+
     handleSelectChange = (selectedOption) => {
         this.setState({ participants : selectedOption });
     }
@@ -96,15 +161,6 @@ class Trips extends Component {
         })
     }
 
-    handleChangeTotalAmount = event => {
-        event.preventDefault();
-        const target = event.target;
-        const value = target.value;
-        this.setState({
-            totalAmountPaid: value
-        })
-        console.log(this.state.totalAmountPaid);
-    }
 
     componentDidMount() {
         this.getAllExistingUsers();
@@ -171,3 +227,4 @@ class Trips extends Component {
 }
 
 export default Trips;
+
