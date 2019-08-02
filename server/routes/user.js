@@ -83,23 +83,12 @@ router.get("/findOwedByUserId/:userId", (request, response) => {
         .catch(err => response.status(422).json(err));
 });
 router.get("/findPaidByUserId/:paidtoId", (request, response) => {
-    console.log("TCL: request================>>>>>>>>>>>>", request.params.paidtobyId)
     Paids.find({})
         .then(dbModel => response.json(dbModel))
         .catch(err => response.status(422).json(err));
 });
 
 router.post("/newEvent", (request, response) => {
-    // console.log("TCL: reques.bodyt=============================>", request.body)
-    // add this data to events database
-    //     { userId: 'test',
-    // [1]   payerId: 'ajay',
-    // [1]   amount: '400',
-    // [1]   eventName: 'dinner',
-    // [1]   paid: true,
-    // [1]   usersAttended:
-    // [1]    [ { value: '5d37b7342d28484a70f4afd7', label: 'luke' },
-    // [1]      { value: '5d3935963c78e75f47526779', label: 'test' } ] }
     let participants = [];
     request.body.usersAttended.forEach(element => {
         participants.push(element.label)
@@ -112,11 +101,9 @@ router.post("/newEvent", (request, response) => {
         paid: request.body.paid,
         usersAttended: participants
     }
-    console.log("TCL: dataToInsert========================================", dataToInsert)
 
     Events.create(dataToInsert)
         .then(dbModel => {
-            console.log("TCL: dbModel", dbModel);
             return addToOwedTable(dataToInsert, dbModel._id);
             //response.json(dbModel);
         })
@@ -125,7 +112,6 @@ router.post("/newEvent", (request, response) => {
 });
 
 function addToOwedTable(data, eventId) {
-    console.log("TCL: addToOwedTable -> =======================>>>data", data);
     let listOfUsersThatOwes = usersThatOwedForThisEvent(
         data.usersAttended,
         data.payerId
@@ -138,7 +124,6 @@ function addToOwedTable(data, eventId) {
             amount: howMuchTheyOwe,
             eventName: eventId
         };
-        console.log("data to inster =======>>", datatoInsert)
         return Oweds.create(datatoInsert);
     });
 }
