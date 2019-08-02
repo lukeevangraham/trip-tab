@@ -2,6 +2,8 @@ const db = require("../database/models")
 
 module.exports = {
     findAllOwed: function (request, response) {
+    console.log("TCL: request====================>>>>>>>>>>>>>>", request)
+        
         db.Owed
         .find(request.query)
         .sort({ date: -1})
