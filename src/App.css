@@ -1,5 +1,9 @@
-.App {
+/* .App {
   text-align: center;
+} */
+
+.login-container {
+  overflow: hidden;
 }
 
 .App-logo {
