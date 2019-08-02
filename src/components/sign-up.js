@@ -49,15 +49,13 @@ class Signup extends Component {
 
     render() {
         return (
-            <div className="SignupForm">
-                <h4>Sign up</h4>
+            <div className="SignupForm col-xs-11 col-md-5 bg-light p-3 rounded mx-auto login-container">
+                <h4 className="mb-3 text-center">Sign up</h4>
                 <form className="form-horizontal">
-                    <div className="form-group">
-                        <div className="col-1 col-ml-auto">
-                            <label className="form-label" htmlFor="username">Username</label>
-                        </div>
-                        <div className="col-3 col-mr-auto">
-                            <input className="form-input"
+                    <div className="form-group row">
+                            <label className="col-sm-3 col-form-label" htmlFor="username">Username</label>
+                        <div className="col-sm-9">
+                            <input className="form-input form-control"
                                 type="text"
                                 id="username"
                                 name="username"
@@ -67,12 +65,10 @@ class Signup extends Component {
                             />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <div className="col-1 col-ml-auto">
-                            <label className="form-label" htmlFor="password">Password: </label>
-                        </div>
-                        <div className="col-3 col-mr-auto">
-                            <input className="form-input"
+                    <div className="form-group row">
+                            <label className="col-sm-3 col-form-label" htmlFor="password">Password: </label>
+                        <div className="col-sm-9">
+                            <input className="form-input form-control"
                                 placeholder="password"
                                 type="password"
                                 name="password"
@@ -81,10 +77,9 @@ class Signup extends Component {
                             />
                         </div>
                     </div>
-                    <div className="form-group ">
-                        <div className="col-7"></div>
+                    <div className="form-group float-right pr-3 mb-0 row">
                         <button
-                            className="btn btn-primary col-1 col-mr-auto"
+                            className="btn btn-primary"
                             onClick={this.handleSubmit}
                             type="submit"
                         >Sign up</button>
