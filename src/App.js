@@ -16,7 +16,7 @@ class App extends Component {
         this.state = {
             loggedIn: false,
             username: null,
-            
+
         };
 
         this.getUser = this.getUser.bind(this);
@@ -33,7 +33,7 @@ class App extends Component {
     updateUser(userObject) {
         this.setState(userObject);
     }
-    
+
 
     // getNewEvent() {
     //     console.log("TCL: App -> getNewEvent ----------------------------> username", this.state.username)
@@ -63,13 +63,13 @@ class App extends Component {
         })
     }
 
-  postNewEvent(){
-    let tripData = { userName: "someUser", tripName: "Denver"}
-    axios.post("/user/newEvent", tripData)
-    .then(response => {
-      console.log(response.data)
-    })
-  }
+    postNewEvent() {
+        let tripData = { userName: "someUser", tripName: "Denver" }
+        axios.post("/user/newEvent", tripData)
+            .then(response => {
+                console.log(response.data)
+            })
+    }
 
     getUser() {
         axios.get("/user/").then(response => {
@@ -111,7 +111,7 @@ class App extends Component {
                         render={() => <LoginForm updateUser={this.updateUser} />}
                     />
                     <Route path="/signup" render={() => <Signup />} />
-                    
+
                     <Route path="/ledger" render={() => <Ledger username={this.state.username} />} />
                     <Route path="/trips" render={() => <Trips owed={this.state.owed} currentUser={this.state.username} />} />
                 </div>

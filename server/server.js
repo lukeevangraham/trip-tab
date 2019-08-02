@@ -24,12 +24,12 @@ app.use(express.json());
 
 // Sessions
 app.use(
-  session({
-    secret: "fraggle-rock", //pick a random string to make the hash that is generated secure
-    store: new MongoStore({ mongooseConnection: dbConnection }),
-    resave: false, //required
-    saveUninitialized: false //required
-  })
+    session({
+        secret: "fraggle-rock", //pick a random string to make the hash that is generated secure
+        store: new MongoStore({ mongooseConnection: dbConnection }),
+        resave: false, //required
+        saveUninitialized: false //required
+    })
 );
 
 // Passport
@@ -42,5 +42,5 @@ app.use("/user", user);
 
 // Starting Server
 app.listen(PORT, () => {
-  console.log(`App's Express Server is listening on PORT: ${PORT}`);
+    console.log(`App's Express Server is listening on PORT: ${PORT}`);
 });

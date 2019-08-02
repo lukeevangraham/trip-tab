@@ -21,7 +21,6 @@ class Trips extends Component {
         axios.get("/user/allUsers/")
             .then(response => {
                 let tempArray = [];
-                console.log("lk;asdjf;laskjdfkl;asdjflkasdjf;klasd;lfasdlkf;askdlfasdfklasdf", response.data)
                 // let tempArray = response.data
                 response.data.forEach(element => {
                     let obj = {
@@ -34,8 +33,6 @@ class Trips extends Component {
                 this.setState({
                     participantsOptions: tempArray
                 })
-                // console.log("la;ksdjf;laksdfj;lkasdfj", this.state.participantsOptions)
-                // return response.data
             })
     }
 
@@ -71,77 +68,77 @@ class Trips extends Component {
     }
 
 
-  isParticipantsArrayEmpty = () => {
-    let returnBool = true;
-    this.participant.forEach(element => {
-      if (element === "") {
-        returnBool = false;
-        return;
-      }
-    });
-    return returnBool;
-  }
+    isParticipantsArrayEmpty = () => {
+        let returnBool = true;
+        this.participant.forEach(element => {
+            if (element === "") {
+                returnBool = false;
+                return;
+            }
+        });
+        return returnBool;
+    }
 
-  handleText = i => e => {
-    let participants = [...this.state.participants]
-    participants[i] = e.target.value
-    this.setState({
-      participants
-    })
-  }
+    handleText = i => e => {
+        let participants = [...this.state.participants]
+        participants[i] = e.target.value
+        this.setState({
+            participants
+        })
+    }
 
-  handleDelete = i => e => {
-    e.preventDefault()
-    let participants = [
-      ...this.state.participants.slice(0, i),
-      ...this.state.participants.slice(i + 1)
-    ]
-    this.setState({
-      participants
-    })
-  }
+    handleDelete = i => e => {
+        e.preventDefault()
+        let participants = [
+            ...this.state.participants.slice(0, i),
+            ...this.state.participants.slice(i + 1)
+        ]
+        this.setState({
+            participants
+        })
+    }
 
-  addParticipant = e => {
-    e.preventDefault()
-    let participants = this.state.participants.concat([''])
-    this.setState({
-      participants
-    })
-  }
-  handleChangeEventInput = event => {
-    event.preventDefault();
-    const target = event.target;
-    const value = target.value;
-    this.setState({
-      eventName: value
-    })
-  }
-  handleChangePayerNameInput = event => {
-    event.preventDefault();
-    const target = event.target;
-    const value = target.value;
-    this.setState({
-      payerName: value
-    })
-  }
+    addParticipant = e => {
+        e.preventDefault()
+        let participants = this.state.participants.concat([''])
+        this.setState({
+            participants
+        })
+    }
+    handleChangeEventInput = event => {
+        event.preventDefault();
+        const target = event.target;
+        const value = target.value;
+        this.setState({
+            eventName: value
+        })
+    }
+    handleChangePayerNameInput = event => {
+        event.preventDefault();
+        const target = event.target;
+        const value = target.value;
+        this.setState({
+            payerName: value
+        })
+    }
 
-  handleChangeTotalAmount = event => {
-    event.preventDefault();
-    const target = event.target;
-    const value = target.value;
-    this.setState({
-      totalAmountPaid: value
-    })
-    console.log(this.state.totalAmountPaid);
-  }
+    handleChangeTotalAmount = event => {
+        event.preventDefault();
+        const target = event.target;
+        const value = target.value;
+        this.setState({
+            totalAmountPaid: value
+        })
+        console.log(this.state.totalAmountPaid);
+    }
 
     handleSelectChange = (selectedOption) => {
-        this.setState({ participants : selectedOption });
+        this.setState({ participants: selectedOption });
     }
-    
+
     handlepayerSelectChange = (selectedOption) => {
         console.log(selectedOption.label);
-        this.setState({ payerName : selectedOption.label });
+        this.setState({ payerName: selectedOption.label });
     }
 
     handleChangeEventInput = event => {
@@ -193,7 +190,7 @@ class Trips extends Component {
                                 className="basic-multi-select"
                                 classNamePrefix="select"
                                 onChange={this.handlepayerSelectChange}
-                        />
+                            />
                         </div>
 
                         <label for="amount">Amount</label>

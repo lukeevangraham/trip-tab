@@ -12,30 +12,30 @@ router.post("/", (req, res) => {
     console.log("user signup");
 
     const { username, password } = req.body;
-  // ADD VALIDATION
+    // ADD VALIDATION
     User.findOne({ username: username }, (err, user) => {
-    if (err) {
-        console.log("User.js post error: ", err);
-    } else if (user) {
-        res.json({
-        error: `Sorry, already a user with the username: ${username}`
-        });
-    } else {
-        const newUser = new User({
-        username: username,
-        password: password
-        });
-        newUser.save((err, savedUser) => {
-        if (err) return res.json(err);
-        res.json(savedUser);
-        });
-    }
+        if (err) {
+            console.log("User.js post error: ", err);
+        } else if (user) {
+            res.json({
+                error: `Sorry, already a user with the username: ${username}`
+            });
+        } else {
+            const newUser = new User({
+                username: username,
+                password: password
+            });
+            newUser.save((err, savedUser) => {
+                if (err) return res.json(err);
+                res.json(savedUser);
+            });
+        }
     });
 });
 
 router.post(
     "/login",
-    function(req, res, next) {
+    function (req, res, next) {
         console.log("routes/user.js, login, req.body: ");
         console.log(req.body);
         next();
@@ -47,8 +47,8 @@ router.post(
         var userInfo = {
             username: req.user.username
         };
-            res.send(userInfo);
-        }
+        res.send(userInfo);
+    }
 );
 
 router.get("/", (req, res, next) => {
@@ -72,8 +72,8 @@ router.post("/logout", (req, res) => {
 
 router.get("/allUsers", (request, response) => {
     User.find({})
-    .then(dbModel => response.json(dbModel))
-    .catch(err => response.status(422).json(err))
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err))
 })
 
 router.get("/findOwedByUserId/:userId", (request, response) => {
@@ -90,16 +90,16 @@ router.get("/findPaidByUserId/:paidtoId", (request, response) => {
 });
 
 router.post("/newEvent", (request, response) => {
-// console.log("TCL: reques.bodyt=============================>", request.body)
+    // console.log("TCL: reques.bodyt=============================>", request.body)
     // add this data to events database
-//     { userId: 'test',
-// [1]   payerId: 'ajay',
-// [1]   amount: '400',
-// [1]   eventName: 'dinner',
-// [1]   paid: true,
-// [1]   usersAttended:
-// [1]    [ { value: '5d37b7342d28484a70f4afd7', label: 'luke' },
-// [1]      { value: '5d3935963c78e75f47526779', label: 'test' } ] }
+    //     { userId: 'test',
+    // [1]   payerId: 'ajay',
+    // [1]   amount: '400',
+    // [1]   eventName: 'dinner',
+    // [1]   paid: true,
+    // [1]   usersAttended:
+    // [1]    [ { value: '5d37b7342d28484a70f4afd7', label: 'luke' },
+    // [1]      { value: '5d3935963c78e75f47526779', label: 'test' } ] }
     let participants = [];
     request.body.usersAttended.forEach(element => {
         participants.push(element.label)
@@ -108,20 +108,20 @@ router.post("/newEvent", (request, response) => {
         userId: request.body.userId,
         payerId: request.body.payerId,
         amount: request.body.amount,
-        eventName : request.body.eventName,
+        eventName: request.body.eventName,
         paid: request.body.paid,
         usersAttended: participants
     }
     console.log("TCL: dataToInsert========================================", dataToInsert)
-    
+
     Events.create(dataToInsert)
-    .then(dbModel => {
-        console.log("TCL: dbModel", dbModel);
-        return addToOwedTable(dataToInsert, dbModel._id);
-        //response.json(dbModel);
-    })
-    .then(dbModel => response.json(dbModel))
-    .catch(err => response.status(422).json(err));
+        .then(dbModel => {
+            console.log("TCL: dbModel", dbModel);
+            return addToOwedTable(dataToInsert, dbModel._id);
+            //response.json(dbModel);
+        })
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err));
 });
 
 function addToOwedTable(data, eventId) {
