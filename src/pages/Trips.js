@@ -1,33 +1,60 @@
 import React, { Component } from "react";
+import ReactDOM, { findDOMNode } from 'react-dom';
 import axios from "axios";
+// import TextInput from 'react-autocomplete-input';
+import Select from 'react-select';
 
 class Trips extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             eventName: "",
             payerName: "",
             totalAmountPaid: 0,
+            participantsOptions: [],
+            participantOptionsPair: [],
             participants: []
         };
+    }
+
+    getAllExistingUsers = () => {
+        axios.get("/user/allUsers/")
+            .then(response => {
+                let tempArray = [];
+                console.log("lk;asdjf;laskjdfkl;asdjflkasdjf;klasd;lfasdlkf;askdlfasdfklasdf", response.data)
+                // let tempArray = response.data
+                response.data.forEach(element => {
+                    let obj = {
+                        value: element._id,
+                        label: element.username
+                    }
+                    tempArray.push(obj)
+                });
+
+                this.setState({
+                    participantsOptions: tempArray
+                })
+                // console.log("la;ksdjf;laksdfj;lkasdfj", this.state.participantsOptions)
+                // return response.data
+            })
     }
 
     handleSubmit = (currentUser) => event => {
         event.preventDefault();
         console.log("in here")
         // if(this.state.eventName !== "" && this.state.payerName !== "" &&  this.state.participants.length !== 0 && this.isParticipantsArrayEmpty){
-            const eventToInsert = {
-                userId : currentUser,
-                payerId: this.state.payerName,
-                amount: this.state.totalAmountPaid,
-                eventName: this.state.eventName,
-                paid: true,
-                usersAttended: this.state.participants
-            }
-            console.log(eventToInsert);
-            axios.post("/user/newEvent", eventToInsert).then(response => {
-                console.log(response)
-            })
+        const eventToInsert = {
+            userId: currentUser,
+            payerId: this.state.payerName,
+            amount: this.state.totalAmountPaid,
+            eventName: this.state.eventName,
+            paid: true,
+            usersAttended: this.state.participants
+        }
+        console.log(eventToInsert);
+        axios.post("/user/newEvent", eventToInsert).then(response => {
+            console.log(response)
+        })
         // }
 
     }
@@ -35,7 +62,7 @@ class Trips extends Component {
     isParticipantsArrayEmpty = () => {
         let returnBool = true;
         this.participant.forEach(element => {
-            if(element === ""){
+            if (element === "") {
                 returnBool = false;
                 return;
             }
@@ -43,33 +70,15 @@ class Trips extends Component {
         return returnBool;
     }
 
-    handleText = i => e => {
-        let participants = [...this.state.participants]
-        participants[i] = e.target.value
-        this.setState({
-            participants
-        })
-        console.log("check this out", this.state.participants)
+    handleSelectChange = (selectedOption) => {
+        this.setState({ participants : selectedOption });
+    }
+    
+    handlepayerSelectChange = (selectedOption) => {
+        console.log(selectedOption.label);
+        this.setState({ payerName : selectedOption.label });
     }
 
-    handleDelete = i => e => {
-        e.preventDefault()
-        let participants = [
-            ...this.state.participants.slice(0, i),
-            ...this.state.participants.slice(i + 1)
-        ]
-        this.setState({
-            participants
-        })
-    }
-
-    addParticipant = e => {
-        e.preventDefault()
-        let participants = this.state.participants.concat([''])
-        this.setState({
-            participants
-        })
-    }
     handleChangeEventInput = event => {
         event.preventDefault();
         const target = event.target;
@@ -97,6 +106,9 @@ class Trips extends Component {
         console.log(this.state.totalAmountPaid);
     }
 
+    componentDidMount() {
+        this.getAllExistingUsers();
+    }
     render() {
         const currentUser = this.props.currentUser
         return (
@@ -119,14 +131,13 @@ class Trips extends Component {
 
                         <div className="form-group">
                             <label for="payerFirstName">Payer First Name</label>
-                            <textarea
-                                className="form-control mb-3"
-                                id="payerFirstName"
-                                placeholder="John"
-                                rows="1"
-                                name="payerName"
-                                onChange={this.handleChangePayerNameInput}
-                            />
+                            <Select
+                                name="payer"
+                                options={this.state.participantsOptions}
+                                className="basic-multi-select"
+                                classNamePrefix="select"
+                                onChange={this.handlepayerSelectChange}
+                        />
                         </div>
 
                         <label for="amount">Amount</label>
@@ -134,28 +145,24 @@ class Trips extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text bg-secondary">$</span>
                             </div>
-                            <input type="number" className="form-control" placeholder="USD" name="totalAmountPaid" onChange={this.handleChangeTotalAmount}/>
+                            <input type="number" className="form-control" placeholder="USD" name="totalAmountPaid" onChange={this.handleChangeTotalAmount} />
                         </div>
 
 
                         <label for="payerFirstName">Additional Participant First Name(s)</label>
-                        <div className="mb-3">
-                            {this.state.participants.map((participant, index) => (
-                                <span key={index}>
-                                    <input
-                                        type="text"
-                                        onChange={this.handleText(index)}
-                                        value={participant}
-                                    />
-                                    <button className="btn-danger mb-2 btn-sm" onClick={this.handleDelete(index)}>X</button><br />
-                                </span>
-                            ))}
-                            <button className="btn btn-dark text-light" onClick={this.addParticipant}>Add Participant</button>
-                        </div>
-
+                        <Select
+                            defaultValue={[this.state.participantsOptions[2], this.state.participantsOptions[1]]}
+                            isMulti
+                            name="participantsList"
+                            options={this.state.participantsOptions}
+                            className="basic-multi-select"
+                            classNamePrefix="select"
+                            onChange={this.handleSelectChange}
+                        />
                         <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit(currentUser)}>
                             Submit
                         </button>
+
                     </fieldset>
                 </form>
             </div>
