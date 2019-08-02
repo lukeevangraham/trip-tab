@@ -16,7 +16,7 @@ class App extends Component {
         this.state = {
             loggedIn: false,
             username: null,
-            owed: []
+            
         };
 
         this.getUser = this.getUser.bind(this);
@@ -27,25 +27,26 @@ class App extends Component {
     componentDidMount() {
         this.getUser()
         // this.getNewEvent()
-        // this.getPostEvent();
+        this.getPostEvent();
     }
 
     updateUser(userObject) {
         this.setState(userObject);
     }
+    
 
-    getNewEvent() {
-        console.log("TCL: App -> getNewEvent ----------------------------> username", this.state.username)
+    // getNewEvent() {
+    //     console.log("TCL: App -> getNewEvent ----------------------------> username", this.state.username)
 
-        axios.get("/user/findOwedByUserId/" + this.state.username).then(response => {
-            this.setState({
-                ...this.state,
-                owed: response.data
-            })
-            console.log("here");
-            console.log(this.state);
-        })
-    }
+    //     axios.get("/user/findOwedByUserId/" + this.state.username).then(response => {
+    //         this.setState({
+    //             ...this.state,
+    //             owed: response.data
+    //         })
+    //         console.log("here");
+    //         console.log(this.state);
+    //     })
+    // }
 
     getPostEvent() {
         const testEvent = {
@@ -95,15 +96,15 @@ class App extends Component {
                     <Route
                         exact
                         path="/"
-                        render={() => <Home loggedIn={this.state.loggedIn} />}
+                        render={() => <Home username={this.state.username} loggedIn={this.state.loggedIn} />}
                     />
                     <Route
                         path="/login"
                         render={() => <LoginForm updateUser={this.updateUser} />}
                     />
                     <Route path="/signup" render={() => <Signup />} />
-                    {/* <Route path="/trips" render={() => <Trips />} /> */}
-                    <Route path="/ledger" render={() => <Ledger owed={this.state.owed} />} />
+                    
+                    <Route path="/ledger" render={() => <Ledger username={this.state.username} />} />
                     <Route path="/trips" render={() => <Trips owed={this.state.owed} currentUser={this.state.username} />} />
                 </div>
             </div>
