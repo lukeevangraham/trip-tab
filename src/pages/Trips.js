@@ -49,6 +49,7 @@ class Trips extends Component {
         this.setState({
             participants
         })
+        console.log("check this out", this.state.participants)
     }
 
     handleDelete = i => e => {
