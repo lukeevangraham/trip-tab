@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import ReactDOM, { findDOMNode } from 'react-dom';
 import axios from "axios";
 import TextInput from 'react-autocomplete-input';
 
 class Trips extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             eventName: "",
@@ -14,44 +15,44 @@ class Trips extends Component {
             participants: [],
             regex: '^[a-zA-Z0-9_\\-]+$',
             requestOnlyIfNoOptions: true,
-            
+
         };
     }
 
     getAllExistingUsers = () => {
         axios.get("/user/allUsers/")
-        .then(response => {
-            let tempArray = [];
-            console.log("lk;asdjf;laskjdfkl;asdjflkasdjf;klasd;lfasdlkf;askdlfasdfklasdf", response.data)
-            // let tempArray = response.data
-            response.data.forEach(element => {
-                tempArray.push(element.username)
-            });
+            .then(response => {
+                let tempArray = [];
+                console.log("lk;asdjf;laskjdfkl;asdjflkasdjf;klasd;lfasdlkf;askdlfasdfklasdf", response.data)
+                // let tempArray = response.data
+                response.data.forEach(element => {
+                    tempArray.push(element.username)
+                });
 
-            this.setState({
-                participantsOptions: tempArray
+                this.setState({
+                    participantsOptions: tempArray
+                })
+                // console.log("la;ksdjf;laksdfj;lkasdfj", this.state.participantsOptions)
+                // return response.data
             })
-            // console.log("la;ksdjf;laksdfj;lkasdfj", this.state.participantsOptions)
-            // return response.data
-        })
     }
 
     handleSubmit = (currentUser) => event => {
         event.preventDefault();
         console.log("in here")
         // if(this.state.eventName !== "" && this.state.payerName !== "" &&  this.state.participants.length !== 0 && this.isParticipantsArrayEmpty){
-            const eventToInsert = {
-                userId : currentUser,
-                payerId: this.state.payerName,
-                amount: this.state.totalAmountPaid,
-                eventName: this.state.eventName,
-                paid: true,
-                usersAttended: this.state.participants
-            }
-            console.log(eventToInsert);
-            axios.post("/user/newEvent", eventToInsert).then(response => {
-                console.log(response)
-            })
+        const eventToInsert = {
+            userId: currentUser,
+            payerId: this.state.payerName,
+            amount: this.state.totalAmountPaid,
+            eventName: this.state.eventName,
+            paid: true,
+            usersAttended: this.state.participants
+        }
+        console.log(eventToInsert);
+        axios.post("/user/newEvent", eventToInsert).then(response => {
+            console.log(response)
+        })
         // }
 
     }
@@ -59,7 +60,7 @@ class Trips extends Component {
     isParticipantsArrayEmpty = () => {
         let returnBool = true;
         this.participant.forEach(element => {
-            if(element === ""){
+            if (element === "") {
                 returnBool = false;
                 return;
             }
@@ -67,9 +68,9 @@ class Trips extends Component {
         return returnBool;
     }
 
-    handleRequestOptions(str){
+    handleRequestOptions(str) {
         console.log(`Requesting options for string: ${str}`);
-    } 
+    }
 
     handleText = i => e => {
         let participants = [...this.state.participants]
@@ -124,7 +125,14 @@ class Trips extends Component {
         console.log(this.state.totalAmountPaid);
     }
 
-    componentDidMount(){
+    handleAddOption() {
+        const nextOptions = this.state.participants;
+    
+        nextOptions.push(findDOMNode(this.refOptionField).value.trim());
+        this.setState({ options: nextOptions });
+      }
+
+    componentDidMount() {
         this.getAllExistingUsers();
     }
     render() {
@@ -164,7 +172,7 @@ class Trips extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text bg-secondary">$</span>
                             </div>
-                            <input type="number" className="form-control" placeholder="USD" name="totalAmountPaid" onChange={this.handleChangeTotalAmount}/>
+                            <input type="number" className="form-control" placeholder="USD" name="totalAmountPaid" onChange={this.handleChangeTotalAmount} />
                         </div>
 
 
@@ -183,7 +191,7 @@ class Trips extends Component {
                             <button className="btn btn-dark text-light" onClick={this.addParticipant}>Add Participant</button>
                         </div>
 
-                        <div className="mb-3">
+                        {/* <div className="mb-3">
                             {this.state.participants.map((participant, index) => (
                                 <span key={index}>
                                     <TextInput
@@ -198,28 +206,48 @@ class Trips extends Component {
                                 </span>
                             ))}
                             <button className="btn btn-dark text-light" onClick={this.addParticipant}>Add Participant</button>
-                        </div>
+                        </div> */}
 
                         <div>
                             <TextInput
-                            // disabled={this.state.disabled}
-                            // style={{ width: '300px', height: '100px', display: 'block' }}
-                            // maxOptions={parseInt(this.state.maxOptions, 10)}
-                            onRequestOptions={this.handleRequestOptions}
-                            options={this.state.participantsOptions}
-                            regex={this.state.regex}
-                            requestOnlyIfNoOptions={this.state.requestOnlyIfNoOptions}
-                            spaceRemovers={eval(this.state.spaceRemovers)}
-                            spacer={this.state.spacer}
-                            trigger={this.state.trigger}
-                            
+                                // disabled={this.state.disabled}
+                                // style={{ width: '300px', height: '100px', display: 'block' }}
+                                // maxOptions={parseInt(this.state.maxOptions, 10)}
+                                onRequestOptions={this.handleRequestOptions}
+                                options={this.state.participantsOptions}
+                                regex={this.state.regex}
+                                requestOnlyIfNoOptions={this.state.requestOnlyIfNoOptions}
+                                spaceRemovers={eval(this.state.spaceRemovers)}
+                                spacer={this.state.spacer}
+                                trigger={this.state.trigger}
+
                             ></TextInput>
+                            <button onClick={this.addParticipant}>Add</button>
                         </div>
+
+                        {/* <div className="option-block">
+
+                            <ul className='options'>
+                                {this.state.participants}
+                            </ul>
+                            <div>
+                                {/* <input ref={c => { this.refOptionField = c; }} /> }
+                                <TextInput>
+                                options={this.state.participantsOptions}
+                                regex={this.state.regex}
+                                requestOnlyIfNoOptions={this.state.requestOnlyIfNoOptions}
+                                spaceRemovers={eval(this.state.spaceRemovers)}
+                                spacer={this.state.spacer}
+                                trigger={this.state.trigger}
+                                </TextInput>
+                            </div>
+                            <button onClick={this.handleAddOption}>Add</button>
+                        </div> */}
 
                         <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit(currentUser)}>
                             Submit
                         </button>
-                        
+
                     </fieldset>
                 </form>
             </div>
