@@ -4,7 +4,7 @@ import axios from "axios";
 // import TextInput from 'react-autocomplete-input';
 import Select from 'react-select';
 
-class Trips extends Component {
+class TripsPaid extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -52,15 +52,15 @@ class Trips extends Component {
         axios.post("/user/newEvent", eventToInsert).then(response => {
             console.log(response)
             this.setState({
-                message : "Successfully updagted"
+                message: "Successfully updagted"
             })
             window.location.reload();
         })
-        .catch(err => {
-            this.setState({
-                message: err
+            .catch(err => {
+                this.setState({
+                    message: err
+                })
             })
-        })
     }
 
     isParticipantsArrayEmpty = () => {
@@ -165,17 +165,16 @@ class Trips extends Component {
         })
     }
 
-
     componentDidMount() {
         this.getAllExistingUsers();
     }
     render() {
         const currentUser = this.props.currentUser
         return (
-            <div className="col-xs-11 bg-light p-3 rounded col-lg-6 mx-auto text-left">
+            <div className="col-xs-11 bg-light p-5 rounded col-lg-6 mx-auto text-left">
                 <form>
                     <fieldset>
-                        <legend className="text-center">Create An Event</legend>
+                        <legend className="text-center">Trips Paid</legend>
 
                         <div className="form-group">
                             <label for="eventtName">Event Name:</label>
@@ -208,7 +207,6 @@ class Trips extends Component {
                             <input type="number" className="form-control" placeholder="USD" name="totalAmountPaid" onChange={this.handleChangeTotalAmount} />
                         </div>
 
-
                         <label for="payerFirstName">Additional Participant First Name(s)</label>
                         <Select
                             defaultValue={[this.state.participantsOptions[2], this.state.participantsOptions[1]]}
@@ -219,10 +217,10 @@ class Trips extends Component {
                             classNamePrefix="select"
                             onChange={this.handleSelectChange}
                         />
+                        <br />
                         <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit(currentUser)}>
                             Submit
                         </button>
-
                     </fieldset>
                 </form>
             </div>
@@ -230,4 +228,4 @@ class Trips extends Component {
     }
 }
 
-export default Trips;
+export default TripsPaid;
