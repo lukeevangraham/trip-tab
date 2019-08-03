@@ -9,6 +9,7 @@ import Home from './components/home'
 import Home2 from './components/home2'
 import Ledger from "./pages/Ledger"
 import Trips from "./pages/Trips"
+import TripsPaid from "./pages/TripsPaid"
 
 class App extends Component {
     constructor() {
@@ -100,6 +101,7 @@ class App extends Component {
 
                     <Route path="/ledger" render={() => <Ledger username={this.state.username} />} />
                     <Route path="/trips" render={() => <Trips owed={this.state.owed} currentUser={this.state.username} />} />
+                    <Route path="/tripsPaid" render={() => <TripsPaid owed={this.state.owed} currentUser={this.state.username} />} />
                 </div>
             </div>
         );
