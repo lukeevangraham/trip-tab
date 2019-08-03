@@ -62,6 +62,7 @@ class Trips extends Component {
                 message: err
             })
         })
+        alert("Event submitted!")
     }
 
     isParticipantsArrayEmpty = () => {
@@ -189,27 +190,6 @@ class Trips extends Component {
                                 onChange={this.handleChangeEventInput}
                             />
                         </div>
-
-                        <div className="form-group">
-                            <label for="payerFirstName">Payer First Name</label>
-                            <Select
-                                name="payer"
-                                options={this.state.participantsOptions}
-                                className="basic-multi-select"
-                                classNamePrefix="select"
-                                onChange={this.handlepayerSelectChange}
-                            />
-                        </div>
-
-                        <label for="amount">Amount</label>
-                        <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text bg-secondary">$</span>
-                            </div>
-                            <input type="number" className="form-control" placeholder="USD" name="totalAmountPaid" onChange={this.handleChangeTotalAmount} />
-                        </div>
-
-
             <div className="form-group">
               <label for="payerFirstName">Payer First Name</label>
               <Select

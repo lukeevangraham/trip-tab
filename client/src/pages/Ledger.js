@@ -61,8 +61,8 @@ class Ledger extends Component {
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-5" />
-                    <div className="col-md-2">
+
+                    <div className="col-md-3 mx-auto">
 
                         {this.setTotals()}
 
@@ -70,9 +70,10 @@ class Ledger extends Component {
                         {console.log(totalOwed)}
                     </div>
 
-                    <div className="col-md-5" />
+
                 </div>
-                <h2 className="text-left">Your Ledger: </h2>
+                <div className="container">
+                <h4 className="text-left">Your Ledger: </h4>
                 {console.log(this.state)}
                 {this.state.owed.map(user => {
                     // totalOwed += user.amount
@@ -99,6 +100,9 @@ class Ledger extends Component {
                         />
                     );
                 })}
+
+                </div>
+
             </div>
         );
     }
