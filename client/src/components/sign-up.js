@@ -34,7 +34,7 @@ class Signup extends Component {
                     console.log('successful signup')
                     this.setState({ //redirect to login page
                         redirectTo: '/login',
-                        message: "Successfully Signedup"
+                        message: "Successfully signed up!"
                     })
                 } else {
                     console.log('username already taken')
@@ -85,7 +85,7 @@ class Signup extends Component {
                         >Sign up</button>
                     </div>
                     <div>
-                        <h2>{this.state.message}</h2>
+                        <h4>{this.state.message}</h4>
                     </div>
                 </form>
             </div>
