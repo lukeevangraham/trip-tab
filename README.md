@@ -1,33 +1,29 @@
-# project-three
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# Create React Express App
 
-## Built With
+## About This Boilerplate
 
-Mongo, Express, ReactJS, Node.js, Javascript. 
+This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
 
-## Getting Started
+The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
 
-Clone the repo and follow the instructions.  You can view each step by running these commands from the terminal:
+## Starting the app locally
 
-```
-git checkout step-0
-git checkout step-1
-...
-```
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/en/)
-- [MongoDB](https://www.mongodb.com/)
-- [Nodemon](https://github.com/remy/nodemon)
-- [create-react-app](https://github.com/facebook/create-react-app)
-
-### Installing
-
-Run these commands in the terminal:
+Start by installing front and backend dependencies. While in this directory, run the following command:
 
 ```
-cd project-three
 npm install
-npm run dev
 ```
+
+This should install node modules within the server and the client folder.
+
+After both installations complete, run the following command in your terminal:
+
+```
+npm start
+```
+
+Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+
+## Deployment (Heroku)
+
+To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
