@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 
-const styles = {
-    cardStyle: {
-        borderRadius: 0
-    }
-};
-
 function Individualcard(props) {
     return (
+        <div className={"card rounded text-white bg-" + props.color}>
+            <div className="row">
+                <div className="col-md-1">
+                    <img src={props.img} alt="Image here" />
+                </div>
+                <div className="col-md-4">
+                    <h4> {props.username}</h4>
+                </div>
+                <div className="col-md-3" />
+                <div className="col-md-4">
+                    <h4>Amount: ${props.amount}</h4>
 
-            <tr className={"text-white table-" + props.color}>
-                <th scope="row"><i class="p-2 fas fa-user" /></th>
-                <td className="align-middle">{props.username}</td>
-                <td className="align-middle">${props.amount}</td>
-            </tr>
-
-
-
-
+                </div>
+            </div>
+        </div>
     );
 }
 
