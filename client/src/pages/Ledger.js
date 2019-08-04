@@ -14,17 +14,6 @@ class Ledger extends Component {
   };
 
   componentDidMount() {
-<<<<<<< HEAD
-    this.getNewEvent();
-  }
-
-  getNewEvent() {
-    console.log(this.props.username);
-
-    Promise.all([
-      axios.get("/user/findOwedByUserId/" + this.props.username),
-      axios.get("/user/findPaidByUserId/" + this.props.username)
-=======
     this.getNewEvent(this.props.username);
   }
   componentWillReceiveProps(props) {
@@ -38,7 +27,6 @@ class Ledger extends Component {
     Promise.all([
       axios.get("/user/findOwedByUserId/" + username),
       axios.get("/user/findYouOwedByUserId/" + username)
->>>>>>> 8247e469ffcf6f1242999b5dc7ddf8e4d8f96ca8
     ]).then(resultArray => {
       this.setState({
         ...this.state,
@@ -68,15 +56,9 @@ class Ledger extends Component {
             {this.setTotals()}
 
             <TotalBalanceCard
-<<<<<<< HEAD
-              userOwes={totalOwed}
-              userIsOwed={totalPaid}
-              balance={totalPaid - totalOwed}
-=======
               userOwes={(totalOwed).toFixed(2)}
               userIsOwed={(totalPaid).toFixed(2)}
               balance={(totalPaid - totalOwed).toFixed(2)}
->>>>>>> 8247e469ffcf6f1242999b5dc7ddf8e4d8f96ca8
             />
             {console.log(totalOwed)}
           </div>
@@ -110,22 +92,12 @@ class Ledger extends Component {
                     />
                   );
                 })}
-<<<<<<< HEAD
-              </tbody>
-            </table>
-          </div>
-
-      </div>
-    );
-  }
-=======
                 </tbody>
                 </table>
             </div>
             </div>
         );
     }
->>>>>>> 8247e469ffcf6f1242999b5dc7ddf8e4d8f96ca8
 }
 
 export default Ledger;
