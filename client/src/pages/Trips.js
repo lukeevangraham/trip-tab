@@ -57,7 +57,7 @@ class Trips extends Component {
       .then(response => {
         console.log(response);
         this.setState({
-          message: "Successfully updagted"
+          message: "Successfully updated"
         });
         window.location.reload();
       })
@@ -66,7 +66,6 @@ class Trips extends Component {
           message: err
         });
       });
-    alert("Event submitted!");
   };
 
   isParticipantsArrayEmpty = () => {
@@ -239,6 +238,9 @@ class Trips extends Component {
             </button>
           </fieldset>
         </form>
+        <div>
+                        <h4>{this.state.message}</h4>
+                    </div>
 
         
       </div>

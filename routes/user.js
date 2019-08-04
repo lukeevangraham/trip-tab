@@ -82,8 +82,19 @@ router.get("/findOwedByUserId/:userId", (request, response) => {
         .then(dbModel => response.json(dbModel))
         .catch(err => response.status(422).json(err));
 });
+router.get("/findYouOwedByUserId/:userId", (request, response) => {
+    console.log("TCL: request=>", request.params.userId)
+    Oweds.find({ youOwedTo: request.params.userId })
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err));
+});
 router.get("/findPaidByUserId/:paidtoId", (request, response) => {
     Paids.find({})
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err));
+});
+router.get("/newEvents/:userId", (request, response) => {
+    Events.find({userId: request.params.userId})
         .then(dbModel => response.json(dbModel))
         .catch(err => response.status(422).json(err));
 });
