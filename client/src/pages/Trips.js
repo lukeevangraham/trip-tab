@@ -1,9 +1,21 @@
 import React, { Component } from "react";
-import ReactDOM, { findDOMNode } from 'react-dom';
+// import ReactDOM, { findDOMNode } from 'react-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 // import TextInput from 'react-autocomplete-input';
 import Select from 'react-select';
 
+toast.configure({
+    autoClose: 8000,
+    draggable: false,
+    //etc you get the idea
+});
+
+const notify = (message) => {
+    toast.success(message, {
+        position: toast.POSITION.TOP_CENTER
+    });
+};
 class Trips extends Component {
     constructor(props) {
         super(props)
@@ -14,7 +26,7 @@ class Trips extends Component {
             participantsOptions: [],
             participantOptionsPair: [],
             participants: [],
-            message: ""
+            successfullyPost: false
         };
     }
 
@@ -52,9 +64,10 @@ class Trips extends Component {
         axios.post("/user/newEvent", eventToInsert).then(response => {
             console.log(response)
             this.setState({
-                message : "Successfully updagted"
+                successfullyPost : "ture"
             })
-            window.location.reload();
+            notify("Successfully updagted");
+            // window.location.reload();
         })
         .catch(err => {
             this.setState({
@@ -165,8 +178,11 @@ class Trips extends Component {
         })
     }
 
+    
+
 
     componentDidMount() {
+        notify("fuck fuck fudk");
         this.getAllExistingUsers();
     }
     render() {
@@ -225,6 +241,20 @@ class Trips extends Component {
 
                     </fieldset>
                 </form>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover
+                    />
+                    
+                    {/* Same as */}
+                <ToastContainer />
             </div>
         );
     }

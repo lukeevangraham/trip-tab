@@ -37,6 +37,7 @@
         "react-router-dom": "^4.2.2",
         "react-scripts": "^3.0.1",
         "react-select": "^3.0.4",
+        "react-toastify": "^5.3.2",
         "reactstrap": "^8.0.1",
         "spectre.css": "^0.5.0"
     }
