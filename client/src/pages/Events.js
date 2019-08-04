@@ -29,7 +29,7 @@ render() {
         <div className="container">
             <h4>Events: </h4>
 
-<div className="card bg-primary">
+<div className="card bg-primary mb-5">
            
                {this.state.events.map((event)=> {
                    
