@@ -3,9 +3,11 @@ import ReactDOM, { findDOMNode } from "react-dom";
 import axios from "axios";
 // import TextInput from 'react-autocomplete-input';
 import Select from "react-select";
+import { ToastContainer, toast } from 'react-toastify';
 import { allResolved } from "q";
 import BootBox from "react-bootbox";
 
+toast.configure();
 class Trips extends Component {
     constructor(props) {
         super(props);
@@ -16,11 +18,30 @@ class Trips extends Component {
             participantsOptions: [],
             participantOptionsPair: [],
             participants: [],
+            noSelectedValue: {label: "", key: ""},
             message: "",
             show: false
         };
     }
 
+    resetAllState = () => {
+        console.log("inside the fucking resetall")
+        // this.handleChangeEventInput();
+        // this.handleChangePayerNameInput();
+        // this.handleSelectChange()
+        this.setState({
+            eventName: "",
+            payerName: "",
+            totalAmountPaid: 0,
+            participantsOptions: [],
+            participantOptionsPair: [],
+            participants: [],
+        })
+    }
+
+    notify = (message) => {
+        toast(message);
+    }
 
     getAllExistingUsers = () => {
         axios.get("/user/allUsers/").then(response => {
@@ -57,9 +78,13 @@ class Trips extends Component {
             .then(response => {
                 console.log(response);
                 this.setState({
-                    message: "Successfully updated"
+                    message: "Successfully updated",
+                    show: true
                 });
-                window.location.reload();
+                this.notify("Successfully updated");
+                this.resetAllState();
+                console.log("the event name is ", this.state.eventName)
+                // window.location.reload();
             })
             .catch(err => {
                 this.setState({
@@ -90,32 +115,6 @@ class Trips extends Component {
         return returnBool;
     };
 
-    handleText = i => e => {
-        let participants = [...this.state.participants];
-        participants[i] = e.target.value;
-        this.setState({
-            participants
-        });
-    };
-
-    handleDelete = i => e => {
-        e.preventDefault();
-        let participants = [
-            ...this.state.participants.slice(0, i),
-            ...this.state.participants.slice(i + 1)
-        ];
-        this.setState({
-            participants
-        });
-    };
-
-    addParticipant = e => {
-        e.preventDefault();
-        let participants = this.state.participants.concat([""]);
-        this.setState({
-            participants
-        });
-    };
     handleChangeEventInput = event => {
         event.preventDefault();
         const target = event.target;
@@ -184,6 +183,7 @@ class Trips extends Component {
                             <label for="eventtName">Event Name:</label>
                             <textarea
                                 className="form-control mb-3"
+                                value={this.state.eventName}
                                 id="eventName"
                                 placeholder="Dinner in Detroit"
                                 rows="1"
@@ -195,6 +195,10 @@ class Trips extends Component {
                             <label for="payerFirstName">Payer First Name</label>
                             <Select
                                 name="payer"
+                                defaultValue={[
+                                    this.state.participantsOptions[2],
+                                    this.state.participantsOptions[1]
+                                ]}
                                 options={this.state.participantsOptions}
                                 className="basic-multi-select"
                                 classNamePrefix="select"
@@ -209,6 +213,7 @@ class Trips extends Component {
                             </div>
                             <input
                                 type="number"
+                                // value={this.state.totalAmountPaid}
                                 className="form-control"
                                 placeholder="USD"
                                 name="totalAmountPaid"
@@ -228,6 +233,7 @@ class Trips extends Component {
                             className="basic-multi-select"
                             classNamePrefix="select"
                             onChange={this.handleSelectChange}
+                            placeholder="Select..."
                         />
                         <button
                             type="submit"
@@ -235,11 +241,12 @@ class Trips extends Component {
                             onClick={this.handleSubmit(currentUser)}
                         >
                             Submit
-            </button>
+                        </button>
                     </fieldset>
                 </form>
                 <div>
                     <h4>{this.state.message}</h4>
+
                 </div>
 
 

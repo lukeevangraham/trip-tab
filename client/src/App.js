@@ -26,10 +26,14 @@ class App extends Component {
         this.updateUser = this.updateUser.bind(this);
     }
 
+    redirectToTarget = () => {
+        this.context.router.history.push(`/`)
+      }
+
     componentDidMount() {
         this.getUser()
         // this.getNewEvent()
-        this.getPostEvent();
+        // this.getPostEvent();
     }
 
     updateUser(userObject) {
