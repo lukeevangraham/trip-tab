@@ -8,93 +8,93 @@ var totalPaid = 0;
 let totalBalance;
 
 class Ledger extends Component {
-  state = {
-    owed: [],
-    paid: []
-  };
+    state = {
+        owed: [],
+        paid: []
+    };
 
-  componentDidMount() {
-    this.getNewEvent(this.props.username);
-  }
-  componentWillReceiveProps(props) {
-       
-    this.getNewEvent(props.username);
-  }
+    componentDidMount() {
+        this.getNewEvent(this.props.username);
+    }
+    componentWillReceiveProps(props) {
 
-  getNewEvent(username) {
-    console.log(this.props.username);
+        this.getNewEvent(props.username);
+    }
 
-    Promise.all([
-      axios.get("/user/findOwedByUserId/" + username),
-      axios.get("/user/findYouOwedByUserId/" + username)
-    ]).then(resultArray => {
-      this.setState({
-        ...this.state,
-        owed: resultArray[0].data,
-        paid: resultArray[1].data
-      });
-    });
-  }
-  setTotals() {
-    totalOwed = 0;
-    totalPaid = 0;
-    this.state.owed.map(user => {
-      return (totalOwed += user.amount);
-    });
-    this.state.paid.forEach(user => {
-      totalPaid += user.amount;
-    });
+    getNewEvent(username) {
+        console.log(this.props.username);
 
-    console.log(this.state);
-  }
+        Promise.all([
+            axios.get("/user/findOwedByUserId/" + username),
+            axios.get("/user/findYouOwedByUserId/" + username)
+        ]).then(resultArray => {
+            this.setState({
+                ...this.state,
+                owed: resultArray[0].data,
+                paid: resultArray[1].data
+            });
+        });
+    }
+    setTotals() {
+        totalOwed = 0;
+        totalPaid = 0;
+        this.state.owed.map(user => {
+            return (totalOwed += user.amount);
+        });
+        this.state.paid.forEach(user => {
+            totalPaid += user.amount;
+        });
 
-  render() {
-    return (
-      <div>
-        <div className="row">
-          <div className="col-md-11 mx-auto">
-            {this.setTotals()}
+        console.log(this.state);
+    }
 
-            <TotalBalanceCard
-              userOwes={(totalOwed).toFixed(2)}
-              userIsOwed={(totalPaid).toFixed(2)}
-              balance={(totalPaid - totalOwed).toFixed(2)}
-            />
-            {console.log(totalOwed)}
-          </div>
-        </div>
-        <div className="card bg-dark col-md-11 mx-auto pt-3">
-          <h4 className="text-left text-light pl-2">Your Ledger: </h4>
-          {console.log(this.state)}
+    render() {
+        return (
+            <div>
+                <div className="row">
+                    <div className="col-md-11 mx-auto">
+                        {this.setTotals()}
 
-            <table className="table table-hover">
-              <tbody>
-                {this.state.owed.map(user => {
-                  // totalOwed += user.amount
+                        <TotalBalanceCard
+                            userOwes={(totalOwed).toFixed(2)}
+                            userIsOwed={(totalPaid).toFixed(2)}
+                            balance={(totalPaid - totalOwed).toFixed(2)}
+                        />
+                        {console.log(totalOwed)}
+                    </div>
+                </div>
+                <div className="card bg-dark col-md-11 mx-auto pt-3">
+                    <h4 className="text-left text-light pl-2">Your Ledger: </h4>
+                    {console.log(this.state)}
 
-                  return (
-                    <Individualcard
-                      color="danger"
-                      username={user.youOwedTo}
-                      amount={user.amount}
-                    />
-                  );
-                })}
-                {this.state.paid.map(user => {
-                  // totalPaid += user.amount
+                    <table className="table table-hover">
+                        <tbody>
+                            {this.state.owed.map(user => {
+                                // totalOwed += user.amount
 
-                  console.log(totalPaid);
-                  return (
-                    <Individualcard
-                      color="success"
-                      username={user.userId}
-                      amount={user.amount}
-                    />
-                  );
-                })}
-                </tbody>
-                </table>
-            </div>
+                                return (
+                                    <Individualcard
+                                        color="danger"
+                                        username={user.youOwedTo}
+                                        amount={user.amount}
+                                    />
+                                );
+                            })}
+                            {this.state.paid.map(user => {
+                                // totalPaid += user.amount
+
+                                console.log(totalPaid);
+                                return (
+                                    <Individualcard
+                                        color="success"
+                                        username={user.userId}
+                                        amount={user.amount}
+                                    />
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

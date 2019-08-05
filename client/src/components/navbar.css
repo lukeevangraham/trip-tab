@@ -1,5 +1,5 @@
 .text-nav {
-  color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .navbar {
@@ -8,40 +8,40 @@
 }
 
 a:active {
-  text-decoration: none !important;
+    text-decoration: none !important;
 }
 
 .nav-link {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a,
 a:hover,
 a:visited,
 a:focus {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:link {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:visited {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:active {
-  text-decoration: none;
+    text-decoration: none;
 }
 /* 
 .drop-special {
-  position: absolute;
-  will-change: transform;
-  top: 0px;
-  left: 0px;
-  transform: translate3d(0px, 39px, 0px);
+    position: absolute;
+    will-change: transform;
+    top: 0px;
+    left: 0px;
+    transform: translate3d(0px, 39px, 0px);
 } */
