@@ -26,18 +26,16 @@ getEvents(username) {
 
 render() {
     return(
-        <div>
-            <h1>Events: </h1>
+        <div className="container">
+            <h4>Events: </h4>
 
-    <table className="table table-hover">
+<div className="card bg-primary mb-5">
            
-              <tbody>
                {this.state.events.map((event)=> {
                    
                    return (<EventCard username={event.userId} eventname={event.eventName} amount={event.amount} color="primary" participants={event.usersAttended} />)
                })}
-                </tbody>
-                </table>
+                </div>
                 </div>
     )
 }

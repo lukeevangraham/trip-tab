@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import Individualcard from "../components/individualCard";
 import TotalBalanceCard from "../components/totalBalance";
-import axios from "axios"
-
+import axios from "axios";
 
 var totalOwed = 0;
 var totalPaid = 0;
 let totalBalance;
-
 
 class Ledger extends Component {
   state = {
@@ -72,29 +70,27 @@ class Ledger extends Component {
             <table className="table table-hover">
               <tbody>
                 {this.state.owed.map(user => {
-                    // totalOwed += user.amount
+                  // totalOwed += user.amount
 
-                    return (
-                        <Individualcard
-                            color="danger"
-                            username={user.youOwedTo}
-                            amount={user.amount}
-                            img={user.img}
-                        />
-                    );
+                  return (
+                    <Individualcard
+                      color="danger"
+                      username={user.youOwedTo}
+                      amount={user.amount}
+                    />
+                  );
                 })}
                 {this.state.paid.map(user => {
-                    // totalPaid += user.amount
+                  // totalPaid += user.amount
 
-                    console.log(totalPaid);
-                    return (
-                        <Individualcard
-                            color="success"
-                            username={user.userId}
-                            amount={user.amount}
-                            img={user.img}
-                        />
-                    );
+                  console.log(totalPaid);
+                  return (
+                    <Individualcard
+                      color="success"
+                      username={user.userId}
+                      amount={user.amount}
+                    />
+                  );
                 })}
                 </tbody>
                 </table>
@@ -105,4 +101,3 @@ class Ledger extends Component {
 }
 
 export default Ledger;
-
