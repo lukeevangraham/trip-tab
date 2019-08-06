@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 import axios from 'axios'
 
 class Signup extends Component {
@@ -36,6 +37,7 @@ class Signup extends Component {
                         redirectTo: '/login',
                         message: "Successfully signed up!"
                     })
+                    this.props.history.push('/login')
                 } else {
                     console.log('username already taken')
                 }
@@ -94,4 +96,4 @@ class Signup extends Component {
     }
 }
 
-export default Signup
+export default withRouter(Signup);
