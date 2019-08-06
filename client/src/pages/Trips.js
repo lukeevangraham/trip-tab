@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import ReactDOM, { findDOMNode } from "react-dom";
 import axios from "axios";
 // import TextInput from 'react-autocomplete-input';
 import Select from "react-select";
 import { ToastContainer, toast } from 'react-toastify';
 import { withRouter } from 'react-router-dom';
-import { allResolved } from "q";
-import BootBox from "react-bootbox";
 
 toast.configure();
 class Trips extends Component {
@@ -24,21 +21,6 @@ class Trips extends Component {
             message: "",
             show: false
         };
-    }
-
-    resetAllState = () => {
-        console.log("inside the fucking resetall")
-        // this.handleChangeEventInput();
-        // this.handleChangePayerNameInput();
-        // this.handleSelectChange()
-        this.setState({
-            eventName: "",
-            payerName: "",
-            totalAmountPaid: 0,
-            participantsOptions: [],
-            participantOptionsPair: [],
-            participants: [],
-        })
     }
 
     notify = (message) => {
@@ -84,7 +66,7 @@ class Trips extends Component {
                     toDashboard: true,
                     show: true
                 });
-                this.notify("Successfully updated");
+                this.notify(this.state.eventName + " has been successfully added.");
                 this.props.history.push('/')
                 // this.resetAllState();
             })
