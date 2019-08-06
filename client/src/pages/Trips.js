@@ -4,6 +4,7 @@ import axios from "axios";
 // import TextInput from 'react-autocomplete-input';
 import Select from "react-select";
 import { ToastContainer, toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
 import { allResolved } from "q";
 import BootBox from "react-bootbox";
 
@@ -19,6 +20,7 @@ class Trips extends Component {
             participantOptionsPair: [],
             participants: [],
             noSelectedValue: {label: "", key: ""},
+            toDashboard: false,
             message: "",
             show: false
         };
@@ -79,12 +81,12 @@ class Trips extends Component {
                 console.log(response);
                 this.setState({
                     message: "Successfully updated",
+                    toDashboard: true,
                     show: true
                 });
                 this.notify("Successfully updated");
-                this.resetAllState();
-                console.log("the event name is ", this.state.eventName)
-                // window.location.reload();
+                this.props.history.push('/')
+                // this.resetAllState();
             })
             .catch(err => {
                 this.setState({
@@ -244,10 +246,10 @@ class Trips extends Component {
                         </button>
                     </fieldset>
                 </form>
-                <div>
+                {/* <div>
                     <h4>{this.state.message}</h4>
 
-                </div>
+                </div> */}
 
 
             </div>
@@ -255,4 +257,5 @@ class Trips extends Component {
     }
 }
 
-export default Trips;
+// export default Trips;
+export default withRouter(Trips)
