@@ -235,9 +235,15 @@ class Trips extends Component {
                 </div> */}
 
 
-            </div>
-        );
-    }
+
+        <div>
+                        <h4>{this.state.message}</h4>
+                    </div>
+
+        
+      </div>
+    );
+  }
 }
 
 // export default Trips;
