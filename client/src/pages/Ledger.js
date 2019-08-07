@@ -7,6 +7,15 @@ var totalOwed = 0;
 var totalPaid = 0;
 let totalBalance;
 
+const styles = {
+  oweHeader: {
+    backgroundColor: "#8C0000"
+  },
+  oweHeader2: {
+    backgroundColor: "#4C7300"
+  }
+};
+
 class Ledger extends Component {
   state = {
     owed: [],
@@ -66,8 +75,8 @@ class Ledger extends Component {
 
         <div className="row">
           <div className="col-md-11 mx-auto">
-            <div className="card bg-danger">
-              <p className="lead text-white pl-3 align-middle pt-3">
+            <div className="card" style={styles.oweHeader}>
+              <p className="lead pl-3 text-white align-middle pt-3">
                 Events you owe money for:
               </p>
               <table className="table table-hover">
@@ -87,7 +96,7 @@ class Ledger extends Component {
               </table>
             </div>
 
-            <div className="card bg-success mt-4 mb-4">
+            <div className="card mt-4 mb-4" style={styles.oweHeader2}>
               <p className="lead pl-3 align-middle pt-3 text-white">
                 Events others owe you for:
               </p>
