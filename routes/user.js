@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
 const User = require("../database/models/user");
 const Oweds = require("../database/models/owed");
 const Paids = require("../database/models/paid")
@@ -76,6 +77,20 @@ router.get("/allUsers", (request, response) => {
         .catch(err => response.status(422).json(err))
 })
 
+router.get("/getAllEvents", (request, response)=>{
+    Events.find({})
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err))
+})
+
+router.get("/getEventByID/:eventId", (request, response)=>{
+console.log("TCL: request", request.params.eventId)
+    
+    Events.find({_id : request.params.eventId})
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err))
+})
+
 router.get("/findOwedByUserId/:userId", (request, response) => {
     console.log("TCL: request=>", request.params.userId)
     Oweds.find({ userId: request.params.userId })
@@ -90,6 +105,18 @@ router.get("/findYouOwedByUserId/:userId", (request, response) => {
 });
 router.get("/findPaidByUserId/:paidtoId", (request, response) => {
     Paids.find({})
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err));
+});
+router.post("/findPaidByUserId", (request, response) => {
+    let dataToInsert = {
+        userId: request.body.userId,
+        payerId: request.body.payerId,
+        amount: request.body.amount,
+        eventName: request.body.eventName
+    }
+    
+    Paids.create(dataToInsert)
         .then(dbModel => response.json(dbModel))
         .catch(err => response.status(422).json(err));
 });

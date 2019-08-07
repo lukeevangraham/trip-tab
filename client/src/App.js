@@ -6,7 +6,6 @@ import Signup from './components/sign-up'
 import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
-import Home2 from './components/home2'
 import Ledger from "./pages/Ledger"
 import Trips from "./pages/Trips"
 import TripsPaid from "./pages/TripsPaid"
@@ -37,16 +36,14 @@ class App extends Component {
     }
     
 
-    getPostEvent() {
+    getEvent() {
         const testEvent = {
-            userId: "patrick",
-            payedtoId: "adam2",
+            userId: "ajay",
+            payedtoId: "adam",
             amount: 100,
-            eventName: "5d48979d2fa0e50d18a4d179",
-            // paid: false,
-            // usersAttended: ["ajay", "jenny", "luke"]
+            eventName: "5d45f2c6c221350d3d8285ea"
         }
-
+        console.log("about to call the event")
         axios.post("/user/pay/", testEvent).then(response => {
             console.log(response)
         })
@@ -62,8 +59,8 @@ class App extends Component {
 
     getUser() {
         axios.get("/user/").then(response => {
-            console.log("Get user response: ");
-            console.log(response.data);
+            // console.log("Get user response: ");
+            // console.log(response.data);
             if (response.data.user) {
                 console.log("Get User: There is a user saved in the server session: ");
 
