@@ -79,8 +79,9 @@ class TripsPaid extends Component {
             eventName: this.state.eventName,
             eventId: this.state.eventId
         }
+        // this.updateOwedWithPaid(currentUser);
         
-        // console.log(eventToInsert);
+        console.log(eventToInsert);
         axios.post("/user/pay", eventToInsert)
         .then(response => {
             console.log("in here")
@@ -99,6 +100,23 @@ class TripsPaid extends Component {
                 console.log("inside handlesumbit of trips.js")
             })
     }
+
+    updateOwedWithPaid = (currentUser => {
+        const eventToFind = {
+            userId: currentUser,
+            payedtoId: this.state.payeesName,
+            amount: this.state.amoutToBePaid,
+            eventName: this.state.eventName,
+            eventId: this.state.eventId
+        }
+        axios.put("/user/updateOwedWithPaid", eventToFind)
+        .then(response => {
+            console.log(response)
+                this.notify(this.state.eventName + " has been paid.");
+                this.props.history.push('/')
+        })
+        .catch(err => console.log(err))
+    })
 
     isParticipantsArrayEmpty = () => {
         let returnBool = true;

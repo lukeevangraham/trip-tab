@@ -207,7 +207,19 @@ function updateOwedTable(dataToInsert){
         youOwedTo: dataToInsert.payedtoId
     }
     console.log(query);
-    return Oweds.FindAndModify(query, {isPaid : true})
+    return Oweds.findOneAndUpdate(query, {isPaid : true})
 }
+
+router.put("/updateOwedWithPaid", (request, response) => {
+    console.log(request.body)
+    const query = {
+        eventId: request.body.eventId, 
+        userId: request.body.userId, 
+        youOwedTo: request.body.payedtoId
+    }
+    Oweds.findOneAndUpdate(query, {isPaid: true})
+    .then(dbModel => response.json(dbModel))
+    .catch(err => response.status(422).json(err))
+})
 
 module.exports = router;
