@@ -3,7 +3,10 @@ import ReactDOM, { findDOMNode } from 'react-dom';
 import axios from "axios";
 // import TextInput from 'react-autocomplete-input';
 import Select from 'react-select';
+import { ToastContainer, toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
 
+toast.configure();
 class TripsPaid extends Component {
     constructor(props) {
         super(props)
@@ -18,6 +21,10 @@ class TripsPaid extends Component {
             participants: [],
             message: ""
         };
+    }
+
+    notify = (message) => {
+        toast(message);
     }
 
     getAllExistingUsers = () => {
@@ -65,7 +72,6 @@ class TripsPaid extends Component {
 
     handleSubmit = (currentUser) => event => {
         event.preventDefault();
-        console.log("in here")
         const eventToInsert = {
             userId: currentUser,
             payedtoId: this.state.payeesName,
@@ -73,19 +79,24 @@ class TripsPaid extends Component {
             eventName: this.state.eventName,
             eventId: this.state.eventId
         }
-
-        console.log(eventToInsert);
-        axios.post("/user/pay", eventToInsert).then(response => {
-            console.log(response)
+        
+        // console.log(eventToInsert);
+        axios.post("/user/pay", eventToInsert)
+        .then(response => {
+            console.log("in here")
+            // console.log(response)
             this.setState({
-                message: "Successfully updagted"
+                message: "Successfully updated"
             })
-            window.location.reload();
+            console.log("inside handlesumbit of trips.js")
+            this.notify(this.state.eventName + " has been paid.");
+            this.props.history.push('/')
         })
             .catch(err => {
                 this.setState({
                     message: err
                 })
+                console.log("inside handlesumbit of trips.js")
             })
     }
 
@@ -127,12 +138,8 @@ class TripsPaid extends Component {
         console.log(this.state.amoutToBePaid);
     }
 
-    // handleSelectChange = (selectedOption) => {
-    //     this.setState({ participants: selectedOption });
-    // }
-
     handleEventSelectChange = (selectedOption) => {
-        console.log(selectedOption.label);
+        // console.log(selectedOption.label);
         this.setState({ 
             eventName: selectedOption.label,
             eventId: selectedOption.value,
@@ -169,18 +176,6 @@ class TripsPaid extends Component {
                 <form>
                     <fieldset>
                         <legend className="text-center">Trips Paid</legend>
-
-                        {/* <div className="form-group">
-                            <label for="eventtName">Event Name:</label>
-                            <textarea
-                                className="form-control mb-3"
-                                id="eventName"
-                                placeholder="Dinner in Detroit"
-                                rows="1"
-                                name="eventName"
-                                onChange={this.handleChangeEventInput}
-                            />
-                        </div> */}
 
                         <div className="form-group">
                             <label for="eventtName">Event Name</label>
@@ -234,15 +229,6 @@ class TripsPaid extends Component {
                                 onChange={this.handleChangeEventInput}
                                 disabled
                             />
-                        {/* <Select
-                            defaultValue={[this.state.participantsOptions[2], this.state.participantsOptions[1]]}
-                            isMulti
-                            name="participantsList"
-                            options={this.state.participantsOptions}
-                            className="basic-multi-select"
-                            classNamePrefix="select"
-                            onChange={this.handleSelectChange}
-                        /> */}
                         <button type="submit" className="btn btn-primary float-right mt-3" onClick={this.handleSubmit(currentUser)}>
                             Submit
                         </button>
@@ -253,4 +239,4 @@ class TripsPaid extends Component {
     }
 }
 
-export default TripsPaid;
+export default withRouter(TripsPaid);

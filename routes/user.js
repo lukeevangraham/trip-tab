@@ -197,12 +197,17 @@ router.post("/pay", (request, response) => {
         return updateOwedTable(dataToInsert)
         // response.json(dbModel);
     })
+    .then(dbModel => response.json(dbModel))
     .catch(err => response.status(422).json(err))
 })
 function updateOwedTable(dataToInsert){
-    console.log("datatoinsert eventname",dataToInsert.eventId)
-    const query = {eventId: dataToInsert.eventId, userId: dataToInsert.userId, youOwedTo: dataToInsert.payedtoId}
-    return Oweds.findOneAndUpdate(query, {isPaid : true})
+    const query = {
+        eventId: dataToInsert.eventId, 
+        userId: dataToInsert.userId, 
+        youOwedTo: dataToInsert.payedtoId
+    }
+    console.log(query);
+    return Oweds.FindAndModify(query, {isPaid : true})
 }
 
 module.exports = router;
