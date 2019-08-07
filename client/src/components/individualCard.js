@@ -11,7 +11,7 @@ function Individualcard(props) {
             <tr className={"text-white table-" + props.color}>
                 <th scope="row"><i class="p-2 fas fa-user" /></th>
                 <td className="align-middle">{props.username}</td>
-                <td className="align-middle">${props.amount}</td>
+                <td className="align-middle">${props.amount.toFixed(2)}</td>
             </tr>
     );
 }
