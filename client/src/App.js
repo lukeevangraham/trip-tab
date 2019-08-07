@@ -6,7 +6,6 @@ import Signup from './components/sign-up'
 import LoginForm from './components/login-form'
 import Navbar from './components/navbar'
 import Home from './components/home'
-import Home2 from './components/home2'
 import Ledger from "./pages/Ledger"
 import Trips from "./pages/Trips"
 import TripsPaid from "./pages/TripsPaid"
@@ -29,7 +28,7 @@ class App extends Component {
     componentDidMount() {
         this.getUser()
         // this.getNewEvent()
-        this.getPostEvent();
+        // this.getPostEvent();
     }
 
     updateUser(userObject) {

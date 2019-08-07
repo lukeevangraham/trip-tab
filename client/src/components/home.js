@@ -17,13 +17,13 @@ class Home extends Component {
 
 
     componentDidMount() {
-        
+
         this.getNewEvent(this.props.username);
     }
     componentWillReceiveProps(props) {
-       
+
         this.getNewEvent(props.username);
-      }
+    }
     getNewEvent(username) {
         // if (this.props.username && (!this.state.owed.length || !this.state.paid.length)){
         //     return;
@@ -42,7 +42,7 @@ class Home extends Component {
                     paid: resultArray[1].data
                 })
             });
-    
+
 
 
     }
@@ -72,7 +72,7 @@ class Home extends Component {
                         </div>
 
                         <div className="col-md-11 col-lg-5 mx-auto">
-                            <TotalBalanceCard userOwes={(totalOwed).toFixed(2)} userIsOwed={(totalPaid.toFixed(2))} balance={(totalPaid-totalOwed).toFixed(2)} />
+                            <TotalBalanceCard userOwes={(totalOwed).toFixed(2)} userIsOwed={(totalPaid.toFixed(2))} balance={(totalPaid - totalOwed).toFixed(2)} />
                         </div>
                     </div>
                 ) : (
