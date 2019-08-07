@@ -165,7 +165,8 @@ function addToOwedTable(data, eventId) {
             userId: element,
             youOwedTo: data.payerId,
             amount: howMuchTheyOwe,
-            eventName: eventId
+            eventId: eventId,
+            eventName: data.eventName
         };
         return Oweds.create(datatoInsert);
     });
@@ -190,8 +191,16 @@ router.post("/pay", (request, response) => {
     }
 
     Paids.create(dataToInsert)
-    .then(dbModel => response.json(dbModel))
+    .then(dbModel => {
+        updateOwedTable(dataToInsert)
+        response.json(dbModel);
+    })
     .catch(err => response.status(422).json(err))
 })
+function updateOwedTable(dataToInsert){
+    // var query = { name: 'borne' };
+    // Model.findOneAndUpdate(query, { name: 'jason bourne' }, options, callback)
+    Oweds.findOneAndUpdate(dataToInsert.eventName, {})
+}
 
 module.exports = router;

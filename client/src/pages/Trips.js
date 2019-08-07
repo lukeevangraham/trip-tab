@@ -11,6 +11,7 @@ class Trips extends Component {
         super(props);
         this.state = {
             eventName: "",
+            eventId: "",
             payerName: "",
             totalAmountPaid: 0,
             participantsOptions: [],

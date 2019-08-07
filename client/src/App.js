@@ -28,7 +28,7 @@ class App extends Component {
     componentDidMount() {
         this.getUser()
         // this.getNewEvent()
-        this.getPostEvent();
+        // this.getPostEvent();
     }
 
     updateUser(userObject) {
