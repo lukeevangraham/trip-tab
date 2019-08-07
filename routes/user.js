@@ -121,8 +121,8 @@ router.post("/newEvent", (request, response) => {
         payerId: request.body.payerId,
         amount: request.body.amount,
         eventName: request.body.eventName,
-        paid: request.body.paid,
-        usersAttended: participants
+        usersAttended: participants,
+        isPaid: false
     }
 
     Events.create(dataToInsert)
