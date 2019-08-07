@@ -17,7 +17,6 @@ class Ledger extends Component {
     this.getNewEvent(this.props.username);
   }
   componentWillReceiveProps(props) {
-       
     this.getNewEvent(props.username);
   }
 
@@ -56,48 +55,54 @@ class Ledger extends Component {
             {this.setTotals()}
 
             <TotalBalanceCard
-              userOwes={(totalOwed).toFixed(2)}
-              userIsOwed={(totalPaid).toFixed(2)}
+              userOwes={totalOwed.toFixed(2)}
+              userIsOwed={totalPaid.toFixed(2)}
               balance={(totalPaid - totalOwed).toFixed(2)}
             />
             {console.log(totalOwed)}
           </div>
         </div>
-        <div className="card bg-dark col-md-11 mx-auto pt-3">
-          <h4 className="text-left text-light pl-2">Your Ledger: </h4>
-          {console.log(this.state)}
 
-            <table className="table table-hover">
-              <tbody>
-                {this.state.owed.map(user => {
-                  // totalOwed += user.amount
+        <div className="row">
+          <div className="col-11 p-0 mx-auto">
+            <h4 className="text-left text-dark pl-2">Your Ledger: </h4>
+            {console.log(this.state)}
 
-                  return (
-                    <Individualcard
-                      color="danger"
-                      username={user.youOwedTo}
-                      amount={user.amount}
-                    />
-                  );
-                })}
-                {this.state.paid.map(user => {
-                  // totalPaid += user.amount
+            {/* <table className="table table-hover"> */}
+            {/* <tbody> */}
 
-                  console.log(totalPaid);
-                  return (
-                    <Individualcard
-                      color="success"
-                      username={user.userId}
-                      amount={user.amount}
-                    />
-                  );
-                })}
-                </tbody>
-                </table>
+            <div className="card bg-primary border-light mb-5">
+              {this.state.owed.map(user => {
+                // totalOwed += user.amount
+
+                return (
+                  <Individualcard
+                    color="danger"
+                    username={user.youOwedTo}
+                    amount={user.amount}
+                  />
+                );
+              })}
+              {this.state.paid.map(user => {
+                // totalPaid += user.amount
+
+                console.log(totalPaid);
+                return (
+                  <Individualcard
+                    color="success"
+                    username={user.userId}
+                    amount={user.amount}
+                  />
+                );
+              })}
+              {/* </tbody> */}
+              {/* </table> */}
             </div>
-            </div>
-        );
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Ledger;
