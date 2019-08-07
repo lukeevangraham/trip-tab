@@ -234,30 +234,7 @@ class Trips extends Component {
                 </div> */}
 
 
-            </div>
 
-            <label for="payerFirstName">Participant First Name(s)</label>
-            <Select
-              defaultValue={[
-                this.state.participantsOptions[2],
-                this.state.participantsOptions[1]
-              ]}
-              isMulti
-              name="participantsList"
-              options={this.state.participantsOptions}
-              className="basic-multi-select"
-              classNamePrefix="select"
-              onChange={this.handleSelectChange}
-            />
-            <button
-              type="submit"
-              className="btn btn-primary float-right mt-3"
-              onClick={this.handleSubmit(currentUser)}
-            >
-              Submit
-            </button>
-          </fieldset>
-        </form>
         <div>
                         <h4>{this.state.message}</h4>
                     </div>
