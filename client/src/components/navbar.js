@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { Route, Link } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
@@ -71,33 +70,55 @@ class Navbar extends Component {
                                             Home <span className="sr-only">(current)</span>
                                         </Link>
                                     </li>
-
-                                    <li className="nav-item m-0">
-                                        <Link
-                                            to="/trips"
-                                            className={
-                                                window.location.pathname === "/trips"
-                                                    ? "nav-link active non-underline-link"
-                                                    : "nav-link non-underline-link"
-                                            }
+                                    <li class="nav-item dropdown">
+                                        <a
+                                            class="nav-link dropdown-toggle"
+                                            href="#"
+                                            id="navbarDropdown"
+                                            role="button"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
                                         >
-                                            Trips
-                                        </Link>
+                                            Events
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <Link
+                                                to="/trips"
+                                                className={
+                                                    window.location.pathname === "/trips"
+                                                        ? "nav-link active non-underline-link"
+                                                        : "nav-link non-underline-link"
+                                                }
+                                            >
+                                                Plan an Event
+                                            </Link>
+                                            <div class="dropdown-divider"></div>
+                                            <Link
+                                                to="/events"
+                                                className={
+                                                    window.location.pathname === "/events"
+                                                        ? "nav-link active non-underline-link"
+                                                        : "nav-link non-underline-link"
+                                                }
+                                            >
+                                                Events
+                                            </Link>
+                                            <div class="dropdown-divider"></div>
+                                            <Link
+                                                to="/tripsPaid"
+                                                className={
+                                                    window.location.pathname === "/tripsPaid"
+                                                        ? "nav-link active non-underline-link"
+                                                        : "nav-link non-underline-link"
+                                                }
+                                            >
+                                                Trips Paid
+                                            </Link>
+                                        </div>
                                     </li>
 
-                                    <li className="nav-item m-0">
-                                        <Link
-                                            to="/tripsPaid"
-                                            className={
-                                                window.location.pathname === "/tripsPaid"
-                                                    ? "nav-link active non-underline-link"
-                                                    : "nav-link non-underline-link"
-                                            }
-                                        >
-                                            Trips Paid
-                                        </Link>
-                                    </li>
-                                    
+
                                     <li className="nav-item m-0">
                                         <Link
                                             to="/ledger"
@@ -108,7 +129,7 @@ class Navbar extends Component {
                                             }
                                         >
                                             Ledger
-                                        </Link>
+                                            </Link>
                                     </li>
                                 </div>
                             ) : (
@@ -142,7 +163,7 @@ class Navbar extends Component {
                                             onClick={this.logout}
                                         >
                                             Logout
-                                        </Link>
+                    </Link>
                                     </div>
                                 </li>
                             </ul>

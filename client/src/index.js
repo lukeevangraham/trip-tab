@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from 'react-router-dom' //don't need to specify localhost url in axios http address
 
+import "react-toastify/dist/ReactToastify.css";
+
 import registerServiceWorker from "./registerServiceWorker";
 
 ReactDOM.render(

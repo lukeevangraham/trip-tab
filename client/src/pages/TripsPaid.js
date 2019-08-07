@@ -171,7 +171,7 @@ class TripsPaid extends Component {
     render() {
         const currentUser = this.props.currentUser
         return (
-            <div className="col-xs-11 bg-light p-5 rounded col-lg-6 mx-auto text-left">
+            <div className="col-xs-11 bg-light p-3 rounded col-lg-6 mx-auto text-left">
                 <form>
                     <fieldset>
                         <legend className="text-center">Trips Paid</legend>
@@ -217,8 +217,7 @@ class TripsPaid extends Component {
                             classNamePrefix="select"
                             onChange={this.handleSelectChange}
                         />
-                        <br />
-                        <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit(currentUser)}>
+                        <button type="submit" className="btn btn-primary float-right mt-3" onClick={this.handleSubmit(currentUser)}>
                             Submit
                         </button>
                     </fieldset>

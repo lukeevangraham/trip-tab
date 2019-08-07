@@ -4,6 +4,7 @@ import TripCardHome from "./tripCardHome";
 import { Route, Link } from "react-router-dom";
 import axios from "axios"
 import logo from "./logo.png"
+import { returnStatement } from "@babel/types";
 
 let totalOwed = 0;
 let totalPaid = 0;
@@ -16,14 +17,23 @@ class Home extends Component {
 
 
     componentDidMount() {
-        this.getNewEvent();
+
+        this.getNewEvent(this.props.username);
     }
-    getNewEvent() {
-        console.log(this.props.username)
+    componentWillReceiveProps(props) {
+
+        this.getNewEvent(props.username);
+    }
+    getNewEvent(username) {
+        // if (this.props.username && (!this.state.owed.length || !this.state.paid.length)){
+        //     return;
+        // }
+
+        console.log(username)
 
         Promise.all([
-            axios.get("/user/findOwedByUserId/" + this.props.username),
-            axios.get("/user/findPaidByUserId/" + this.props.username)
+            axios.get("/user/findOwedByUserId/" + username),
+            axios.get("/user/findYouOwedByUserId/" + username)
         ])
             .then(resultArray => {
                 this.setState({
@@ -31,8 +41,6 @@ class Home extends Component {
                     owed: resultArray[0].data,
                     paid: resultArray[1].data
                 })
-
-
             });
 
 
@@ -64,7 +72,7 @@ class Home extends Component {
                         </div>
 
                         <div className="col-md-11 col-lg-5 mx-auto">
-                            <TotalBalanceCard userOwes={9} userIsOwed={8} />
+                            <TotalBalanceCard userOwes={(totalOwed).toFixed(2)} userIsOwed={(totalPaid.toFixed(2))} balance={(totalPaid - totalOwed).toFixed(2)} />
                         </div>
                     </div>
                 ) : (

@@ -1,24 +1,14 @@
 import React, { Component } from "react";
-// import ReactDOM, { findDOMNode } from 'react-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 // import TextInput from 'react-autocomplete-input';
-import Select from 'react-select';
+import Select from "react-select";
+import { ToastContainer, toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
 
-toast.configure({
-    autoClose: 8000,
-    draggable: false,
-    //etc you get the idea
-});
-
-const notify = (message) => {
-    toast.success(message, {
-        position: toast.POSITION.TOP_CENTER
-    });
-};
+toast.configure();
 class Trips extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             eventName: "",
             payerName: "",
@@ -26,32 +16,38 @@ class Trips extends Component {
             participantsOptions: [],
             participantOptionsPair: [],
             participants: [],
-            successfullyPost: false
+            noSelectedValue: {label: "", key: ""},
+            toDashboard: false,
+            message: "",
+            show: false
         };
     }
 
-    getAllExistingUsers = () => {
-        axios.get("/user/allUsers/")
-            .then(response => {
-                let tempArray = [];
-                // let tempArray = response.data
-                response.data.forEach(element => {
-                    let obj = {
-                        value: element._id,
-                        label: element.username
-                    }
-                    tempArray.push(obj)
-                });
-
-                this.setState({
-                    participantsOptions: tempArray
-                })
-            })
+    notify = (message) => {
+        toast(message);
     }
 
-    handleSubmit = (currentUser) => event => {
+    getAllExistingUsers = () => {
+        axios.get("/user/allUsers/").then(response => {
+            let tempArray = [];
+            // let tempArray = response.data
+            response.data.forEach(element => {
+                let obj = {
+                    value: element._id,
+                    label: element.username
+                };
+                tempArray.push(obj);
+            });
+
+            this.setState({
+                participantsOptions: tempArray
+            });
+        });
+    };
+
+    handleSubmit = currentUser => event => {
         event.preventDefault();
-        console.log("in here")
+        console.log("in here");
         const eventToInsert = {
             userId: currentUser,
             payerId: this.state.payerName,
@@ -59,22 +55,27 @@ class Trips extends Component {
             eventName: this.state.eventName,
             paid: true,
             usersAttended: this.state.participants
-        }
+        };
         console.log(eventToInsert);
-        axios.post("/user/newEvent", eventToInsert).then(response => {
-            console.log(response)
-            this.setState({
-                successfullyPost : "ture"
+        axios
+            .post("/user/newEvent", eventToInsert)
+            .then(response => {
+                console.log(response);
+                this.setState({
+                    message: "Successfully updated",
+                    toDashboard: true,
+                    show: true
+                });
+                this.notify(this.state.eventName + " has been successfully added.");
+                this.props.history.push('/')
+                // this.resetAllState();
             })
-            notify("Successfully updagted");
-            // window.location.reload();
-        })
-        .catch(err => {
-            this.setState({
-                message: err
-            })
-        })
-    }
+            .catch(err => {
+                this.setState({
+                    message: err
+                });
+            });
+    };
 
     isParticipantsArrayEmpty = () => {
         let returnBool = true;
@@ -85,8 +86,7 @@ class Trips extends Component {
             }
         });
         return returnBool;
-    }
-
+    };
 
     isParticipantsArrayEmpty = () => {
         let returnBool = true;
@@ -97,50 +97,24 @@ class Trips extends Component {
             }
         });
         return returnBool;
-    }
+    };
 
-    handleText = i => e => {
-        let participants = [...this.state.participants]
-        participants[i] = e.target.value
-        this.setState({
-            participants
-        })
-    }
-
-    handleDelete = i => e => {
-        e.preventDefault()
-        let participants = [
-            ...this.state.participants.slice(0, i),
-            ...this.state.participants.slice(i + 1)
-        ]
-        this.setState({
-            participants
-        })
-    }
-
-    addParticipant = e => {
-        e.preventDefault()
-        let participants = this.state.participants.concat([''])
-        this.setState({
-            participants
-        })
-    }
     handleChangeEventInput = event => {
         event.preventDefault();
         const target = event.target;
         const value = target.value;
         this.setState({
             eventName: value
-        })
-    }
+        });
+    };
     handleChangePayerNameInput = event => {
         event.preventDefault();
         const target = event.target;
         const value = target.value;
         this.setState({
             payerName: value
-        })
-    }
+        });
+    };
 
     handleChangeTotalAmount = event => {
         event.preventDefault();
@@ -148,18 +122,18 @@ class Trips extends Component {
         const value = target.value;
         this.setState({
             totalAmountPaid: value
-        })
+        });
         console.log(this.state.totalAmountPaid);
-    }
+    };
 
-    handleSelectChange = (selectedOption) => {
+    handleSelectChange = selectedOption => {
         this.setState({ participants: selectedOption });
-    }
+    };
 
-    handlepayerSelectChange = (selectedOption) => {
+    handlepayerSelectChange = selectedOption => {
         console.log(selectedOption.label);
         this.setState({ payerName: selectedOption.label });
-    }
+    };
 
     handleChangeEventInput = event => {
         event.preventDefault();
@@ -167,26 +141,23 @@ class Trips extends Component {
         const value = target.value;
         this.setState({
             eventName: value
-        })
-    }
+        });
+    };
     handleChangePayerNameInput = event => {
         event.preventDefault();
         const target = event.target;
         const value = target.value;
         this.setState({
             payerName: value
-        })
-    }
-
-    
-
+        });
+    };
 
     componentDidMount() {
         notify("fuck fuck fudk");
         this.getAllExistingUsers();
     }
     render() {
-        const currentUser = this.props.currentUser
+        const currentUser = this.props.currentUser;
         return (
             <div className="col-xs-11 bg-light p-3 rounded col-lg-6 mx-auto text-left">
                 <form>
@@ -197,6 +168,7 @@ class Trips extends Component {
                             <label for="eventtName">Event Name:</label>
                             <textarea
                                 className="form-control mb-3"
+                                value={this.state.eventName}
                                 id="eventName"
                                 placeholder="Dinner in Detroit"
                                 rows="1"
@@ -204,11 +176,14 @@ class Trips extends Component {
                                 onChange={this.handleChangeEventInput}
                             />
                         </div>
-
                         <div className="form-group">
                             <label for="payerFirstName">Payer First Name</label>
                             <Select
                                 name="payer"
+                                defaultValue={[
+                                    this.state.participantsOptions[2],
+                                    this.state.participantsOptions[1]
+                                ]}
                                 options={this.state.participantsOptions}
                                 className="basic-multi-select"
                                 classNamePrefix="select"
@@ -221,43 +196,49 @@ class Trips extends Component {
                             <div className="input-group-prepend">
                                 <span className="input-group-text bg-secondary">$</span>
                             </div>
-                            <input type="number" className="form-control" placeholder="USD" name="totalAmountPaid" onChange={this.handleChangeTotalAmount} />
+                            <input
+                                type="number"
+                                // value={this.state.totalAmountPaid}
+                                className="form-control"
+                                placeholder="USD"
+                                name="totalAmountPaid"
+                                onChange={this.handleChangeTotalAmount}
+                            />
                         </div>
 
-
-                        <label for="payerFirstName">Additional Participant First Name(s)</label>
+                        <label for="payerFirstName">Participant First Name(s)</label>
                         <Select
-                            defaultValue={[this.state.participantsOptions[2], this.state.participantsOptions[1]]}
+                            defaultValue={[
+                                this.state.participantsOptions[2],
+                                this.state.participantsOptions[1]
+                            ]}
                             isMulti
                             name="participantsList"
                             options={this.state.participantsOptions}
                             className="basic-multi-select"
                             classNamePrefix="select"
                             onChange={this.handleSelectChange}
+                            placeholder="Select..."
                         />
-                        <button type="submit" className="btn btn-primary float-right" onClick={this.handleSubmit(currentUser)}>
+                        <button
+                            type="submit"
+                            className="btn btn-primary float-right mt-3"
+                            onClick={this.handleSubmit(currentUser)}
+                        >
                             Submit
                         </button>
-
                     </fieldset>
                 </form>
-                <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnVisibilityChange
-                    draggable
-                    pauseOnHover
-                    />
-                    
-                    {/* Same as */}
-                <ToastContainer />
+                {/* <div>
+                    <h4>{this.state.message}</h4>
+
+                </div> */}
+
+
             </div>
         );
     }
 }
 
-export default Trips;
+// export default Trips;
+export default withRouter(Trips)
