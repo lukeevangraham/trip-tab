@@ -20,7 +20,7 @@ const owedSchema = new Schema({
     isPaid: {
         type: Boolean,
         default: false
-      }
+    }
 })
 
 const Oweds = mongoose.model('Owed', owedSchema)
