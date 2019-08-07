@@ -29,7 +29,7 @@ class App extends Component {
     componentDidMount() {
         this.getUser()
         // this.getNewEvent()
-        // this.getPostEvent();
+        this.getPostEvent();
     }
 
     updateUser(userObject) {
@@ -39,15 +39,15 @@ class App extends Component {
 
     getPostEvent() {
         const testEvent = {
-            userId: "luke",
-            payerId: "ajay",
-            amount: 600,
-            eventName: "Ruth's chris",
-            paid: false,
-            usersAttended: ["ajay", "jenny", "luke"]
+            userId: "patrick",
+            payedtoId: "adam2",
+            amount: 100,
+            eventName: "5d48979d2fa0e50d18a4d179",
+            // paid: false,
+            // usersAttended: ["ajay", "jenny", "luke"]
         }
 
-        axios.post("/user/newEvent/", testEvent).then(response => {
+        axios.post("/user/pay/", testEvent).then(response => {
             console.log(response)
         })
     }

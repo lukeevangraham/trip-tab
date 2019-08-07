@@ -98,6 +98,11 @@ router.get("/newEvents/:userId", (request, response) => {
         .then(dbModel => response.json(dbModel))
         .catch(err => response.status(422).json(err));
 });
+router.get("/allEvents", (request, response) => {
+    Events.find({})
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err))
+})
 
 router.post("/newEvent", (request, response) => {
     let participants = [];
@@ -148,5 +153,18 @@ function usersThatOwedForThisEvent(anArrayOfUsers, userPaid) {
     });
     return returnArray;
 }
+
+router.post("/pay", (request, response) => {
+    dataToInsert={
+        userId: request.body.userId,
+        payedtoId: request.body.payedtoId,
+        amount: request.body.amount,
+        eventName: request.body.eventName
+    }
+
+    Paids.create(dataToInsert)
+    .then(dbModel => response.json(dbModel))
+    .catch(err => response.status(422).json(err))
+})
 
 module.exports = router;
