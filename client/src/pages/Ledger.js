@@ -7,7 +7,6 @@ var totalOwed = 0;
 var totalPaid = 0;
 let totalBalance;
 
-
 class Ledger extends Component {
   state = {
     owed: [],
@@ -65,53 +64,51 @@ class Ledger extends Component {
         </div>
         {console.log(this.state)}
 
-        <div className="card bg-danger">
-          <p className="lead text-white pl-3 align-middle pt-3">
-            Events you owe money for:
-          </p>
-          <table className="table table-hover">
-            <tbody>
-              {this.state.owed.map(user => {
-                // totalOwed += user.amount
-                if (user.isPaid === true) {
-                  return 
-                }
-                else{
-                return (
-                  <Individualcard
-                    color="danger"
-                    username={user.youOwedTo}
-                    amount={user.amount}
-                  />
-                );}
-              })}
-            </tbody>
-          </table>
-        </div>
+        <div className="row">
+          <div className="col-md-11 mx-auto">
+            <div className="card bg-danger">
+              <p className="lead text-white pl-3 align-middle pt-3">
+                Events you owe money for:
+              </p>
+              <table className="table table-hover">
+                <tbody>
+                  {this.state.owed.map(user => {
+                    // totalOwed += user.amount
 
-        <div className="card bg-success mt-4 mb-4">
-          <p className="lead pl-3 align-middle pt-3 text-white">
-            Events you owe money for:
-          </p>
-          <table className="table table-hover">
-            <tbody>
-              {this.state.paid.map(user => {
-                // totalPaid += user.amount
-                if (user.isPaid === true) {
-                  return
-                }
-                else {
-                return (
-                  <Individualcard
-                    color="success"
-                    username={user.userId}
-                    amount={user.amount}
-                  />
-                );
-                }
-              })}
-            </tbody>
-          </table>
+                    return (
+                      <Individualcard
+                        color="danger"
+                        username={user.youOwedTo}
+                        amount={user.amount}
+                      />
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="card bg-success mt-4 mb-4">
+              <p className="lead pl-3 align-middle pt-3 text-white">
+                Events others owe you for:
+              </p>
+              <table className="table table-hover">
+                <tbody>
+                  {this.state.paid.map(user => {
+                    // totalPaid += user.amount
+
+                    console.log(totalPaid);
+                    return (
+                      <Individualcard
+                        color="success"
+                        username={user.userId}
+                        amount={user.amount}
+                      />
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     );

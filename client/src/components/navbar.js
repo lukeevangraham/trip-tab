@@ -55,7 +55,7 @@ class Navbar extends Component {
                     </button>
 
                     <div className="navbar-collapse collapse" id="navbarColor02">
-                        <ul className="navbar-nav mr-auto m-0">
+                        <ul className="navbar-nav submenu mr-auto m-0">
                             {loggedIn ? (
                                 <div className="navbar-nav mr-auto m-0">
                                     <li className="nav-item m-0">
