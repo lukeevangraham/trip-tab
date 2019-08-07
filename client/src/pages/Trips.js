@@ -153,7 +153,6 @@ class Trips extends Component {
     };
 
     componentDidMount() {
-        notify("fuck fuck fudk");
         this.getAllExistingUsers();
     }
     render() {
