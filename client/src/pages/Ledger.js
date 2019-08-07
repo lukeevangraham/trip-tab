@@ -73,14 +73,17 @@ class Ledger extends Component {
             <tbody>
               {this.state.owed.map(user => {
                 // totalOwed += user.amount
-
+                if (user.isPaid === true) {
+                  return 
+                }
+                else{
                 return (
                   <Individualcard
                     color="danger"
                     username={user.youOwedTo}
                     amount={user.amount}
                   />
-                );
+                );}
               })}
             </tbody>
           </table>
@@ -94,8 +97,10 @@ class Ledger extends Component {
             <tbody>
               {this.state.paid.map(user => {
                 // totalPaid += user.amount
-
-                console.log(totalPaid);
+                if (user.isPaid === true) {
+                  return
+                }
+                else {
                 return (
                   <Individualcard
                     color="success"
@@ -103,6 +108,7 @@ class Ledger extends Component {
                     amount={user.amount}
                   />
                 );
+                }
               })}
             </tbody>
           </table>
