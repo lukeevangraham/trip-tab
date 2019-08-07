@@ -68,18 +68,12 @@ class TripsPaid extends Component {
         console.log("in here")
         const eventToInsert = {
             userId: currentUser,
-            payertoId: this.state.payeesName,
+            payedtoId: this.state.payeesName,
             amount: this.state.amoutToBePaid,
-            eventName: this.state.eventId
+            eventName: this.state.eventName,
+            eventId: this.state.eventId
         }
-        // const testEvent = {
-        //     userId: "patrick",
-        //     payedtoId: "adam2",
-        //     amount: 100,
-        //     eventName: "5d48979d2fa0e50d18a4d179",
-        //     // paid: false,
-        //     // usersAttended: ["ajay", "jenny", "luke"]
-        // }
+
         console.log(eventToInsert);
         axios.post("/user/pay", eventToInsert).then(response => {
             console.log(response)
@@ -106,44 +100,6 @@ class TripsPaid extends Component {
         return returnBool;
     }
 
-
-    // isParticipantsArrayEmpty = () => {
-    //     let returnBool = true;
-    //     this.participant.forEach(element => {
-    //         if (element === "") {
-    //             returnBool = false;
-    //             return;
-    //         }
-    //     });
-    //     return returnBool;
-    // }
-
-    // handleText = i => e => {
-    //     let participants = [...this.state.participants]
-    //     participants[i] = e.target.value
-    //     this.setState({
-    //         participants
-    //     })
-    // }
-
-    // handleDelete = i => e => {
-    //     e.preventDefault()
-    //     let participants = [
-    //         ...this.state.participants.slice(0, i),
-    //         ...this.state.participants.slice(i + 1)
-    //     ]
-    //     this.setState({
-    //         participants
-    //     })
-    // }
-
-    // addParticipant = e => {
-    //     e.preventDefault()
-    //     let participants = this.state.participants.concat([''])
-    //     this.setState({
-    //         participants
-    //     })
-    // }
     handleChangeEventInput = event => {
         event.preventDefault();
         const target = event.target;
