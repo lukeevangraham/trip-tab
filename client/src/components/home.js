@@ -56,11 +56,11 @@ class Home extends Component {
             totalPaid += user.amount
         })
 
-        console.log(this.state);
+        // console.log(this.state);
     }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
 
             <div>

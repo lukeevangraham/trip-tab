@@ -18,6 +18,9 @@ const paidSchema = new Schema({
     type: String,
     required: true
   },
+  eventId: {
+    type: String, required: true
+  },
   isPaid: {
     type: Boolean,
     default: false

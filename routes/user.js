@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
 const User = require("../database/models/user");
 const Oweds = require("../database/models/owed");
 const Paids = require("../database/models/paid")
@@ -76,6 +77,20 @@ router.get("/allUsers", (request, response) => {
         .catch(err => response.status(422).json(err))
 })
 
+router.get("/getAllEvents", (request, response)=>{
+    Events.find({})
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err))
+})
+
+router.get("/getEventByID/:eventId", (request, response)=>{
+console.log("TCL: request", request.params.eventId)
+    
+    Events.find({_id : request.params.eventId})
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err))
+})
+
 router.get("/findOwedByUserId/:userId", (request, response) => {
     console.log("TCL: request=>", request.params.userId)
     Oweds.find({ userId: request.params.userId })
@@ -110,6 +125,11 @@ router.get("/newEvents/:userId", (request, response) => {
         .then(dbModel => response.json(dbModel))
         .catch(err => response.status(422).json(err));
 });
+router.get("/allEvents", (request, response) => {
+    Events.find({})
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err))
+})
 
 router.post("/newEvent", (request, response) => {
     let participants = [];
@@ -145,7 +165,8 @@ function addToOwedTable(data, eventId) {
             userId: element,
             youOwedTo: data.payerId,
             amount: howMuchTheyOwe,
-            eventName: eventId
+            eventId: eventId,
+            eventName: data.eventName
         };
         return Oweds.create(datatoInsert);
     });
@@ -159,6 +180,27 @@ function usersThatOwedForThisEvent(anArrayOfUsers, userPaid) {
         }
     });
     return returnArray;
+}
+
+router.post("/pay", (request, response) => {
+    dataToInsert={
+        userId: request.body.userId,
+        payedtoId: request.body.payedtoId,
+        amount: request.body.amount,
+        eventName: request.body.eventName
+    }
+
+    Paids.create(dataToInsert)
+    .then(dbModel => {
+        updateOwedTable(dataToInsert)
+        response.json(dbModel);
+    })
+    .catch(err => response.status(422).json(err))
+})
+function updateOwedTable(dataToInsert){
+    // var query = { name: 'borne' };
+    // Model.findOneAndUpdate(query, { name: 'jason bourne' }, options, callback)
+    Oweds.findOneAndUpdate(dataToInsert.eventName, {})
 }
 
 module.exports = router;

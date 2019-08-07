@@ -14,8 +14,12 @@ const owedSchema = new Schema({
     eventName: {
         type: String, required: true
     },
+    eventId: {
+        type: String, required: true
+    },
     isPaid: {
-        type: Boolean, default: false
+        type: Boolean,
+        default: false
     }
 })
 

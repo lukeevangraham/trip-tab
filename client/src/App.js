@@ -36,17 +36,15 @@ class App extends Component {
     }
     
 
-    getPostEvent() {
+    getEvent() {
         const testEvent = {
-            userId: "luke",
-            payerId: "ajay",
-            amount: 600,
-            eventName: "Ruth's chris",
-            paid: false,
-            usersAttended: ["ajay", "jenny", "luke"]
+            userId: "ajay",
+            payedtoId: "adam",
+            amount: 100,
+            eventName: "5d45f2c6c221350d3d8285ea"
         }
-
-        axios.post("/user/newEvent/", testEvent).then(response => {
+        console.log("about to call the event")
+        axios.post("/user/pay/", testEvent).then(response => {
             console.log(response)
         })
     }
@@ -61,8 +59,8 @@ class App extends Component {
 
     getUser() {
         axios.get("/user/").then(response => {
-            console.log("Get user response: ");
-            console.log(response.data);
+            // console.log("Get user response: ");
+            // console.log(response.data);
             if (response.data.user) {
                 console.log("Get User: There is a user saved in the server session: ");
 

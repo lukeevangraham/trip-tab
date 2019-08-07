@@ -163,7 +163,7 @@ class Navbar extends Component {
                                             onClick={this.logout}
                                         >
                                             Logout
-                    </Link>
+                                        </Link>
                                     </div>
                                 </li>
                             </ul>
