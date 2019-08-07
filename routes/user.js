@@ -93,6 +93,18 @@ router.get("/findPaidByUserId/:paidtoId", (request, response) => {
         .then(dbModel => response.json(dbModel))
         .catch(err => response.status(422).json(err));
 });
+router.post("/findPaidByUserId", (request, response) => {
+    let dataToInsert = {
+        userId: request.body.userId,
+        payerId: request.body.payerId,
+        amount: request.body.amount,
+        eventName: request.body.eventName
+    }
+    
+    Paids.create(dataToInsert)
+        .then(dbModel => response.json(dbModel))
+        .catch(err => response.status(422).json(err));
+});
 router.get("/newEvents/:userId", (request, response) => {
     Events.find({userId: request.params.userId})
         .then(dbModel => response.json(dbModel))
