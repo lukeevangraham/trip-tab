@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Individualcard from "../components/individualCard";
 import TotalBalanceCard from "../components/totalBalance";
+import OwedToYou from "../components/owedToYou";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { Table } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
 
 var totalOwed = 0;
 var totalPaid = 0;
@@ -116,7 +118,7 @@ class Ledger extends Component {
                         amount={user.amount}
                         eventName={user.eventName}
                         eventId={user.eventId}
-                        username={this.props.username}
+                      // username={this.props.username}
                       />
                     );
                   })}
@@ -129,13 +131,21 @@ class Ledger extends Component {
                 Events others owe you for:
               </p>
               <table className="table table-hover">
+                <thead>
+                  <tr className={"text-white table-"}>
+                    {/* <th scope="row"><i class="p-2 fas fa-user" /></th> */}
+                    <th scope="col">Participant(s)</th>
+                    <th scope="col">Event Name</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                  </thead>
                 <tbody>
                   {this.state.paid.map(user => {
                     // totalPaid += user.amount
 
                     console.log(totalPaid);
                     return (
-                      <Individualcard
+                      <OwedToYou
                         color="success"
                         username={user.userId}
                         amount={user.amount}
