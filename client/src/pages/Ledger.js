@@ -107,7 +107,15 @@ class Ledger extends Component {
                 Events you owe money for:
               </p>
               <table className="table table-hover">
-                <tbody>
+                  <thead>
+                    <tr className="text-white">
+                      <th scope="col">Payee</th>
+                      <th scope="col">Event</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Pay</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                   {this.state.owed.map(user => {
                     // totalOwed += user.amount
 
