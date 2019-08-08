@@ -32,7 +32,8 @@ function eventCard(props) {
                 </tbody>
             </Table>
         </div>
-    );
+     
+  );
 }
 
 export default eventCard;

@@ -25,7 +25,6 @@ const paidSchema = new Schema({
     type: Boolean,
     default: false
   }
-  
 });
 
 const Paids = mongoose.model("Paid", paidSchema);

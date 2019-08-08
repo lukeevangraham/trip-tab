@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 const styles = {
-    cardStyle: {
-        borderRadius: 0
-    }
+  cardStyle: {
+    borderRadius: 0
+  }
 };
 
 function Individualcard(props) {
