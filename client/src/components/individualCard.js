@@ -14,7 +14,7 @@ function Individualcard(props) {
                 <td className="align-middle">{props.payee}</td>
                 <td className="align-middle">{props.eventName}</td>
                 <td className="align-middle">${props.amount.toFixed(2)}</td>
-                <td><button onClick={() => props.onClick(props.eventId, props.payee, props.eventName, props.username)}>Pay</button></td>
+                <td><button onClick={() => props.onClick(props.eventId, props.payee, props.eventName, props.username, props.amount)}>Pay</button></td>
             </tr>
     );
 }

@@ -56,8 +56,24 @@ class Ledger extends Component {
     console.log(this.state);
   }
 
-  handleClick = (id, payee, eventName, username) => {
+  handleClick = (id, payee, eventName, username, amount) => {
     console.log("click handling! ", id, payee, eventName, username)
+
+      const eventToFind = {
+        userId: username,
+        payedtoName: payee,
+        amount: amount,
+        eventName: eventName,
+        eventId: id
+      }
+      axios.put("/user/updateOwedWithPaid", eventToFind)
+      .then(response => {
+        console.log(response)
+        this.notify(eventName + "has been paid.");
+        this.props.history.push('/')
+      })
+      .catch(err => console.log(err))
+
   }
 
   render() {
