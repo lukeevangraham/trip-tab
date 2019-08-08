@@ -91,7 +91,7 @@ class Navbar extends Component {
                                                         : "nav-link non-underline-link"
                                                 }
                                             >
-                                                Plan an Event
+                                                Create Event
                                             </Link>
                                             <div class="dropdown-divider"></div>
                                             <Link
@@ -102,7 +102,7 @@ class Navbar extends Component {
                                                         : "nav-link non-underline-link"
                                                 }
                                             >
-                                                Events
+                                                Event Log
                                             </Link>
                                             <div class="dropdown-divider"></div>
                                             <Link
@@ -113,7 +113,7 @@ class Navbar extends Component {
                                                         : "nav-link non-underline-link"
                                                 }
                                             >
-                                                Trips Paid
+                                                Payoff Event
                                             </Link>
                                         </div>
                                     </li>

@@ -193,7 +193,7 @@ class TripsPaid extends Component {
             <div className="col-xs-11 bg-light p-3 rounded col-lg-6 mx-auto text-left">
                 <form>
                     <fieldset>
-                        <legend className="text-center">Trips Paid</legend>
+                        <legend className="text-center">Payoff An Event</legend>
 
                         <div className="form-group">
                             <label for="eventtName">Event Name</label>
