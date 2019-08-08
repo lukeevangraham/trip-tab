@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Individualcard from "../components/individualCard";
 import TotalBalanceCard from "../components/totalBalance";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 var totalOwed = 0;
 var totalPaid = 0;
@@ -59,22 +60,28 @@ class Ledger extends Component {
   handleClick = (id, payee, eventName, username, amount) => {
     console.log("click handling! ", id, payee, eventName, username)
 
-      const eventToFind = {
+      const eventToUpdate = {
         userId: username,
-        payedtoName: payee,
+        payedtoId: payee,
         amount: amount,
         eventName: eventName,
         eventId: id
       }
-      axios.put("/user/updateOwedWithPaid", eventToFind)
+
+      console.log(eventToUpdate)
+      axios.post("/user/pay", eventToUpdate)
       .then(response => {
-        console.log(response)
+        console.log("there goes payment!")
         this.notify(eventName + "has been paid.");
         this.props.history.push('/')
       })
       .catch(err => console.log(err))
 
   }
+
+  notify = (message) => {
+    toast(message);
+}
 
   render() {
     return (
