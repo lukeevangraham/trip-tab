@@ -75,6 +75,7 @@ class Trips extends Component {
                 this.setState({
                     message: err
                 });
+                this.notify(this.state.eventName + " has been successfully added.");
             });
     };
 
@@ -229,21 +230,15 @@ class Trips extends Component {
                         </button>
                     </fieldset>
                 </form>
-                {/* <div>
-                    <h4>{this.state.message}</h4>
-
-                </div> */}
-
-
 
         <div>
                         <h4>{this.state.message}</h4>
                     </div>
 
         
-      </div>
+    </div>
     );
-  }
+    }
 }
 
 // export default Trips;

@@ -187,20 +187,39 @@ router.post("/pay", (request, response) => {
         userId: request.body.userId,
         payedtoId: request.body.payedtoId,
         amount: request.body.amount,
-        eventName: request.body.eventName
+        eventName: request.body.eventName,
+        eventId: request.body.eventId,
+        isPaid: true
     }
 
     Paids.create(dataToInsert)
     .then(dbModel => {
-        updateOwedTable(dataToInsert)
-        response.json(dbModel);
+        return updateOwedTable(dataToInsert)
+        // response.json(dbModel);
     })
+    .then(dbModel => response.json(dbModel))
     .catch(err => response.status(422).json(err))
 })
 function updateOwedTable(dataToInsert){
-    // var query = { name: 'borne' };
-    // Model.findOneAndUpdate(query, { name: 'jason bourne' }, options, callback)
-    Oweds.findOneAndUpdate(dataToInsert.eventName, {})
+    const query = {
+        eventId: dataToInsert.eventId, 
+        userId: dataToInsert.userId, 
+        youOwedTo: dataToInsert.payedtoId
+    }
+    console.log(query);
+    return Oweds.findOneAndUpdate(query, {isPaid : true})
 }
+
+router.put("/updateOwedWithPaid", (request, response) => {
+    console.log(request.body)
+    const query = {
+        eventId: request.body.eventId, 
+        userId: request.body.userId, 
+        youOwedTo: request.body.payedtoId
+    }
+    Oweds.findOneAndUpdate(query, {isPaid: true})
+    .then(dbModel => response.json(dbModel))
+    .catch(err => response.status(422).json(err))
+})
 
 module.exports = router;

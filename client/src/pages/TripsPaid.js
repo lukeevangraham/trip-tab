@@ -3,7 +3,10 @@ import ReactDOM, { findDOMNode } from 'react-dom';
 import axios from "axios";
 // import TextInput from 'react-autocomplete-input';
 import Select from 'react-select';
+import { ToastContainer, toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
 
+toast.configure();
 class TripsPaid extends Component {
     constructor(props) {
         super(props)
@@ -18,6 +21,10 @@ class TripsPaid extends Component {
             participants: [],
             message: ""
         };
+    }
+
+    notify = (message) => {
+        toast(message);
     }
 
     getAllExistingUsers = () => {
@@ -65,35 +72,51 @@ class TripsPaid extends Component {
 
     handleSubmit = (currentUser) => event => {
         event.preventDefault();
-        console.log("in here")
         const eventToInsert = {
             userId: currentUser,
-            payertoId: this.state.payeesName,
+            payedtoId: this.state.payeesName,
             amount: this.state.amoutToBePaid,
-            eventName: this.state.eventId
+            eventName: this.state.eventName,
+            eventId: this.state.eventId
         }
-        // const testEvent = {
-        //     userId: "patrick",
-        //     payedtoId: "adam2",
-        //     amount: 100,
-        //     eventName: "5d48979d2fa0e50d18a4d179",
-        //     // paid: false,
-        //     // usersAttended: ["ajay", "jenny", "luke"]
-        // }
+        // this.updateOwedWithPaid(currentUser);
+        
         console.log(eventToInsert);
-        axios.post("/user/pay", eventToInsert).then(response => {
-            console.log(response)
+        axios.post("/user/pay", eventToInsert)
+        .then(response => {
+            console.log("in here")
+            // console.log(response)
             this.setState({
-                message: "Successfully updagted"
+                message: "Successfully updated"
             })
-            window.location.reload();
+            console.log("inside handlesumbit of trips.js")
+            this.notify(this.state.eventName + " has been paid.");
+            this.props.history.push('/')
         })
             .catch(err => {
                 this.setState({
                     message: err
                 })
+                console.log("inside handlesumbit of trips.js")
             })
     }
+
+    updateOwedWithPaid = (currentUser => {
+        const eventToFind = {
+            userId: currentUser,
+            payedtoId: this.state.payeesName,
+            amount: this.state.amoutToBePaid,
+            eventName: this.state.eventName,
+            eventId: this.state.eventId
+        }
+        axios.put("/user/updateOwedWithPaid", eventToFind)
+        .then(response => {
+            console.log(response)
+                this.notify(this.state.eventName + " has been paid.");
+                this.props.history.push('/')
+        })
+        .catch(err => console.log(err))
+    })
 
     isParticipantsArrayEmpty = () => {
         let returnBool = true;
@@ -106,44 +129,6 @@ class TripsPaid extends Component {
         return returnBool;
     }
 
-
-    // isParticipantsArrayEmpty = () => {
-    //     let returnBool = true;
-    //     this.participant.forEach(element => {
-    //         if (element === "") {
-    //             returnBool = false;
-    //             return;
-    //         }
-    //     });
-    //     return returnBool;
-    // }
-
-    // handleText = i => e => {
-    //     let participants = [...this.state.participants]
-    //     participants[i] = e.target.value
-    //     this.setState({
-    //         participants
-    //     })
-    // }
-
-    // handleDelete = i => e => {
-    //     e.preventDefault()
-    //     let participants = [
-    //         ...this.state.participants.slice(0, i),
-    //         ...this.state.participants.slice(i + 1)
-    //     ]
-    //     this.setState({
-    //         participants
-    //     })
-    // }
-
-    // addParticipant = e => {
-    //     e.preventDefault()
-    //     let participants = this.state.participants.concat([''])
-    //     this.setState({
-    //         participants
-    //     })
-    // }
     handleChangeEventInput = event => {
         event.preventDefault();
         const target = event.target;
@@ -171,12 +156,8 @@ class TripsPaid extends Component {
         console.log(this.state.amoutToBePaid);
     }
 
-    // handleSelectChange = (selectedOption) => {
-    //     this.setState({ participants: selectedOption });
-    // }
-
     handleEventSelectChange = (selectedOption) => {
-        console.log(selectedOption.label);
+        // console.log(selectedOption.label);
         this.setState({ 
             eventName: selectedOption.label,
             eventId: selectedOption.value,
@@ -213,18 +194,6 @@ class TripsPaid extends Component {
                 <form>
                     <fieldset>
                         <legend className="text-center">Trips Paid</legend>
-
-                        {/* <div className="form-group">
-                            <label for="eventtName">Event Name:</label>
-                            <textarea
-                                className="form-control mb-3"
-                                id="eventName"
-                                placeholder="Dinner in Detroit"
-                                rows="1"
-                                name="eventName"
-                                onChange={this.handleChangeEventInput}
-                            />
-                        </div> */}
 
                         <div className="form-group">
                             <label for="eventtName">Event Name</label>
@@ -278,15 +247,6 @@ class TripsPaid extends Component {
                                 onChange={this.handleChangeEventInput}
                                 disabled
                             />
-                        {/* <Select
-                            defaultValue={[this.state.participantsOptions[2], this.state.participantsOptions[1]]}
-                            isMulti
-                            name="participantsList"
-                            options={this.state.participantsOptions}
-                            className="basic-multi-select"
-                            classNamePrefix="select"
-                            onChange={this.handleSelectChange}
-                        /> */}
                         <button type="submit" className="btn btn-primary float-right mt-3" onClick={this.handleSubmit(currentUser)}>
                             Submit
                         </button>
@@ -297,4 +257,4 @@ class TripsPaid extends Component {
     }
 }
 
-export default TripsPaid;
+export default withRouter(TripsPaid);
