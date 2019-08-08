@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const owedSchema = new Schema({
     userId: {
@@ -23,6 +23,6 @@ const owedSchema = new Schema({
     }
 })
 
-const Oweds = mongoose.model('Owed', owedSchema)
+const Oweds = mongoose.model("Owed", owedSchema);
 
 module.exports = Oweds;
