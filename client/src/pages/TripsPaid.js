@@ -16,8 +16,6 @@ class TripsPaid extends Component {
             payerName: "",
             payeesName: "",
             amoutToBePaid: 0,
-            // participantsOptions: [],
-            // eventsOptions: [],
             participants: [],
             message: ""
         };
@@ -84,12 +82,10 @@ class TripsPaid extends Component {
         console.log(eventToInsert);
         axios.post("/user/pay", eventToInsert)
         .then(response => {
-            console.log("in here")
             // console.log(response)
             this.setState({
                 message: "Successfully updated"
             })
-            console.log("inside handlesumbit of trips.js")
             this.notify(this.state.eventName + " has been paid.");
             this.props.history.push('/')
         })
@@ -97,7 +93,6 @@ class TripsPaid extends Component {
                 this.setState({
                     message: err
                 })
-                console.log("inside handlesumbit of trips.js")
             })
     }
 
@@ -111,11 +106,11 @@ class TripsPaid extends Component {
         }
         axios.put("/user/updateOwedWithPaid", eventToFind)
         .then(response => {
-            console.log(response)
-                this.notify(this.state.eventName + " has been paid.");
-                this.props.history.push('/')
+            // console.log(response)
+            this.notify.success(this.state.eventName + " has been paid.");
+            this.props.history.push('/')
         })
-        .catch(err => console.log(err))
+        .catch(err => this.notify.error(err))
     })
 
     isParticipantsArrayEmpty = () => {
@@ -153,7 +148,7 @@ class TripsPaid extends Component {
         this.setState({
             totalAmountPaid: value
         })
-        console.log(this.state.amoutToBePaid);
+        // console.log(this.state.amoutToBePaid);
     }
 
     handleEventSelectChange = (selectedOption) => {
