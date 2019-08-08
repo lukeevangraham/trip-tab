@@ -56,6 +56,10 @@ class Ledger extends Component {
     console.log(this.state);
   }
 
+  handleClick = (id, payee, eventName, username) => {
+    console.log("click handling! ", id, payee, eventName, username)
+  }
+
   render() {
     return (
       <div>
@@ -86,9 +90,13 @@ class Ledger extends Component {
 
                     return (
                       <Individualcard
+                        onClick={this.handleClick}
                         color="danger"
-                        username={user.youOwedTo}
+                        payee={user.youOwedTo}
                         amount={user.amount}
+                        eventName={user.eventName}
+                        eventId={user.eventId}
+                        username={this.props.username}
                       />
                     );
                   })}
@@ -111,6 +119,8 @@ class Ledger extends Component {
                         color="success"
                         username={user.userId}
                         amount={user.amount}
+                        eventName={user.eventName}
+                        eventId={user.eventId}
                       />
                     );
                   })}
