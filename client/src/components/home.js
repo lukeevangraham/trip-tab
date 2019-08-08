@@ -70,12 +70,13 @@ class Home extends Component {
                     <div className="row justify-content-center">
                         <div className="col-md-1" />
                         <div className="col-md-11 col-lg-5 mx-auto">
-                            <TripCardHome tripName={"Denver"} />
-                        </div>
-
-                        <div className="col-md-11 col-lg-5 mx-auto">
                             <TotalBalanceCard userOwes={(totalOwed).toFixed(2)} userIsOwed={(totalPaid.toFixed(2))} balance={(totalPaid - totalOwed).toFixed(2)} />
                         </div>
+                        <div className="col-md-11 col-lg-5 mx-auto">
+                            <TripCardHome />
+                        </div>
+
+
                         <div className="col-md-1" />
                     </div>
                 ) : (
