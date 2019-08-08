@@ -7,8 +7,8 @@ function TripCardHome(props) {
     <div className="card text-white border-warning bg-warning  mb-3 rounded card-parent">
       {/* <div className="card-header text-left">Upcoming Trips</div> */}
       <div className="card-body text-left">
-        <h4 className="card-title mb-1">What to do?</h4>
-        <div className="mx-auto">
+        <h4 className="card-title text-center mb-1">What to do?</h4>
+        <div className="mx-auto text-center">
           <Link to="/trips">
             <button
               type="button"

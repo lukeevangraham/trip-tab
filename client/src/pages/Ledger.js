@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Individualcard from "../components/individualCard";
 import TotalBalanceCard from "../components/totalBalance";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 var totalOwed = 0;
 var totalPaid = 0;
@@ -58,46 +58,35 @@ class Ledger extends Component {
   }
 
   handleClick = (id, payee, eventName, username, amount) => {
-    console.log("click handling! ", id, payee, eventName, username)
+    console.log("click handling! ", id, payee, eventName, username);
 
-      const eventToUpdate = {
-        userId: username,
-        payedtoId: payee,
-        amount: amount,
-        eventName: eventName,
-        eventId: id
-      }
+    const eventToUpdate = {
+      userId: username,
+      payedtoId: payee,
+      amount: amount,
+      eventName: eventName,
+      eventId: id
+    };
 
-      console.log(eventToUpdate)
-      axios.post("/user/pay", eventToUpdate)
+    console.log(eventToUpdate);
+    axios
+      .post("/user/pay", eventToUpdate)
       .then(response => {
-        console.log("there goes payment!")
+        console.log("there goes payment!");
         this.notify(eventName + "has been paid.");
-        this.props.history.push('/')
+        this.props.history.push("/");
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
+  };
 
-  }
-
-  notify = (message) => {
+  notify = message => {
     toast(message);
-}
+  };
 
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-md-11 mx-auto">
-            {this.setTotals()}
-
-            <TotalBalanceCard
-              userOwes={totalOwed.toFixed(2)}
-              userIsOwed={totalPaid.toFixed(2)}
-              balance={(totalPaid - totalOwed).toFixed(2)}
-            />
-            {console.log(totalOwed)}
-          </div>
-        </div>
+        <h4 className="text-center mb-3">{this.props.username}'s Ledger:</h4>
         {console.log(this.state)}
 
         <div className="row">
@@ -107,15 +96,15 @@ class Ledger extends Component {
                 Events you owe money for:
               </p>
               <table className="table table-hover">
-                  <thead>
-                    <tr className="text-white">
-                      <th scope="col">Payee</th>
-                      <th scope="col">Event</th>
-                      <th scope="col">Amount</th>
-                      <th scope="col">Pay</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <thead>
+                  <tr className="text-white">
+                    <th scope="col">Payee</th>
+                    <th scope="col">Event</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Pay</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {this.state.owed.map(user => {
                     // totalOwed += user.amount
 
@@ -158,6 +147,18 @@ class Ledger extends Component {
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-11 mx-auto">
+            {this.setTotals()}
+
+            <TotalBalanceCard
+              userOwes={totalOwed.toFixed(2)}
+              userIsOwed={totalPaid.toFixed(2)}
+              balance={(totalPaid - totalOwed).toFixed(2)}
+            />
+            {console.log(totalOwed)}
           </div>
         </div>
       </div>
