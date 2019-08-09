@@ -51,10 +51,20 @@ class Home extends Component {
         totalOwed = 0;
         totalPaid = 0;
         this.state.owed.map(user => {
-            return totalOwed += user.amount
+            totalOwed += user.amount
+            if (user.isPaid === true) {
+                
+                totalOwed -= user.amount;
+            }
+            return totalOwed 
         })
         this.state.paid.forEach(user => {
             totalPaid += user.amount
+            if (user.isPaid === true) {
+                
+                totalPaid -= user.amount;
+            }
+            return totalPaid
         })
 
         // console.log(this.state);
