@@ -59,7 +59,7 @@ class Events extends Component {
           <div className="col-md-11 mx-auto">
             <div className="card" style={styles.eventsHeader}>
               <table
-                className="table table-hover lead"
+                className="table table-hover lead w-100 d-block d-md-table"
               >
                 <thead className="text-white" >
                   <tr className="text-white">
