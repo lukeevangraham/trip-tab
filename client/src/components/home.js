@@ -77,12 +77,12 @@ class Home extends Component {
             <div>
                 {this.setTotals()}
                 {this.props.loggedIn ? (
-                    <div className="col justify-content-center">
+                    <div className="col justify-content-center p-0">
                         <div className="col-md-1" />
-                        <div className="col-md-11 col-lg-5 mx-auto">
+                        <div className="col-md-11 col-lg-5 mx-auto p-0">
                             <TotalBalanceCard userOwes={(totalOwed).toFixed(2)} userIsOwed={(totalPaid.toFixed(2))} balance={(totalPaid - totalOwed).toFixed(2)} />
                         </div>
-                        <div className="col-md-11 col-lg-5 mx-auto">
+                        <div className="col-md-11 col-lg-5 mx-auto p-0">
                             <TripCardHome />
                         </div>
 
