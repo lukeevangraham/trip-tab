@@ -17,6 +17,9 @@ const styles = {
         listStylePosition: "inside",
         margin: 0,
         padding: 0
+    },
+    td: {
+        maxWidth: "150px"
     }
 }
 
@@ -33,7 +36,7 @@ function eventCard(props) {
           })}
         </ol>
       </td>
-      <td className="align-top">{props.eventname}</td>
+      <td style={styles.td} className="align-top">{props.eventname}</td>
       <td className="align-top">${props.amount}</td>
     </tr>
   );
