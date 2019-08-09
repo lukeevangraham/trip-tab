@@ -17,12 +17,6 @@ const styles = {
         listStylePosition: "inside",
         margin: 0,
         padding: 0
-<<<<<<< HEAD
-    },
-    td: {
-        maxWidth: "150px"
-=======
->>>>>>> 36dd290a8eabb470da3a6092971a2707abba187f
     }
 }
 
