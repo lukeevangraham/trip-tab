@@ -85,6 +85,8 @@ class Home extends Component {
                         <div className="col-md-11 col-lg-5 mx-auto">
                             <TripCardHome />
                         </div>
+
+
                         <div className="col-md-1" />
                     </div>
                 ) : (
