@@ -33,11 +33,7 @@ function eventCard(props) {
           })}
         </ol>
       </td>
-<<<<<<< HEAD
-      <td style={styles.td} className="align-top">{props.eventname}</td>
-=======
       <td className="align-top">{props.eventname}</td>
->>>>>>> 36dd290a8eabb470da3a6092971a2707abba187f
       <td className="align-top">${props.amount}</td>
     </tr>
   );

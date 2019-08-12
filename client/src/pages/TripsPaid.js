@@ -231,7 +231,6 @@ class TripsPaid extends Component {
                         </div>
 
                         <label for="payerFirstName">Payee's name (who are you paying to?)</label>
-                        <label for="payerName">Payer Name:</label>
                             <textarea
                                 className="form-control mb-3"
                                 id="payerName"
