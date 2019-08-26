@@ -15,16 +15,19 @@ The home page allows users to create an account on the site or login with an exi
 
 After logging in the home page displays balances of monies owed to others and to the user.
 
+![Home](./readmeImages/triptab.png?raw=true "Home Page")
+
 The home page also shows three buttons
 * Create event
 * Payoff event
 * View ledger
 
-![Alt text](readmeImages/triptab.png?raw=true "Title")
 
 ### Create event
 
 Displays a form where users can enter a shared travel expense.  
+
+![Create Event Page](./readmeImages/createEvent.png?raw=true "Create Event Page")
 
 * Event Name (can include location or additional details)
 * Payer First Name (indicates who paid for the expense)
@@ -32,6 +35,8 @@ Displays a form where users can enter a shared travel expense.
 * Participant First Name (indicates who expense is shared with, include the payer)
 
 ### Payoff event
+
+![Payoff Event Page](./readmeImages/payoffEvent.png?raw=true "Payoff Event Page")
 
 Displays a form where users who owe money for an event can indicate payoff is complete
 
@@ -41,6 +46,8 @@ Displays a form where users who owe money for an event can indicate payoff is co
 * Payees name (automatically populates based on event information)
 
 ### Ledger
+
+![Ledger](./readmeImages/ledger.png?raw=true "Ledger")
 
 The Ledger page shows which events the user has not yet paid for.  Users can indicate payment is complete by clicking the Pay button.  It also shows which events others owe the user money for.
 
