@@ -20,6 +20,8 @@ The home page also shows three buttons
 * Payoff event
 * View ledger
 
+![alt text](https://raw.githubusercontent.com/lukeevangraham/trip-tab/master/readmeImages/triptab.png)
+
 ### Create event
 
 Displays a form where users can enter a shared travel expense.  
