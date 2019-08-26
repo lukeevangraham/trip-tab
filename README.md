@@ -20,7 +20,7 @@ The home page also shows three buttons
 * Payoff event
 * View ledger
 
-![alt text](https://raw.githubusercontent.com/lukeevangraham/trip-tab/master/readmeImages/triptab.png)
+![Alt text](readmeImages/triptab.png?raw=true "Title")
 
 ### Create event
 
