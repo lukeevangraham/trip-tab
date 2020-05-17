@@ -7,7 +7,7 @@ const passport = require("./passport");
 const user = require("./routes/user");
 const dbConnection = require("./database");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3011;
 const app = express();
 // const server = require('http').createServer(app);
 
