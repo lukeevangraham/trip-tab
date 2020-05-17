@@ -2,7 +2,7 @@
 
 ## Overview
 
-Deployed at: https:/triptab.lukegraham.us/
+Deployed at: https://triptab.lukegraham.us/
 
 Spending money while traveling in groups can get complicated.  TripTab is an application that helps users **track** shared travel expenses.  Users can keep track of money they owe others and others owe them.  TripTab is designed for use on mobile phones to make logging expenses easy on-the-go. 
 
